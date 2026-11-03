@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" role="img" aria-label="SpiceTrip">
+  <defs>
+    <linearGradient id="arcGold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="arcOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#EA580C"/>
+    </linearGradient>
+    <linearGradient id="arcRed" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Wordmark -->
+  <text
+    x="8"
+    y="68"
+    font-family="Arial Black, Arial, Helvetica, sans-serif"
+    font-size="58"
+    font-weight="900"
+    font-style="italic"
+    letter-spacing="-1.5"
+  >
+    <tspan fill="#E11D2E">spice</tspan><tspan fill="#FFFFFF">trip</tspan>
+  </text>
+
+  <!-- Motion arcs over "trip" -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M232 28 C268 8, 318 8, 368 22" stroke="url(#arcGold)" stroke-width="4.5"/>
+    <path d="M236 36 C270 18, 316 18, 364 32" stroke="url(#arcOrange)" stroke-width="4"/>
+    <path d="M240 44 C272 28, 314 28, 360 42" stroke="url(#arcRed)" stroke-width="3.5"/>
+  </g>
+
+  <!-- Tagline -->
+  <text
+    x="95"
+    y="98"
+    fill="#FFFFFF"
+    fill-opacity="0.88"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="16"
+    font-style="italic"
+    letter-spacing="0.4"
+  >good time — great memories!</text>
+</svg>
