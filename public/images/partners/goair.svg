@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <rect width="320" height="180" fill="#fff"/>
+  <text x="48" y="92" font-family="Arial, sans-serif" font-size="14" fill="#0369a1" font-weight="700" letter-spacing="1">FLY SMART</text>
+  <path d="M160 45l90 40-90 40 16-40z" fill="#0284c7"/>
+  <text x="198" y="95" font-family="Arial Black, Arial, sans-serif" font-size="30" fill="#fff">go</text>
+  <text x="160" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#0f172a">GoAir Airlines</text>
+</svg>

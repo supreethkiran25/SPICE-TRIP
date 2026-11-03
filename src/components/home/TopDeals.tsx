@@ -1,119 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Plane, Hotel, Compass, Clock, Check, Sparkles, Tag } from "lucide-react";
-
-interface DealItem {
-  id: string;
-  title: string;
-  category: string;
-  duration: string;
-  inclusions: string;
-  discount: string;
-  originalPrice: string;
-  originalUsd: string;
-  discountedPrice: string;
-  discountedUsd: string;
-  image: string;
-  slug: string;
-}
-
-const DEALS: DealItem[] = [
-  {
-    id: "deal-1",
-    title: "Explore Vietnam — Hanoi & Halong Bay",
-    category: "Cultural",
-    duration: "6 Days / 5 Nights",
-    inclusions: "Includes: 5★ Overnight Cruise + French Quarter + Transfers",
-    discount: "20% OFF",
-    originalPrice: "₹43,999",
-    originalUsd: "$999",
-    discountedPrice: "₹34,999",
-    discountedUsd: "$849",
-    image: "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=640&q=70",
-    slug: "explore-vietnam",
-  },
-  {
-    id: "deal-2",
-    title: "Maldives — Barefoot Coral Atoll Sanctuary",
-    category: "Honeymoon",
-    duration: "4 Days / 3 Nights",
-    inclusions: "Includes: Overwater Villa + Seaplane + House Reef Snorkel",
-    discount: "15% OFF",
-    originalPrice: "₹68,000",
-    originalUsd: "$820",
-    discountedPrice: "₹58,000",
-    discountedUsd: "$699",
-    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=640&q=70",
-    slug: "maldives-luxury-escape",
-  },
-  {
-    id: "deal-3",
-    title: "Bali Classic Tour — Temples & Nusa Dua",
-    category: "Island",
-    duration: "5 Days / 4 Nights",
-    inclusions: "Includes: Private Pool Villa + Uluwatu Sunset + Transfers",
-    discount: "25% OFF",
-    originalPrice: "₹35,999",
-    originalUsd: "$850",
-    discountedPrice: "₹26,999",
-    discountedUsd: "$649",
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=640&q=70",
-    slug: "bali-classic-tour",
-  },
-  {
-    id: "deal-4",
-    title: "Dubai Luxury Extravaganza — Burj & Safari",
-    category: "Luxury",
-    duration: "4 Days / 3 Nights",
-    inclusions: "Includes: 5★ Hotel + Desert BBQ Safari + Burj Khalifa",
-    discount: "30% OFF",
-    originalPrice: "₹55,000",
-    originalUsd: "$1,150",
-    discountedPrice: "₹38,500",
-    discountedUsd: "$899",
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=640&q=70",
-    slug: "dubai-tour",
-  },
-  {
-    id: "deal-5",
-    title: "Splendid Thailand — Phuket & Krabi",
-    category: "Island",
-    duration: "5 Days / 4 Nights",
-    inclusions: "Includes: Speedboat Tours + 4★ Beach Resort + Transfers",
-    discount: "20% OFF",
-    originalPrice: "₹28,500",
-    originalUsd: "$650",
-    discountedPrice: "₹22,999",
-    discountedUsd: "$549",
-    image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=640&q=70",
-    slug: "thailand-tour",
-  },
-  {
-    id: "deal-6",
-    title: "Kerala — God's Own Country Munnar & Alleppey",
-    category: "Cultural",
-    duration: "5 Days / 4 Nights",
-    inclusions: "Includes: Private Houseboat + Tea Gardens + Safe Wheels Car",
-    discount: "18% OFF",
-    originalPrice: "₹22,500",
-    originalUsd: "$480",
-    discountedPrice: "₹18,500",
-    discountedUsd: "$399",
-    image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=640&q=70",
-    slug: "kerala-tour",
-  },
-];
+import { ArrowRight, Clock, Tag } from "lucide-react";
+import { useCms } from "@/components/cms/CmsProvider";
+import { formatPrice } from "@/lib/utils";
 
 export default function TopDeals() {
+  const { homepage, packages } = useCms();
   const [selectedFilter, setSelectedFilter] = useState("All");
+
+  const deals = useMemo(() => {
+    if (homepage.deals.length) return homepage.deals;
+    return packages
+      .filter((pkg) => pkg.featured)
+      .slice(0, 6)
+      .map((pkg) => ({
+        id: pkg.id,
+        title: pkg.title,
+        category: pkg.category[0] || pkg.region,
+        duration: `${pkg.duration.days} Days / ${pkg.duration.nights} Nights`,
+        inclusions: pkg.highlights[0] ? `Includes: ${pkg.highlights[0]}` : pkg.description,
+        discount: "Special",
+        originalPrice: "",
+        originalUsd: "",
+        discountedPrice: formatPrice(pkg.startingPrice, pkg.currency),
+        discountedUsd: "",
+        image: pkg.images[0] || "",
+        slug: pkg.slug,
+      }));
+  }, [homepage.deals, packages]);
 
   const filteredDeals =
     selectedFilter === "All"
-      ? DEALS
-      : DEALS.filter((d) => d.category === selectedFilter);
+      ? deals
+      : deals.filter((d) => d.category === selectedFilter);
 
   return (
     <section id="deals" className="py-16 md:py-20 bg-gray-50/50 scroll-mt-28 perf-section">

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { PACKAGES } from "@/lib/data/packages";
+import { getPublished } from "@/lib/published";
 import { formatPrice } from "@/lib/utils";
 import { Heart, Sparkles, Clock, Star, ArrowRight, ShieldCheck } from "lucide-react";
 import InquirySection from "@/components/home/InquirySection";
+
+export const revalidate = 30;
 
 export const metadata: Metadata = {
   title: "Bespoke Honeymoon Packages & Romantic Sanctuaries | SpiceTrip",
@@ -12,8 +14,9 @@ export const metadata: Metadata = {
     "Curated honeymoon tours to Maldives, Bali, Mauritius, Vietnam, Kerala, and Andaman by SpiceTrip, Mysore. Private pool villas, overwater bungalows, and bespoke romantic itineraries.",
 };
 
-export default function HoneymoonPage() {
-  const honeymoonPackages = PACKAGES.filter((p) => p.category.includes("Honeymoon"));
+export default async function HoneymoonPage() {
+  const { packages } = await getPublished();
+  const honeymoonPackages = packages.filter((p) => p.category.includes("Honeymoon"));
 
   return (
     <div className="bg-background min-h-screen">

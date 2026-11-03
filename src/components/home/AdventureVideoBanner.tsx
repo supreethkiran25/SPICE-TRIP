@@ -1,12 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Play, X, ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
+import { Play, X, ArrowRight, CheckCircle2 } from "lucide-react";
+import { useCms } from "@/components/cms/CmsProvider";
+
+function youtubeEmbedId(raw?: string) {
+  if (!raw) return "Scxs7L0vhZ4";
+  const value = raw.trim();
+  if (/^[\w-]{11}$/.test(value)) return value;
+  try {
+    const url = new URL(value.startsWith("http") ? value : `https://${value}`);
+    if (url.hostname.includes("youtu.be")) return url.pathname.replace("/", "") || "Scxs7L0vhZ4";
+    return url.searchParams.get("v") || value.split("/").pop() || "Scxs7L0vhZ4";
+  } catch {
+    return "Scxs7L0vhZ4";
+  }
+}
 
 export default function AdventureVideoBanner() {
+  const { homepage } = useCms();
   const [videoOpen, setVideoOpen] = useState(false);
+  const videoId = useMemo(() => youtubeEmbedId(homepage.videoUrl), [homepage.videoUrl]);
+  const ctaHref = homepage.ctaHref || "/packages";
+  const ctaLabel = homepage.ctaLabel || "Explore Now";
 
   return (
     <section className="py-10 px-4 sm:px-6 lg:px-8">
@@ -68,10 +86,10 @@ export default function AdventureVideoBanner() {
             </div>
 
             <Link
-              href="/packages"
+              href={ctaHref}
               className="inline-flex items-center space-x-2 bg-[#D31F25] hover:bg-[#B91C1C] text-white px-7 py-3 rounded-full font-bold text-xs sm:text-sm shadow-lg shadow-red-600/30 hover:shadow-xl transition-all transform hover:-translate-y-0.5"
             >
-              <span>Explore Now</span>
+              <span>{ctaLabel === "Explore Journeys" ? "Explore Now" : ctaLabel}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -90,7 +108,7 @@ export default function AdventureVideoBanner() {
               <X className="w-5 h-5" />
             </button>
             <iframe
-              src="https://www.youtube-nocookie.com/embed/Scxs7L0vhZ4?autoplay=1&mute=0&controls=1&rel=0"
+              src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0`}
               title="SpiceTrip Global Wanderlust Montage"
               className="w-full h-full border-0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

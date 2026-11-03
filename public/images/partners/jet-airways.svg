@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <rect width="320" height="180" fill="#fff"/>
+  <rect x="36" y="58" width="248" height="56" rx="4" fill="#0b1f4a"/>
+  <text x="52" y="94" font-family="Georgia, serif" font-size="22" fill="#fff">JET AIRWAYS</text>
+  <circle cx="248" cy="86" r="16" fill="#f59e0b"/>
+  <path d="M240 86h16M248 78v16" stroke="#0b1f4a" stroke-width="2"/>
+</svg>

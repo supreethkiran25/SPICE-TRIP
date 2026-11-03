@@ -399,15 +399,6 @@ export default function Navbar() {
                 Experiences
               </a>
 
-              {/* Deals (Scrolls smoothly to Top Deals) */}
-              <a
-                href="/#deals"
-                onClick={(e) => handleScrollTo(e, "deals")}
-                className="px-3 py-1.5 text-xs xl:text-sm font-bold text-[#18181B] hover:text-[#D31F25] transition-colors"
-              >
-                Deals
-              </a>
-
               {/* About Us */}
               <Link
                 href="/about"
@@ -624,15 +615,6 @@ export default function Navbar() {
                   className="block px-3 py-2 rounded-xl text-sm font-bold text-gray-900 hover:bg-gray-50"
                 >
                   Experiences
-                </a>
-
-                {/* Deals */}
-                <a
-                  href="/#deals"
-                  onClick={(e) => handleScrollTo(e, "deals")}
-                  className="block px-3 py-2 rounded-xl text-sm font-bold text-gray-900 hover:bg-gray-50"
-                >
-                  Deals
                 </a>
 
                 {/* About Us */}

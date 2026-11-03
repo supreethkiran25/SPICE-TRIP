@@ -2,20 +2,24 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { JOURNAL_ARTICLES } from "@/lib/data/journal";
+import { getPublished } from "@/lib/published";
 import { formatDate } from "@/lib/utils";
 import { Clock, ArrowLeft, Share2, BookOpen } from "lucide-react";
+
+export const revalidate = 30;
 
 interface Props {
   params: { slug: string };
 }
 
-export function generateStaticParams() {
-  return JOURNAL_ARTICLES.map((a) => ({ slug: a.slug }));
+export async function generateStaticParams() {
+  const { journal } = await getPublished();
+  return journal.map((a) => ({ slug: a.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const art = JOURNAL_ARTICLES.find((a) => a.slug === params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { journal } = await getPublished();
+  const art = journal.find((a) => a.slug === params.slug);
   if (!art) return { title: "Article Not Found" };
 
   return {
@@ -24,8 +28,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function BlogDetailPage({ params }: Props) {
-  const article = JOURNAL_ARTICLES.find((a) => a.slug === params.slug);
+export default async function BlogDetailPage({ params }: Props) {
+  const { journal } = await getPublished();
+  const article = journal.find((a) => a.slug === params.slug);
   if (!article) notFound();
 
   return (

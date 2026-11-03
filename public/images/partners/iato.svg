@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <rect width="320" height="180" fill="#fff"/>
+  <circle cx="160" cy="62" r="36" fill="none" stroke="#1e3a8a" stroke-width="3"/>
+  <path d="M140 62c4-14 16-24 28-24s20 8 24 20c-10 2-18 10-20 20-8-2-18-4-32-16z" fill="#1e40af"/>
+  <text x="160" y="120" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="28" fill="#1e3a8a" font-weight="700">IATO</text>
+  <text x="160" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#334155" letter-spacing="2">ALLIED MEMBER</text>
+</svg>

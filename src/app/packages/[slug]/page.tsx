@@ -2,21 +2,25 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { PACKAGES } from "@/lib/data/packages";
+import { getPublished } from "@/lib/published";
 import { formatPrice } from "@/lib/utils";
 import { Clock, Star, MapPin, Check, X, ShieldCheck, Phone, ArrowRight, Share2, Sparkles } from "lucide-react";
 import InquirySection from "@/components/home/InquirySection";
+
+export const revalidate = 30;
 
 interface Props {
   params: { slug: string };
 }
 
-export function generateStaticParams() {
-  return PACKAGES.map((pkg) => ({ slug: pkg.slug }));
+export async function generateStaticParams() {
+  const { packages } = await getPublished();
+  return packages.map((pkg) => ({ slug: pkg.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const pkg = PACKAGES.find((p) => p.slug === params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { packages } = await getPublished();
+  const pkg = packages.find((p) => p.slug === params.slug);
   if (!pkg) return { title: "Package Not Found" };
 
   return {
@@ -25,8 +29,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function PackageDetailPage({ params }: Props) {
-  const pkg = PACKAGES.find((p) => p.slug === params.slug);
+export default async function PackageDetailPage({ params }: Props) {
+  const { packages } = await getPublished();
+  const pkg = packages.find((p) => p.slug === params.slug);
   if (!pkg) notFound();
 
   return (

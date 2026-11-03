@@ -4,6 +4,7 @@ import { Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import SmoothScroll from "@/components/motion/SmoothScroll";
+import { CmsProvider } from "@/components/cms/CmsProvider";
 import { COMPANY_INFO } from "@/lib/data/company";
 
 const Footer = dynamic(() => import("@/components/layout/Footer"));
@@ -113,11 +114,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-[#FAF9F5] text-[#18181B] min-h-screen flex flex-col font-sans selection:bg-[#D31F25] selection:text-white">
-        <SmoothScroll>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </SmoothScroll>
+        <CmsProvider>
+          <SmoothScroll>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </SmoothScroll>
+        </CmsProvider>
       </body>
     </html>
   );

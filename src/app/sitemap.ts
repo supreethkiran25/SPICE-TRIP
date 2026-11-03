@@ -1,9 +1,12 @@
 import { MetadataRoute } from "next";
-import { PACKAGES, DESTINATIONS } from "@/lib/data/packages";
-import { JOURNAL_ARTICLES } from "@/lib/data/journal";
+import { DESTINATIONS } from "@/lib/data/packages";
+import { getPublished } from "@/lib/published";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 30;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.spicetrip.com";
+  const { packages, journal } = await getPublished();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${baseUrl}`, lastModified: new Date(), changeFrequency: "daily", priority: 1.0 },
@@ -31,14 +34,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const packageRoutes: MetadataRoute.Sitemap = PACKAGES.map((p) => ({
+  const packageRoutes: MetadataRoute.Sitemap = packages.map((p) => ({
     url: `${baseUrl}/packages/${p.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.85,
   }));
 
-  const journalRoutes: MetadataRoute.Sitemap = JOURNAL_ARTICLES.map((a) => ({
+  const journalRoutes: MetadataRoute.Sitemap = journal.map((a) => ({
     url: `${baseUrl}/blog/${a.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
@@ -47,4 +50,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...staticRoutes, ...destinationRoutes, ...packageRoutes, ...journalRoutes];
 }
-

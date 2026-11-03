@@ -4,16 +4,18 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Compass, Sparkles, Send, ArrowRight, Star, Clock } from "lucide-react";
-import { PACKAGES } from "@/lib/data/packages";
+import { useCms } from "@/components/cms/CmsProvider";
+import type { TravelPackage } from "@/types";
 
 export default function TripRecommendationWidget() {
+  const { packages } = useCms();
   const [preference, setPreference] = useState("Anywhere");
   const [budget, setBudget] = useState("Any Budget");
-  const [results, setResults] = useState<typeof PACKAGES | null>(null);
+  const [results, setResults] = useState<TravelPackage[] | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
 
   const handleGetRecommendations = () => {
-    let filtered = [...PACKAGES];
+    let filtered = [...packages];
 
     if (preference === "Beaches") {
       filtered = filtered.filter((p) =>
@@ -24,14 +26,16 @@ export default function TripRecommendationWidget() {
     } else if (preference === "Honeymoon") {
       filtered = filtered.filter((p) =>
         ["honeymoon", "maldives", "vietnam", "bali"].some((k) =>
-          p.slug.toLowerCase().includes(k) || p.description.toLowerCase().includes(k)
+          p.slug.toLowerCase().includes(k) ||
+          p.description.toLowerCase().includes(k) ||
+          p.category.includes("Honeymoon")
         )
       );
     } else if (preference === "Cultural") {
       filtered = filtered.filter((p) =>
         ["vietnam", "karnataka", "golden-triangle", "dubai", "singapore"].some((k) =>
           p.slug.toLowerCase().includes(k) || p.destination.toLowerCase().includes(k)
-        )
+        ) || p.category.includes("Cultural")
       );
     }
 
@@ -47,7 +51,7 @@ export default function TripRecommendationWidget() {
 
     // Default to at least 3 packages if too narrow
     if (filtered.length === 0) {
-      filtered = PACKAGES.slice(0, 3);
+      filtered = packages.slice(0, 3);
     }
 
     setResults(filtered.slice(0, 3));

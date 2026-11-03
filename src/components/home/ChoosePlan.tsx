@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useMemo, useState } from "react";
 import { Compass, Heart, Users, Briefcase, Check, ArrowRight, X, ShieldCheck } from "lucide-react";
+import { useCms } from "@/components/cms/CmsProvider";
 
 export default function ChoosePlan() {
+  const { homepage } = useCms();
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [planModalOpen, setPlanModalOpen] = useState(false);
   const [inquirySent, setInquirySent] = useState(false);
@@ -12,35 +13,24 @@ export default function ChoosePlan() {
   const [travelerPhone, setTravelerPhone] = useState("");
   const [travelerDate, setTravelerDate] = useState("");
 
-  const plans = [
-    {
-      id: "solo",
-      name: "Solo Explorer",
-      tagline: "Perfect for solo travelers seeking authentic adventure.",
-      price: "₹19,999",
-      usd: "$499",
-      icon: <Briefcase className="w-5 h-5 text-blue-600" />,
-      popular: false,
-    },
-    {
-      id: "couple",
-      name: "Couple Getaway",
-      tagline: "Romantic escapes & honeymoon retreats made memorable.",
-      price: "₹39,999",
-      usd: "$799",
-      icon: <Heart className="w-5 h-5 text-rose-500 fill-rose-500" />,
-      popular: true,
-    },
-    {
-      id: "family",
-      name: "Family Vacation",
-      tagline: "Curated, safe and comfortable journeys for all generations.",
-      price: "₹59,999",
-      usd: "$1,299",
-      icon: <Users className="w-5 h-5 text-indigo-600" />,
-      popular: false,
-    },
-  ];
+  const plans = useMemo(() => {
+    const icons = {
+      solo: <Briefcase className="w-5 h-5 text-blue-600" />,
+      couple: <Heart className="w-5 h-5 text-rose-500 fill-rose-500" />,
+      family: <Users className="w-5 h-5 text-indigo-600" />,
+    } as const;
+    return homepage.plans.map((plan) => ({
+      id: plan.id,
+      name: plan.title,
+      tagline: plan.blurb,
+      price: plan.fromPrice,
+      usd: plan.usd,
+      icon:
+        icons[plan.id as keyof typeof icons] ||
+        (plan.id.includes("couple") ? icons.couple : plan.id.includes("family") ? icons.family : icons.solo),
+      popular: plan.popular,
+    }));
+  }, [homepage.plans]);
 
   const handleSelectPlan = (planName: string) => {
     setSelectedPlan(planName);

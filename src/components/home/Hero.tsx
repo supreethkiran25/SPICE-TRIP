@@ -4,72 +4,13 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Clock, Check, X } from "lucide-react";
-
-interface HighlightItem {
-  id: string;
-  scriptText: string;
-  destination: string;
-  subtitle: string;
-  duration: string;
-  inclusions: string;
-  price: string;
-  usdPrice: string;
-  slug: string;
-  bgImage: string;
-}
-
-const HIGHLIGHTS: HighlightItem[] = [
-  {
-    id: "maldives",
-    scriptText: "Live Better",
-    destination: "Maldives",
-    subtitle: "Barefoot Coral Atoll Sanctuary",
-    duration: "4 Days / 3 Nights",
-    inclusions: "Private Overwater Villa + Seaplane",
-    price: "₹58,000",
-    usdPrice: "$699",
-    slug: "maldives-luxury-escape",
-    bgImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=70",
-  },
-  {
-    id: "vietnam",
-    scriptText: "Explore Indochina",
-    destination: "Vietnam & Halong",
-    subtitle: "Hanoi Old Quarter & Emerald Karsts",
-    duration: "6 Days / 5 Nights",
-    inclusions: "5★ Halong Cruise + Transfers",
-    price: "₹34,999",
-    usdPrice: "$849",
-    slug: "explore-vietnam",
-    bgImage: "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=70",
-  },
-  {
-    id: "bali",
-    scriptText: "Find Serenity",
-    destination: "Bali, Indonesia",
-    subtitle: "Ubud Sanctuaries & Cliff Temples",
-    duration: "5 Days / 4 Nights",
-    inclusions: "Private Pool Villa + Excursions",
-    price: "₹26,999",
-    usdPrice: "$649",
-    slug: "bali-classic-tour",
-    bgImage: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=70",
-  },
-  {
-    id: "dubai",
-    scriptText: "Taste Luxury",
-    destination: "Dubai",
-    subtitle: "Burj Khalifa & Desert Safari",
-    duration: "4 Days / 3 Nights",
-    inclusions: "5★ Hotel + Desert BBQ + Cruise",
-    price: "₹38,500",
-    usdPrice: "$899",
-    slug: "dubai-tour",
-    bgImage: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=70",
-  },
-];
+import { useCms } from "@/components/cms/CmsProvider";
 
 export default function Hero() {
+  const { homepage } = useCms();
+  const highlights = homepage.hero.highlights?.length
+    ? homepage.hero.highlights
+    : [];
   const [index, setIndex] = useState(0);
   const [isFading, setIsFading] = useState(false);
   const [quickBookOpen, setQuickBookOpen] = useState(false);
@@ -77,12 +18,13 @@ export default function Hero() {
 
   // Rotate highlights; pause when tab is hidden to save CPU/network
   useEffect(() => {
+    if (highlights.length < 2) return;
     let fadeTimer: ReturnType<typeof setTimeout> | undefined;
     const tick = () => {
       if (document.hidden) return;
       setIsFading(true);
       fadeTimer = setTimeout(() => {
-        setIndex((prev) => (prev + 1) % HIGHLIGHTS.length);
+        setIndex((prev) => (prev + 1) % highlights.length);
         setIsFading(false);
       }, 280);
     };
@@ -91,9 +33,31 @@ export default function Hero() {
       clearInterval(timer);
       if (fadeTimer) clearTimeout(fadeTimer);
     };
-  }, []);
+  }, [highlights.length]);
 
-  const current = HIGHLIGHTS[index];
+  const current =
+    highlights[index % Math.max(highlights.length, 1)] ||
+    ({
+      id: "fallback",
+      scriptText: "Live Better",
+      destination: homepage.hero.featuredDestination?.name || "Maldives",
+      subtitle: homepage.hero.featuredDestination?.tagline || "",
+      duration: homepage.hero.featuredDestination?.duration || "",
+      inclusions: homepage.hero.featuredDestination?.inclusions || "",
+      price: homepage.hero.featuredDestination?.price || "",
+      usdPrice: homepage.hero.featuredDestination?.usdPrice || "",
+      slug: homepage.hero.featuredDestination?.slug || "packages",
+      bgImage:
+        homepage.hero.featuredDestination?.image ||
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=70",
+    } as const);
+
+  const headline = homepage.hero.headline || "Travel Farther,";
+  const subcopy =
+    homepage.hero.subcopy ||
+    "Thoughtfully curated private journeys to the world's most extraordinary destinations. Orchestrated with IATA certified excellence from Mysore.";
+  const ctaHref = homepage.ctaHref || "/packages";
+  const ctaLabel = homepage.ctaLabel || "Explore Journeys";
 
   return (
     <section className="relative min-h-[90vh] sm:min-h-screen flex items-center justify-center pt-24 pb-20 md:pb-28 overflow-hidden">
@@ -124,7 +88,7 @@ export default function Hero() {
 
             {/* Dual Headline with Smooth Animated Script Highlight */}
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-5">
-              <span>Travel Farther,</span>
+              <span>{headline}</span>
               <br />
               <span
                 className={`inline-block font-script text-[#FBBF24] text-5xl sm:text-7xl lg:text-8xl font-normal drop-shadow-md transition-all duration-400 ${isFading ? "opacity-0 -translate-y-2" : "opacity-100 translate-y-0"
@@ -136,16 +100,16 @@ export default function Hero() {
 
             {/* Clean, Restrained Supporting Copy */}
             <p className="text-base sm:text-lg text-white/90 max-w-xl font-normal leading-relaxed mb-8">
-              Thoughtfully curated private journeys to the world's most extraordinary destinations. Orchestrated with IATA certified excellence from Mysore.
+              {subcopy}
             </p>
 
             {/* Minimal CTA */}
             <div className="flex flex-wrap items-center gap-4">
               <Link
-                href="/packages"
+                href={ctaHref}
                 className="inline-flex items-center space-x-2 bg-[#D31F25] hover:bg-[#B91C1C] text-white px-7 py-3.5 rounded-full font-bold text-sm tracking-wide shadow-lg shadow-red-600/30 hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
               >
-                <span>Explore Journeys</span>
+                <span>{ctaLabel}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

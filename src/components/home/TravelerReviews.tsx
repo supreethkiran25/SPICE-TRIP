@@ -2,91 +2,18 @@
 
 import Link from "next/link";
 import { Star, Quote, Users, MapPin, ThumbsUp, ArrowRight } from "lucide-react";
+import { useCms } from "@/components/cms/CmsProvider";
 
-interface Review {
+type ReviewCardData = {
   id: string;
   quote: string;
   author: string;
   location: string;
   rating: number;
   trip?: string;
-  avatar: string;
-}
+};
 
-const REAL_REVIEWS: Review[] = [
-  {
-    id: "rev-1",
-    quote:
-      "Our Vietnam journey curated by SpiceTrip exceeded every expectation. From the luxury wooden junk in Halong Bay to our private guide in Hoi An, every detail was orchestrated with calm perfection.",
-    author: "Dr. K. S. Venkatesh & Family",
-    location: "Mysore, Karnataka",
-    trip: "Explore Vietnam · 6 Days",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=96&q=70",
-  },
-  {
-    id: "rev-2",
-    quote:
-      "We trusted SpiceTrip with our Maldives honeymoon and it was truly magical. The overwater villa, private sandbank dinner, and seaplane transfers were handled seamlessly.",
-    author: "Prashanth & Ananya Rao",
-    location: "Indiranagar, Bangalore",
-    trip: "Maldives Luxury Escape",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=96&q=70",
-  },
-  {
-    id: "rev-3",
-    quote:
-      "The Safe Wheels heritage really shows in the ground execution. Our chauffeur in Himachal was exceptional—courteous, cautious on mountain passes, and knowledgeable about local temples.",
-    author: "Girish N. Shetty",
-    location: "Mangalore, Karnataka",
-    trip: "Himachal Pradesh Tour",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&q=70",
-  },
-  {
-    id: "rev-4",
-    quote:
-      "For our executive leadership retreat in Dubai, SpiceTrip managed flights, Burj Khalifa VIP passes, and private desert safari buyouts without a single hitch.",
-    author: "Sujata Hegde",
-    location: "Whitefield, Bangalore",
-    trip: "Dubai Business & Leisure",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=96&q=70",
-  },
-  {
-    id: "rev-5",
-    quote:
-      "Highly recommended! Booking with SpiceTrip gave us complete peace of mind. Will definitely book again!",
-    author: "Vikram Sengupta",
-    location: "London / Bangalore",
-    trip: "International Voyage",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=96&q=70",
-  },
-  {
-    id: "rev-6",
-    quote:
-      "The private Halong Bay cruise arranged by SpiceTrip was exceptional. Authentic local cuisine and 5-star guidance throughout.",
-    author: "Ananya Deshmukh",
-    location: "Mumbai, India",
-    trip: "Halong & Hanoi",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=96&q=70",
-  },
-  {
-    id: "rev-7",
-    quote:
-      "Safe Wheels car rental and Bali villa transfers were flawless. The staff in Mysore handled our visas in record time.",
-    author: "Siddharth Rao",
-    location: "Mysore, India",
-    trip: "Bali Classic Tour",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=96&q=70",
-  },
-];
-
-function ReviewCard({ rev }: { rev: Review }) {
+function ReviewCard({ rev }: { rev: ReviewCardData }) {
   return (
     <article className="shrink-0 w-[300px] sm:w-[340px] bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
       <div>
@@ -109,16 +36,14 @@ function ReviewCard({ rev }: { rev: Review }) {
       </div>
 
       <div className="flex items-center space-x-3 pt-3 border-t border-gray-100">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={rev.avatar}
-          alt=""
-          width={36}
-          height={36}
-          loading="lazy"
-          decoding="async"
-          className="w-9 h-9 rounded-full object-cover ring-2 ring-red-50"
-        />
+        <div className="w-9 h-9 rounded-full bg-red-50 text-[#D31F25] flex items-center justify-center text-xs font-extrabold ring-2 ring-red-50">
+          {rev.author
+            .split(/\s+/)
+            .filter(Boolean)
+            .slice(0, 2)
+            .map((part) => part[0]?.toUpperCase() || "")
+            .join("") || "ST"}
+        </div>
         <div>
           <h4 className="text-xs font-bold text-[#18181B] leading-tight">{rev.author}</h4>
           <span className="text-[10px] text-gray-500">{rev.location}</span>
@@ -129,7 +54,17 @@ function ReviewCard({ rev }: { rev: Review }) {
 }
 
 export default function TravelerReviews() {
-  const loop = [...REAL_REVIEWS, ...REAL_REVIEWS];
+  const { testimonials, homepage } = useCms();
+  const reviews: ReviewCardData[] = testimonials.map((item) => ({
+    id: item.id,
+    quote: item.quote,
+    author: item.author,
+    location: item.location,
+    rating: item.rating,
+    trip: item.destination || item.tripType || undefined,
+  }));
+  const loop = [...reviews, ...reviews];
+  const stats = homepage.stats;
 
   return (
     <section className="py-16 md:py-20 bg-white overflow-hidden perf-section">
@@ -172,7 +107,7 @@ export default function TravelerReviews() {
               <Users className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-2xl font-extrabold text-[#18181B]">25,000+</span>
+              <span className="text-2xl font-extrabold text-[#18181B]">{stats.travelers}</span>
               <span className="block text-xs font-semibold text-gray-600">Happy Travelers</span>
             </div>
           </div>
@@ -181,7 +116,7 @@ export default function TravelerReviews() {
               <MapPin className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-2xl font-extrabold text-[#18181B]">150+</span>
+              <span className="text-2xl font-extrabold text-[#18181B]">{stats.destinations}</span>
               <span className="block text-xs font-semibold text-gray-600">Destinations</span>
             </div>
           </div>
@@ -190,7 +125,7 @@ export default function TravelerReviews() {
               <ThumbsUp className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-2xl font-extrabold text-[#18181B]">98%</span>
+              <span className="text-2xl font-extrabold text-[#18181B]">{stats.satisfaction}</span>
               <span className="block text-xs font-semibold text-gray-600">Satisfaction Rate</span>
             </div>
           </div>

@@ -4,11 +4,12 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { PACKAGES } from "@/lib/data/packages";
+import { useCms } from "@/components/cms/CmsProvider";
 import { formatPrice } from "@/lib/utils";
 import { Clock, Star, MapPin, Search, Filter, ArrowRight, Sparkles } from "lucide-react";
 
 export default function PackagesClient() {
+  const { packages } = useCms();
   const searchParams = useSearchParams();
   const initialSearch = searchParams?.get("search") || "";
   const initialType = searchParams?.get("type") || "All";
@@ -20,7 +21,7 @@ export default function PackagesClient() {
   const categories = ["All", "International", "Domestic", "Honeymoon", "Family Holidays", "Adventure"];
 
   const filteredAndSortedPackages = useMemo(() => {
-    return PACKAGES.filter((pkg) => {
+    return packages.filter((pkg) => {
       // Category filter
       if (selectedCategory !== "All") {
         if (selectedCategory === "International" && pkg.region !== "International") return false;
@@ -46,7 +47,7 @@ export default function PackagesClient() {
       if (sortBy === "duration") return a.duration.days - b.duration.days;
       return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
     });
-  }, [searchQuery, selectedCategory, sortBy]);
+  }, [packages, searchQuery, selectedCategory, sortBy]);
 
   return (
     <div className="bg-background min-h-screen py-16 md:py-24">

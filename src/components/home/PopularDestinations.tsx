@@ -1,139 +1,75 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
-
-interface TourItem {
-  id: string;
-  title: string;
-  location: string;
-  price: string;
-  duration: string;
-  style: string;
-  description: string;
-  slug: string;
-  image: string;
-}
-
-const TOURS: TourItem[] = [
-  {
-    id: "pokhara",
-    title: "Pokhara Retreat",
-    location: "Himalayas",
-    price: "₹28,500",
-    duration: "5 Days",
-    style: "Active & Serene",
-    description: "Stay down beside the peaceful Phewa lake, surrounded by green hills, distant Annapurna peaks and quiet beauty.",
-    slug: "kashmir-paradise",
-    image: "/images/destinations/nepal.jpg",
-  },
-  {
-    id: "maldives",
-    title: "Maldives Barefoot",
-    location: "Indian Ocean",
-    price: "₹58,000",
-    duration: "4 Days",
-    style: "Luxury Atoll",
-    description: "Private overwater sanctuary villas, coral lagoon snorkeling, and barefoot sunset dining over the sea.",
-    slug: "maldives-luxury-escape",
-    image: "/images/destinations/maldives.jpg",
-  },
-  {
-    id: "vietnam",
-    title: "Vietnam & Halong",
-    location: "Indochina",
-    price: "₹34,999",
-    duration: "6 Days",
-    style: "Heritage & Cruise",
-    description: "Sail amidst emerald limestone karsts on an overnight luxury junk boat and wander lantern-lit ancient Hoi An.",
-    slug: "explore-vietnam",
-    image: "/images/destinations/vietnam.jpg",
-  },
-  {
-    id: "bali",
-    title: "Bali Sanctuary",
-    location: "Indonesia",
-    price: "₹26,999",
-    duration: "5 Days",
-    style: "Pool Villa & Temple",
-    description: "Ubud jungle river valleys, cliffside Uluwatu sunset fire dances, and private luxury pool sanctuary villas.",
-    slug: "bali-classic-tour",
-    image: "/images/destinations/bali.jpg",
-  },
-  {
-    id: "dubai",
-    title: "Dubai Extravaganza",
-    location: "UAE",
-    price: "₹38,500",
-    duration: "4 Days",
-    style: "Desert & Skyline",
-    description: "Burj Khalifa 124th floor observatory, red dune 4x4 safaris with starlight BBQ and Dubai Marina yachts.",
-    slug: "dubai-tour",
-    image: "/images/destinations/dubai.jpg",
-  },
-  {
-    id: "kerala",
-    title: "Kerala Backwaters",
-    location: "God's Own Country",
-    price: "₹18,500",
-    duration: "5 Days",
-    style: "Houseboat & Mist",
-    description: "Munnar rolling tea plantations, spice-scented mountain mist, and private wooden houseboats on Alleppey canals.",
-    slug: "kerala-tour",
-    image: "/images/destinations/kerala.jpg",
-  },
-  {
-    id: "thailand",
-    title: "Splendid Thailand",
-    location: "Phuket & Krabi",
-    price: "₹22,999",
-    duration: "5 Days",
-    style: "Island Hopping",
-    description: "Phi Phi limestone sea grottos, crystal lagoon longtail boats, and world-famous Andaman sunset beaches.",
-    slug: "thailand-tour",
-    image: "/images/destinations/thailand.jpg",
-  },
-];
+import { useCms } from "@/components/cms/CmsProvider";
+import { formatPrice } from "@/lib/utils";
 
 export default function PopularDestinations() {
-  const [activeIndex, setActiveIndex] = useState(0); // Start with Pokhara Retreat
+  const { homepage, packages } = useCms();
+  const tours = useMemo(() => {
+    if (homepage.popularTours.length) return homepage.popularTours;
+    return packages
+      .filter((pkg) => pkg.featured)
+      .slice(0, 7)
+      .map((pkg) => ({
+        id: pkg.id,
+        title: pkg.title,
+        location: pkg.destination,
+        price: formatPrice(pkg.startingPrice, pkg.currency),
+        duration: `${pkg.duration.days} Days`,
+        style: pkg.category[0] || pkg.region,
+        description: pkg.description,
+        slug: pkg.slug,
+        image: pkg.images[0] || "/images/destinations/vietnam.jpg",
+      }));
+  }, [homepage.popularTours, packages]);
+
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const tourCount = Math.max(tours.length, 1);
 
   // Auto-advance one by one every 5.5 seconds
   useEffect(() => {
-    if (isHovered) return;
+    if (isHovered || tours.length < 2) return;
     const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % TOURS.length);
+      setActiveIndex((prev) => (prev + 1) % tours.length);
     }, 5500);
     return () => clearInterval(timer);
-  }, [isHovered]);
+  }, [isHovered, tours.length]);
 
   const prevTour = () => {
-    setActiveIndex((prev) => (prev - 1 + TOURS.length) % TOURS.length);
+    setActiveIndex((prev) => (prev - 1 + tourCount) % tourCount);
   };
 
   const nextTour = () => {
-    setActiveIndex((prev) => (prev + 1) % TOURS.length);
+    setActiveIndex((prev) => (prev + 1) % tourCount);
   };
 
   // Keyboard controls
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") prevTour();
-      if (e.key === "ArrowRight") nextTour();
+      if (e.key === "ArrowLeft") {
+        setActiveIndex((prev) => (prev - 1 + tourCount) % tourCount);
+      }
+      if (e.key === "ArrowRight") {
+        setActiveIndex((prev) => (prev + 1) % tourCount);
+      }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, []);
+  }, [tourCount]);
 
   // Compute the 5 symmetric slots around activeIndex: [-2, -1, 0, +1, +2]
   // Slot 2 is ALWAYS the single enlarged center card
   const getSlot = (offset: number) => {
-    const index = (activeIndex + offset + TOURS.length) % TOURS.length;
-    return { tour: TOURS[index], index, offset };
+    const index = (activeIndex + offset + tourCount) % tourCount;
+    return { tour: tours[index], index, offset };
   };
+
+  if (!tours.length) return null;
 
   const slots = [
     getSlot(-2), // 0: Left Outer

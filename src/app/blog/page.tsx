@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { JOURNAL_ARTICLES } from "@/lib/data/journal";
+import { getPublished } from "@/lib/published";
 import { formatDate } from "@/lib/utils";
 import { BookOpen, Clock, ArrowRight, ArrowUpRight } from "lucide-react";
+
+export const revalidate = 30;
 
 export const metadata: Metadata = {
   title: "The Travel Journal — Editorial Dispatches | SpiceTrip",
@@ -11,9 +13,10 @@ export const metadata: Metadata = {
     "Curated stories, insider gastronomy guides, and travel philosophy from the curators at SpiceTrip, Mysore.",
 };
 
-export default function BlogListingPage() {
-  const featuredArticle = JOURNAL_ARTICLES[0];
-  const otherArticles = JOURNAL_ARTICLES.slice(1);
+export default async function BlogListingPage() {
+  const { journal } = await getPublished();
+  const featuredArticle = journal[0];
+  const otherArticles = journal.slice(1);
 
   return (
     <div className="bg-background min-h-screen py-16 md:py-24">

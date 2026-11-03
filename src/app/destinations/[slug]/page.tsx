@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { DESTINATIONS, PACKAGES } from "@/lib/data/packages";
+import { DESTINATIONS } from "@/lib/data/packages";
+import { getPublished } from "@/lib/published";
 import { formatPrice } from "@/lib/utils";
 import { MapPin, Calendar, ShieldCheck, ArrowRight, Clock, Star, Compass } from "lucide-react";
 import InquirySection from "@/components/home/InquirySection";
+
+export const revalidate = 30;
 
 interface Props {
   params: { slug: string };
@@ -25,12 +28,13 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function DestinationDetailPage({ params }: Props) {
+export default async function DestinationDetailPage({ params }: Props) {
   const destination = DESTINATIONS.find((d) => d.slug === params.slug);
   if (!destination) notFound();
 
+  const { packages } = await getPublished();
   // Find all packages matching this destination
-  const matchingPackages = PACKAGES.filter(
+  const matchingPackages = packages.filter(
     (p) =>
       p.destination.toLowerCase().includes(destination.name.toLowerCase()) ||
       destination.name.toLowerCase().includes(p.destination.toLowerCase())

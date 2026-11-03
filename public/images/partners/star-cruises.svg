@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <rect width="320" height="180" fill="#fff"/>
+  <path d="M90 70h140l-20 36H110z" fill="#1d4ed8"/>
+  <circle cx="160" cy="70" r="18" fill="#facc15"/>
+  <rect x="100" y="78" width="120" height="6" fill="#dc2626"/>
+  <rect x="100" y="88" width="120" height="6" fill="#dc2626"/>
+  <text x="160" y="135" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="18" fill="#1e3a8a">STAR CRUISES</text>
+  <text x="160" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#64748b">Asia-Pacific Cruise Line</text>
+</svg>
