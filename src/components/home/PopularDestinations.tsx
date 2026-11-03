@@ -145,11 +145,12 @@ export default function PopularDestinations() {
 
   return (
     <section
-      id="popular-tours"
+      id="destinations"
       className="py-16 md:py-24 bg-[#FAFAF8] relative overflow-hidden scroll-mt-24"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      <span id="popular-tours" className="sr-only" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Eyebrow Pill */}
         <div className="flex justify-center mb-3">

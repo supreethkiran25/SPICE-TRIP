@@ -9,18 +9,11 @@ import {
   X,
   ChevronDown,
   ArrowRight,
-  Plane,
   Globe,
   MapPin,
   Heart,
-  Car,
   Compass,
-  FileCheck,
-  ShieldCheck,
-  Phone,
-  Sparkles,
 } from "lucide-react";
-import { COMPANY_INFO } from "@/lib/data/company";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,10 +25,10 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  // Scroll threshold
+  // Scroll threshold for dynamic shadow
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 25);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -45,6 +38,22 @@ export default function Navbar() {
   useEffect(() => {
     setMobileMenuOpen(false);
     setOpenDropdown(null);
+  }, [pathname]);
+
+  // Handle URL hash on load or route change
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const hash = window.location.hash.replace("#", "");
+      const timer = setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          const yOffset = -90;
+          const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }, 150);
+      return () => clearTimeout(timer);
+    }
   }, [pathname]);
 
   const handleMouseEnter = (menu: string) => {
@@ -58,43 +67,48 @@ export default function Navbar() {
     }, 200);
   };
 
-  const toggleDropdown = (menu: string) => {
-    setOpenDropdown(openDropdown === menu ? null : menu);
-  };
-
   const toggleMobileAccordion = (menu: string) => {
     setMobileAccordion(mobileAccordion === menu ? null : menu);
   };
 
-  // Smooth scroll handler
-  const handleScrollTo = (e: React.MouseEvent, targetId: string) => {
-    e.preventDefault();
+  // Smooth scroll handler for anchor links
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     setMobileMenuOpen(false);
     setOpenDropdown(null);
 
     if (pathname === "/") {
+      e.preventDefault();
       const el = document.getElementById(targetId);
       if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
+        const yOffset = -90;
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
         window.history.pushState(null, "", `/#${targetId}`);
         return;
       }
     }
-    router.push(`/#${targetId}`);
   };
+
+  // Helper to determine active state
+  const isHomeActive = pathname === "/";
+  const isDestinationsActive = (pathname ?? "").startsWith("/destinations");
+  const isPackagesActive = (pathname ?? "").startsWith("/packages") || pathname === "/honeymoon";
+  const isAboutActive = pathname === "/about";
+  const isContactActive = pathname === "/contact";
 
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 sm:py-4 px-3 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
+          {/* Main Floating Pill with 100% Solid Pure White Background */}
           <div
-            className={`rounded-full px-4 sm:px-6 py-2 sm:py-2.5 transition-all duration-300 flex items-center justify-between border shadow-lg ${
+            className={`rounded-full px-4 sm:px-6 py-2 sm:py-2.5 transition-all duration-300 flex items-center justify-between border bg-white ${
               isScrolled
-                ? "bg-white/98 backdrop-blur-md border-gray-200/90 shadow-xl"
-                : "bg-white/95 backdrop-blur-md border-white/80 shadow-lg"
+                ? "shadow-xl border-gray-200/90"
+                : "shadow-lg border-gray-200/70"
             }`}
           >
-            {/* 01. Official SpiceTrip Logo (Standalone 1024x377 clean brand asset) */}
+            {/* 01. Official SpiceTrip & Safe Wheels Group Logo Lockup (Matches Reference Image 1) */}
             <Link
               href="/"
               onClick={(e) => {
@@ -103,60 +117,74 @@ export default function Navbar() {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }
               }}
-              className="flex items-center group shrink-0"
-              aria-label="SpiceTrip home"
+              className="flex items-center space-x-2.5 sm:space-x-3.5 group shrink-0 focus:outline-none"
+              aria-label="SpiceTrip — Safe Wheels Group, IATA Certified Agency"
             >
               <Image
                 src="/images/spicetrip-logo-light-bg.png"
                 alt="SpiceTrip — good time, great memories!"
-                width={175}
-                height={55}
+                width={145}
+                height={46}
                 priority
                 unoptimized
-                className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-7 sm:h-8 md:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-102"
               />
+
+              {/* Thin Vertical Separator Line */}
+              <div className="h-6 sm:h-7 md:h-8 w-[1.5px] bg-gray-300 shrink-0" />
+
+              {/* Stacked Safe Wheels Group & IATA Pedigree */}
+              <div className="flex flex-col justify-center leading-tight select-none">
+                <span className="text-[10px] sm:text-[11px] md:text-xs font-black uppercase tracking-wider text-gray-900 font-sans whitespace-nowrap">
+                  SAFE WHEELS GROUP
+                </span>
+                <span className="text-[8.5px] sm:text-[9.5px] md:text-[10.5px] font-bold uppercase tracking-wider text-[#D31F25] font-sans whitespace-nowrap">
+                  IATA CERTIFIED AGENCY
+                </span>
+              </div>
             </Link>
 
-            {/* 02. Desktop Navigation with Interactive Dropdowns */}
+            {/* 02. Desktop Navigation Items (Matches Reference Image 8) */}
             <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
               {/* Home */}
               <Link
                 href="/"
-                className={`px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors ${
-                  pathname === "/" ? "text-[#D31F25]" : "text-[#18181B] hover:text-[#D31F25]"
+                onClick={(e) => {
+                  if (pathname === "/") {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
+                className={`relative px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors ${
+                  isHomeActive
+                    ? "text-[#D31F25] after:content-[''] after:absolute after:bottom-[-2px] after:left-3 after:right-3 after:h-[2.5px] after:bg-[#D31F25] after:rounded-full"
+                    : "text-[#18181B] hover:text-[#D31F25]"
                 }`}
               >
                 Home
               </Link>
 
-              {/* Destinations (Interactive Dropdown) */}
+              {/* Destinations (Links to /destinations + Dropdown on hover) */}
               <div
                 className="relative"
                 onMouseEnter={() => handleMouseEnter("destinations")}
                 onMouseLeave={handleMouseLeave}
               >
-                <button
-                  type="button"
-                  onClick={() => toggleDropdown("destinations")}
-                  className={`flex items-center space-x-1 px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors ${
-                    openDropdown === "destinations" || (pathname ?? "").startsWith("/destinations")
-                      ? "text-[#D31F25]"
+                <Link
+                  href="/destinations"
+                  className={`relative px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors inline-flex items-center ${
+                    isDestinationsActive
+                      ? "text-[#D31F25] after:content-[''] after:absolute after:bottom-[-2px] after:left-3 after:right-3 after:h-[2.5px] after:bg-[#D31F25] after:rounded-full"
                       : "text-[#18181B] hover:text-[#D31F25]"
                   }`}
-                  aria-expanded={openDropdown === "destinations"}
                 >
-                  <span>Destinations</span>
-                  <ChevronDown
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                      openDropdown === "destinations" ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+                  Destinations
+                </Link>
 
                 {/* Destinations Mega Dropdown Panel */}
                 {openDropdown === "destinations" && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[560px] animate-in fade-in zoom-in-95 duration-200">
-                    <div className="bg-white rounded-2xl shadow-2xl border border-gray-200/90 p-5 overflow-hidden">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[560px] animate-in fade-in zoom-in-95 duration-200 z-50">
+                    <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-5 overflow-hidden">
                       <div className="grid grid-cols-2 gap-6">
                         {/* Column 1: International */}
                         <div>
@@ -203,14 +231,6 @@ export default function Navbar() {
                                 className="block py-1 px-2 rounded-lg hover:bg-red-50 hover:text-[#D31F25] transition-colors"
                               >
                                 Splendid Thailand & Phuket
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                href="/packages/singapore-tour"
-                                className="block py-1 px-2 rounded-lg hover:bg-red-50 hover:text-[#D31F25] transition-colors"
-                              >
-                                Singapore & Sentosa
                               </Link>
                             </li>
                           </ul>
@@ -285,34 +305,27 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Packages (Interactive Dropdown) */}
+              {/* Packages (Links to /packages + Dropdown on hover) */}
               <div
                 className="relative"
                 onMouseEnter={() => handleMouseEnter("packages")}
                 onMouseLeave={handleMouseLeave}
               >
-                <button
-                  type="button"
-                  onClick={() => toggleDropdown("packages")}
-                  className={`flex items-center space-x-1 px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors ${
-                    openDropdown === "packages" || (pathname ?? "").startsWith("/packages")
-                      ? "text-[#D31F25]"
+                <Link
+                  href="/packages"
+                  className={`relative px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors inline-flex items-center ${
+                    isPackagesActive
+                      ? "text-[#D31F25] after:content-[''] after:absolute after:bottom-[-2px] after:left-3 after:right-3 after:h-[2.5px] after:bg-[#D31F25] after:rounded-full"
                       : "text-[#18181B] hover:text-[#D31F25]"
                   }`}
-                  aria-expanded={openDropdown === "packages"}
                 >
-                  <span>Packages</span>
-                  <ChevronDown
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                      openDropdown === "packages" ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+                  Packages
+                </Link>
 
                 {/* Packages Dropdown Panel */}
                 {openDropdown === "packages" && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-80 animate-in fade-in zoom-in-95 duration-200">
-                    <div className="bg-white rounded-2xl shadow-2xl border border-gray-200/90 p-4">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-80 animate-in fade-in zoom-in-95 duration-200 z-50">
+                    <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4">
                       <ul className="space-y-1 text-xs font-medium text-gray-800">
                         <li>
                           <Link
@@ -377,121 +390,31 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Experiences (Smooth Scroll to Bento) */}
+              {/* Experiences (Scrolls smoothly to Why Travel With Us Bento) */}
               <a
-                href="#experiences"
+                href="/#experiences"
                 onClick={(e) => handleScrollTo(e, "experiences")}
                 className="px-3 py-1.5 text-xs xl:text-sm font-bold text-[#18181B] hover:text-[#D31F25] transition-colors"
               >
                 Experiences
               </a>
 
-              {/* Deals (Smooth Scroll to Top Deals) */}
+              {/* Deals (Scrolls smoothly to Top Deals) */}
               <a
-                href="#deals"
+                href="/#deals"
                 onClick={(e) => handleScrollTo(e, "deals")}
                 className="px-3 py-1.5 text-xs xl:text-sm font-bold text-[#18181B] hover:text-[#D31F25] transition-colors"
               >
                 Deals
               </a>
 
-              {/* Services (Interactive Dropdown) */}
-              <div
-                className="relative"
-                onMouseEnter={() => handleMouseEnter("services")}
-                onMouseLeave={handleMouseLeave}
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleDropdown("services")}
-                  className={`flex items-center space-x-1 px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors ${
-                    openDropdown === "services" || (pathname ?? "").startsWith("/services")
-                      ? "text-[#D31F25]"
-                      : "text-[#18181B] hover:text-[#D31F25]"
-                  }`}
-                  aria-expanded={openDropdown === "services"}
-                >
-                  <span>Services</span>
-                  <ChevronDown
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                      openDropdown === "services" ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-
-                {/* Services Dropdown Panel */}
-                {openDropdown === "services" && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-80 animate-in fade-in zoom-in-95 duration-200">
-                    <div className="bg-white rounded-2xl shadow-2xl border border-gray-200/90 p-4">
-                      <ul className="space-y-1 text-xs font-medium text-gray-800">
-                        <li>
-                          <Link
-                            href="/services/air-tickets"
-                            className="flex items-center space-x-2.5 p-2 rounded-xl hover:bg-gray-50 hover:text-[#D31F25] transition-colors"
-                          >
-                            <Plane className="w-4 h-4 text-[#D31F25]" />
-                            <div>
-                              <div className="font-bold">Air Ticket Desk (IATA)</div>
-                              <div className="text-[10px] text-gray-500">Domestic & International airline ticketing</div>
-                            </div>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/services/car-rentals"
-                            className="flex items-center space-x-2.5 p-2 rounded-xl hover:bg-gray-50 hover:text-[#D31F25] transition-colors"
-                          >
-                            <Car className="w-4 h-4 text-emerald-600" />
-                            <div>
-                              <div className="font-bold">Safe Wheels Car Rentals</div>
-                              <div className="text-[10px] text-gray-500">Chauffeur drive & self-drive fleet in Mysore</div>
-                            </div>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/services/visa-assistance"
-                            className="flex items-center space-x-2.5 p-2 rounded-xl hover:bg-gray-50 hover:text-[#D31F25] transition-colors"
-                          >
-                            <FileCheck className="w-4 h-4 text-amber-500" />
-                            <div>
-                              <div className="font-bold">Passport & Visa Assistance</div>
-                              <div className="text-[10px] text-gray-500">End-to-end documentation & visa filing</div>
-                            </div>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/services/bus-tickets"
-                            className="flex items-center space-x-2.5 p-2 rounded-xl hover:bg-gray-50 hover:text-[#D31F25] transition-colors"
-                          >
-                            <Compass className="w-4 h-4 text-sky-600" />
-                            <div>
-                              <div className="font-bold">Intercity Bus Ticketing</div>
-                              <div className="text-[10px] text-gray-500">South India luxury coach bookings</div>
-                            </div>
-                          </Link>
-                        </li>
-                      </ul>
-
-                      <div className="mt-3 pt-2.5 border-t border-gray-100">
-                        <Link
-                          href="/services"
-                          className="w-full text-center block text-xs font-bold text-[#D31F25] hover:underline"
-                        >
-                          View All Travel Services →
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
               {/* About Us */}
               <Link
                 href="/about"
-                className={`px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors ${
-                  pathname === "/about" ? "text-[#D31F25]" : "text-[#18181B] hover:text-[#D31F25]"
+                className={`relative px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors ${
+                  isAboutActive
+                    ? "text-[#D31F25] after:content-[''] after:absolute after:bottom-[-2px] after:left-3 after:right-3 after:h-[2.5px] after:bg-[#D31F25] after:rounded-full"
+                    : "text-[#18181B] hover:text-[#D31F25]"
                 }`}
               >
                 About Us
@@ -500,8 +423,10 @@ export default function Navbar() {
               {/* Contact */}
               <Link
                 href="/contact"
-                className={`px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors ${
-                  pathname === "/contact" ? "text-[#D31F25]" : "text-[#18181B] hover:text-[#D31F25]"
+                className={`relative px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors ${
+                  isContactActive
+                    ? "text-[#D31F25] after:content-[''] after:absolute after:bottom-[-2px] after:left-3 after:right-3 after:h-[2.5px] after:bg-[#D31F25] after:rounded-full"
+                    : "text-[#18181B] hover:text-[#D31F25]"
                 }`}
               >
                 Contact
@@ -512,13 +437,13 @@ export default function Navbar() {
             <div className="flex items-center space-x-2 sm:space-x-3">
               <Link
                 href="/contact#enquiry"
-                className="hidden sm:inline-flex items-center space-x-1.5 bg-[#D31F25] hover:bg-[#B91C1C] text-white px-5 py-2 rounded-full text-xs font-bold transition-all shadow-md hover:shadow-red-600/30"
+                className="hidden sm:inline-flex items-center space-x-1.5 bg-[#D31F25] hover:bg-[#B91C1C] text-white px-5 py-2 rounded-full text-xs font-bold transition-all shadow-md hover:shadow-red-600/30 shrink-0"
               >
                 <span>Plan Trip</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
-              {/* Mobile Hamburger Button */}
+              {/* Mobile Menu Hamburger Button */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -531,60 +456,102 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* 04. Mobile Expandable Navigation Drawer */}
+        {/* 04. Mobile Expandable Navigation Drawer (Pure Solid White) */}
         {mobileMenuOpen && (
           <div className="lg:hidden mt-2 max-w-7xl mx-auto px-2 animate-in fade-in slide-in-from-top-4 duration-300">
-            <div className="bg-white rounded-3xl shadow-2xl border border-gray-200 p-5 max-h-[80vh] overflow-y-auto">
+            <div className="bg-white rounded-3xl shadow-2xl border border-gray-200 p-5 max-h-[82vh] overflow-y-auto">
               <div className="space-y-3">
                 {/* Home */}
                 <Link
                   href="/"
-                  className="block px-3 py-2 rounded-xl text-sm font-bold text-gray-900 hover:bg-red-50 hover:text-[#D31F25]"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block px-3 py-2 rounded-xl text-sm font-bold ${
+                    isHomeActive ? "bg-red-50 text-[#D31F25]" : "text-gray-900 hover:bg-gray-50"
+                  }`}
                 >
                   Home
                 </Link>
 
                 {/* Destinations Accordion */}
                 <div>
-                  <button
-                    type="button"
-                    onClick={() => toggleMobileAccordion("destinations")}
-                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-sm font-bold text-gray-900 hover:bg-gray-50"
-                  >
-                    <span>Destinations</span>
-                    <ChevronDown
-                      className={`w-4 h-4 transition-transform ${
-                        mobileAccordion === "destinations" ? "rotate-180" : ""
+                  <div className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-gray-50">
+                    <Link
+                      href="/destinations"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`text-sm font-bold flex-1 ${
+                        isDestinationsActive ? "text-[#D31F25]" : "text-gray-900"
                       }`}
-                    />
-                  </button>
+                    >
+                      Destinations
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => toggleMobileAccordion("destinations")}
+                      className="p-1 text-gray-500 hover:text-gray-900"
+                      aria-label="Expand destinations"
+                    >
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform ${
+                          mobileAccordion === "destinations" ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                  </div>
                   {mobileAccordion === "destinations" && (
                     <div className="pl-4 pr-2 py-2 space-y-1.5 text-xs text-gray-600 bg-gray-50 rounded-xl mt-1">
                       <div className="font-bold text-[#D31F25] uppercase tracking-wider text-[10px] pt-1">
                         International
                       </div>
-                      <Link href="/packages/explore-vietnam" className="block py-1 hover:text-[#D31F25]">
+                      <Link
+                        href="/packages/explore-vietnam"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1 hover:text-[#D31F25]"
+                      >
                         Vietnam & Halong Cruise
                       </Link>
-                      <Link href="/packages/maldives-luxury-escape" className="block py-1 hover:text-[#D31F25]">
+                      <Link
+                        href="/packages/maldives-luxury-escape"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1 hover:text-[#D31F25]"
+                      >
                         Maldives Barefoot Atolls
                       </Link>
-                      <Link href="/packages/bali-classic-tour" className="block py-1 hover:text-[#D31F25]">
+                      <Link
+                        href="/packages/bali-classic-tour"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1 hover:text-[#D31F25]"
+                      >
                         Bali Private Pool Villas
                       </Link>
-                      <Link href="/packages/dubai-tour" className="block py-1 hover:text-[#D31F25]">
+                      <Link
+                        href="/packages/dubai-tour"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1 hover:text-[#D31F25]"
+                      >
                         Dubai Burj Khalifa & Safari
                       </Link>
                       <div className="font-bold text-emerald-600 uppercase tracking-wider text-[10px] pt-2">
                         South India & Domestic
                       </div>
-                      <Link href="/packages/kerala-tour" className="block py-1 hover:text-emerald-700">
+                      <Link
+                        href="/packages/kerala-tour"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1 hover:text-emerald-700"
+                      >
                         Kerala Munnar & Alleppey
                       </Link>
-                      <Link href="/packages/karnataka-heritage-tour" className="block py-1 hover:text-emerald-700">
+                      <Link
+                        href="/packages/karnataka-heritage-tour"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1 hover:text-emerald-700"
+                      >
                         Mysore & Coorg (Safe Wheels)
                       </Link>
-                      <Link href="/destinations" className="block py-1.5 font-bold text-[#D31F25] pt-1 border-t border-gray-200">
+                      <Link
+                        href="/destinations"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1.5 font-bold text-[#D31F25] pt-1 border-t border-gray-200"
+                      >
                         View All Destinations →
                       </Link>
                     </div>
@@ -593,30 +560,57 @@ export default function Navbar() {
 
                 {/* Packages Accordion */}
                 <div>
-                  <button
-                    type="button"
-                    onClick={() => toggleMobileAccordion("packages")}
-                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-sm font-bold text-gray-900 hover:bg-gray-50"
-                  >
-                    <span>Packages</span>
-                    <ChevronDown
-                      className={`w-4 h-4 transition-transform ${
-                        mobileAccordion === "packages" ? "rotate-180" : ""
+                  <div className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-gray-50">
+                    <Link
+                      href="/packages"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`text-sm font-bold flex-1 ${
+                        isPackagesActive ? "text-[#D31F25]" : "text-gray-900"
                       }`}
-                    />
-                  </button>
+                    >
+                      Packages
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => toggleMobileAccordion("packages")}
+                      className="p-1 text-gray-500 hover:text-gray-900"
+                      aria-label="Expand packages"
+                    >
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform ${
+                          mobileAccordion === "packages" ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                  </div>
                   {mobileAccordion === "packages" && (
                     <div className="pl-4 pr-2 py-2 space-y-1.5 text-xs text-gray-600 bg-gray-50 rounded-xl mt-1">
-                      <Link href="/honeymoon" className="block py-1 hover:text-[#D31F25]">
+                      <Link
+                        href="/honeymoon"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1 hover:text-[#D31F25]"
+                      >
                         Honeymoon Specials
                       </Link>
-                      <Link href="/packages#international" className="block py-1 hover:text-[#D31F25]">
+                      <Link
+                        href="/packages#international"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1 hover:text-[#D31F25]"
+                      >
                         International Tour Packages
                       </Link>
-                      <Link href="/packages#domestic" className="block py-1 hover:text-[#D31F25]">
+                      <Link
+                        href="/packages#domestic"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1 hover:text-[#D31F25]"
+                      >
                         South India & Domestic Packages
                       </Link>
-                      <Link href="/packages" className="block py-1.5 font-bold text-[#D31F25] pt-1 border-t border-gray-200">
+                      <Link
+                        href="/packages"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1.5 font-bold text-[#D31F25] pt-1 border-t border-gray-200"
+                      >
                         View All 15 Packages →
                       </Link>
                     </div>
@@ -625,7 +619,7 @@ export default function Navbar() {
 
                 {/* Experiences */}
                 <a
-                  href="#experiences"
+                  href="/#experiences"
                   onClick={(e) => handleScrollTo(e, "experiences")}
                   className="block px-3 py-2 rounded-xl text-sm font-bold text-gray-900 hover:bg-gray-50"
                 >
@@ -634,49 +628,20 @@ export default function Navbar() {
 
                 {/* Deals */}
                 <a
-                  href="#deals"
+                  href="/#deals"
                   onClick={(e) => handleScrollTo(e, "deals")}
                   className="block px-3 py-2 rounded-xl text-sm font-bold text-gray-900 hover:bg-gray-50"
                 >
                   Deals
                 </a>
 
-                {/* Services Accordion */}
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => toggleMobileAccordion("services")}
-                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-sm font-bold text-gray-900 hover:bg-gray-50"
-                  >
-                    <span>Services</span>
-                    <ChevronDown
-                      className={`w-4 h-4 transition-transform ${
-                        mobileAccordion === "services" ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-                  {mobileAccordion === "services" && (
-                    <div className="pl-4 pr-2 py-2 space-y-1.5 text-xs text-gray-600 bg-gray-50 rounded-xl mt-1">
-                      <Link href="/services/air-tickets" className="block py-1 hover:text-[#D31F25]">
-                        IATA Air Ticketing
-                      </Link>
-                      <Link href="/services/car-rentals" className="block py-1 hover:text-[#D31F25]">
-                        Safe Wheels Car Rentals
-                      </Link>
-                      <Link href="/services/visa-assistance" className="block py-1 hover:text-[#D31F25]">
-                        Passport & Visa Assistance
-                      </Link>
-                      <Link href="/services/bus-tickets" className="block py-1 hover:text-[#D31F25]">
-                        Intercity Bus Ticketing
-                      </Link>
-                    </div>
-                  )}
-                </div>
-
                 {/* About Us */}
                 <Link
                   href="/about"
-                  className="block px-3 py-2 rounded-xl text-sm font-bold text-gray-900 hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block px-3 py-2 rounded-xl text-sm font-bold ${
+                    isAboutActive ? "bg-red-50 text-[#D31F25]" : "text-gray-900 hover:bg-gray-50"
+                  }`}
                 >
                   About Us
                 </Link>
@@ -684,7 +649,10 @@ export default function Navbar() {
                 {/* Contact */}
                 <Link
                   href="/contact"
-                  className="block px-3 py-2 rounded-xl text-sm font-bold text-gray-900 hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block px-3 py-2 rounded-xl text-sm font-bold ${
+                    isContactActive ? "bg-red-50 text-[#D31F25]" : "text-gray-900 hover:bg-gray-50"
+                  }`}
                 >
                   Contact
                 </Link>
@@ -693,7 +661,8 @@ export default function Navbar() {
                 <div className="pt-3 border-t border-gray-100">
                   <Link
                     href="/contact#enquiry"
-                    className="w-full bg-[#D31F25] text-white py-3 rounded-full text-center text-xs font-bold block shadow-md"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full bg-[#D31F25] hover:bg-[#B91C1C] text-white py-3 rounded-full text-center text-xs font-bold block shadow-md"
                   >
                     Plan Custom Trip
                   </Link>
