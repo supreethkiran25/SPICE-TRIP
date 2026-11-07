@@ -1,7 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
-  <rect width="320" height="180" fill="#fff"/>
-  <rect x="36" y="58" width="248" height="56" rx="4" fill="#0b1f4a"/>
-  <text x="52" y="94" font-family="Georgia, serif" font-size="22" fill="#fff">JET AIRWAYS</text>
-  <circle cx="248" cy="86" r="16" fill="#f59e0b"/>
-  <path d="M240 86h16M248 78v16" stroke="#0b1f4a" stroke-width="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 180" width="360" height="180">
+  <defs>
+    <linearGradient id="jetNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#081938"/>
+      <stop offset="100%" stop-color="#040D1E"/>
+    </linearGradient>
+    <linearGradient id="jetSun" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#EA580C"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="360" height="180" fill="none"/>
+
+  <!-- Authentic Jet Airways Badge Plate -->
+  <g transform="translate(180, 90)">
+    <rect x="-140" y="-32" width="280" height="64" rx="6" fill="url(#jetNavy)"/>
+    
+    <!-- Wordmark -->
+    <text x="-118" y="10" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="bold" fill="#FFFFFF" letter-spacing="1.5">JET AIRWAYS</text>
+    
+    <!-- Jet Airways Iconic Rising Sun & Wing Ribbon -->
+    <circle cx="100" cy="0" r="18" fill="url(#jetSun)"/>
+    <path d="M88,6 C96,-4 108,-6 114,-2 C106,6 96,10 88,6 Z" fill="#FFFFFF"/>
+    <path d="M84,10 C92,2 102,0 110,4 C102,10 92,14 84,10 Z" fill="url(#jetNavy)"/>
+  </g>
 </svg>

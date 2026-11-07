@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 180" width="360" height="180">
+  <defs>
+    <linearGradient id="kstdcMaroon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#991B1B"/>
+      <stop offset="100%" stop-color="#7F1D1D"/>
+    </linearGradient>
+    <linearGradient id="kstdcGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="360" height="180" fill="none"/>
+
+  <!-- Gandaberunda / Mysore Heritage Crest -->
+  <g transform="translate(180, 48)">
+    <circle cx="0" cy="0" r="28" fill="url(#kstdcMaroon)"/>
+    <circle cx="0" cy="0" r="25" fill="none" stroke="url(#kstdcGold)" stroke-width="1.5" stroke-dasharray="3,2"/>
+    
+    <!-- Stylized Mythical Gandaberunda / Royal Two-Headed Crest -->
+    <!-- Center Body -->
+    <path d="M-4,12 C-6,2 -10,-4 -12,-12 C-8,-10 -4,-8 0,-6 C4,-8 8,-10 12,-12 C10,-4 6,2 4,12 Z" fill="url(#kstdcGold)"/>
+    <!-- Left Head -->
+    <path d="M-6,-8 C-10,-12 -16,-12 -16,-8 C-14,-6 -10,-6 -6,-8 Z" fill="url(#kstdcGold)"/>
+    <circle cx="-12" cy="-9" r="1" fill="#7F1D1D"/>
+    <!-- Right Head -->
+    <path d="M6,-8 C10,-12 16,-12 16,-8 C14,-6 10,-6 6,-8 Z" fill="url(#kstdcGold)"/>
+    <circle cx="12" cy="-9" r="1" fill="#7F1D1D"/>
+    <!-- Wings Spread -->
+    <path d="M-14,-2 C-20,4 -22,12 -16,14 C-14,10 -10,6 -6,4 Z" fill="#FDE68A"/>
+    <path d="M14,-2 C20,4 22,12 16,14 C14,10 10,6 6,4 Z" fill="#FDE68A"/>
+  </g>
+
+  <!-- KSTDC Wordmark -->
+  <text x="180" y="112" text-anchor="middle" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="32" font-weight="900" fill="#7F1D1D" letter-spacing="3.5">KSTDC</text>
+
+  <!-- Subtitle -->
+  <text x="180" y="134" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#1E293B" letter-spacing="1.2">KARNATAKA STATE TOURISM DEV. CORP.</text>
+  <text x="180" y="152" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#991B1B" letter-spacing="2">GOVERNMENT OF KARNATAKA UNDERTAKING</text>
+  <text x="180" y="168" text-anchor="middle" font-family="Georgia, serif" font-size="9.5" font-style="italic" fill="#64748B">One State. Many Worlds.</text>
+</svg>

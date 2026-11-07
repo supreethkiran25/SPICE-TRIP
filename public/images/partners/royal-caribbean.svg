@@ -1,9 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
-  <rect width="320" height="180" fill="#fff"/>
-  <rect x="40" y="50" width="50" height="50" fill="#0b3a6e"/>
-  <text x="65" y="82" text-anchor="middle" font-size="22" fill="#fff">⚓</text>
-  <rect x="90" y="50" width="190" height="28" fill="#2b6cb0"/>
-  <text x="185" y="70" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#fff">Royal Caribbean</text>
-  <rect x="90" y="78" width="190" height="22" fill="#eab308"/>
-  <text x="185" y="94" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#111" letter-spacing="2">INTERNATIONAL</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 180" width="360" height="180">
+  <defs>
+    <linearGradient id="rcNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#002B66"/>
+      <stop offset="100%" stop-color="#001433"/>
+    </linearGradient>
+    <linearGradient id="rcGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="360" height="180" fill="none"/>
+
+  <!-- Crown & Anchor Crest -->
+  <g transform="translate(180, 48)">
+    <!-- Anchor Ring -->
+    <circle cx="0" cy="-18" r="6" fill="none" stroke="#002B66" stroke-width="2.5"/>
+    <!-- Crown -->
+    <path d="M-14,-14 L-12,-4 L12,-4 L14,-14 L7,-8 L0,-16 L-7,-8 Z" fill="url(#rcGold)"/>
+    <circle cx="-14" cy="-14" r="1.5" fill="#B45309"/>
+    <circle cx="0" cy="-16" r="1.5" fill="#B45309"/>
+    <circle cx="14" cy="-14" r="1.5" fill="#B45309"/>
+    <!-- Anchor Stock & Shank -->
+    <line x1="-16" y1="-2" x2="16" y2="-2" stroke="#002B66" stroke-width="3" stroke-linecap="round"/>
+    <line x1="0" y1="-2" x2="0" y2="22" stroke="#002B66" stroke-width="3.5"/>
+    <!-- Anchor Flukes -->
+    <path d="M-20,10 C-16,22 16,22 20,10" fill="none" stroke="#002B66" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Fluke Tips -->
+    <polygon points="-22,8 -16,11 -18,15" fill="#002B66"/>
+    <polygon points="22,8 16,11 18,15" fill="#002B66"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="180" y="112" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="bold" fill="#002B66" letter-spacing="0.5">Royal Caribbean</text>
+
+  <!-- Tagline -->
+  <g transform="translate(180, 136)">
+    <rect x="-72" y="-11" width="144" height="20" rx="4" fill="#002B66"/>
+    <text x="0" y="3" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9.5" font-weight="800" fill="#FFFFFF" letter-spacing="2.5">INTERNATIONAL</text>
+  </g>
+  <text x="180" y="164" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" font-weight="600" fill="#64748B" letter-spacing="0.8">Official Cruise Vacation Partner</text>
 </svg>

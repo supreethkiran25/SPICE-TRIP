@@ -1,9 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
-  <rect width="320" height="180" fill="#fff"/>
-  <rect x="110" y="28" width="100" height="80" rx="4" fill="#111"/>
-  <ellipse cx="160" cy="72" rx="28" ry="22" fill="#f8fafc"/>
-  <circle cx="148" cy="68" r="4" fill="#111"/><circle cx="172" cy="68" r="4" fill="#111"/>
-  <path d="M140 82c8 8 24 8 32 0" fill="none" stroke="#111" stroke-width="3"/>
-  <text x="160" y="132" text-anchor="middle" font-family="Georgia, serif" font-size="15" fill="#111">Ministry of Tourism</text>
-  <text x="160" y="152" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#475569">Govt. of India</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 180" width="360" height="180">
+  <defs>
+    <linearGradient id="saffronGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9933"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <linearGradient id="goldEmblem" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#B45309"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Clean Transparent Canvas -->
+  <rect width="360" height="180" fill="none"/>
+
+  <g transform="translate(180, 22)">
+    <!-- Ashoka Lion Capital Vector Silhouette -->
+    <!-- Center Lion -->
+    <path d="M-12,2 C-14,-6 -8,-14 0,-14 C8,-14 14,-6 12,2 C16,4 18,10 16,16 C14,22 10,26 8,30 C6,34 6,38 8,42 L-8,42 C-6,38 -6,34 -8,30 C-10,26 -14,22 -16,16 C-18,10 -16,4 -12,2 Z" fill="url(#goldEmblem)"/>
+    <!-- Left Lion Head -->
+    <path d="M-14,6 C-22,6 -28,12 -28,20 C-28,26 -24,32 -18,36 L-10,36 C-12,30 -12,22 -10,16 Z" fill="#92400E"/>
+    <!-- Right Lion Head -->
+    <path d="M14,6 C22,6 28,12 28,20 C28,26 24,32 18,36 L10,36 C12,30 12,22 10,16 Z" fill="#92400E"/>
+    <!-- Crown / Details -->
+    <circle cx="0" cy="-11" r="2.5" fill="#FDE68A"/>
+    <circle cx="-18" cy="14" r="2" fill="#FDE68A"/>
+    <circle cx="18" cy="14" r="2" fill="#FDE68A"/>
+    <!-- Abacus Base -->
+    <rect x="-26" y="42" width="52" height="7" rx="1.5" fill="#78350F"/>
+    <!-- Ashoka Chakra Wheel -->
+    <circle cx="0" cy="45.5" r="3" fill="none" stroke="#FEF3C7" stroke-width="0.8"/>
+    <circle cx="0" cy="45.5" r="0.8" fill="#FEF3C7"/>
+    <!-- Bell Lotus Base -->
+    <path d="M-20,49 C-15,55 15,55 20,49 L-20,49 Z" fill="#92400E"/>
+    <!-- Satyameva Jayate Devnagari -->
+    <text x="0" y="61" text-anchor="middle" font-family="'Noto Sans Devanagari', 'Mangal', 'Arial Unicode MS', sans-serif" font-size="7.5" font-weight="bold" fill="#78350F" letter-spacing="0.5">सत्यमेव जयते</text>
+  </g>
+
+  <!-- Typography: Ministry of Tourism -->
+  <text x="180" y="104" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="800" fill="#0F172A" letter-spacing="1.2">MINISTRY OF TOURISM</text>
+  <text x="180" y="122" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="700" fill="#64748B" letter-spacing="2.5">GOVERNMENT OF INDIA</text>
+
+  <!-- Incredible !ndia Tagline -->
+  <g transform="translate(180, 150)">
+    <text x="-4" text-anchor="end" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-style="italic" font-weight="bold" fill="#1E293B">Incredible</text>
+    <!-- Stylized Saffron Exclamation as 'i' / bang -->
+    <path d="M4,-13 L9,-13 L7,-2 L5,-2 Z" fill="url(#saffronGrad)"/>
+    <circle cx="6.5" cy="2" r="2" fill="url(#saffronGrad)"/>
+    <text x="14" text-anchor="start" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-style="italic" font-weight="bold" fill="#1E293B">ndia</text>
+  </g>
 </svg>
