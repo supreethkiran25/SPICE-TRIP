@@ -23,7 +23,13 @@ export default function InquirySection({ defaultDestination = "" }: InquirySecti
       await fetch("/api/inquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, email, destination, message }),
+        body: JSON.stringify({
+          fullName: name,
+          phone,
+          email,
+          destination: destination || "General Inquiry",
+          additionalRequirements: message,
+        }),
       });
     } catch {
       // still show success UX for local/demo

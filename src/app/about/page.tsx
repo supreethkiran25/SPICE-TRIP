@@ -59,22 +59,31 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative aspect-[4/5] rounded-sm overflow-hidden border border-sand/40 shadow-xl bg-sand/20">
+          <div className="lg:col-span-5 relative aspect-[4/5] rounded-2xl overflow-hidden border border-border shadow-xl bg-slate-100 group">
             <Image
-              src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1000&q=80"
-              alt="SpiceTrip travel expedition"
+              src="/images/prashanth-plaza-mysore.jpg"
+              alt="SpiceTrip Headquarters — Prashanth Plaza, Saraswathipuram, Mysore"
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover"
+              className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/80 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 text-white p-4 bg-forest-deep/90 backdrop-blur-sm rounded-sm border border-sand/30">
-              <span className="text-[10px] font-sans uppercase tracking-widest text-sand font-semibold block mb-1">
-                Headquarters
-              </span>
-              <h3 className="font-serif text-lg font-bold">"PRASHANTH PLAZA", Mysore</h3>
-              <p className="text-xs text-sand-light/80 mt-0.5">Saraswathipuram, Mysore - 570009</p>
+            <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-forest-deep/30 to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6 text-white p-5 bg-forest-deep/95 backdrop-blur-md rounded-xl border border-white/10 shadow-lg">
+              <div className="flex items-center space-x-2 mb-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-emerald-300 font-bold">
+                  Corporate Headquarters
+                </span>
+              </div>
+              <h3 className="font-serif text-xl font-bold text-white tracking-tight">"PRASHANTH PLAZA", Mysore</h3>
+              <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                4th Main, 5th Cross, Saraswathipuram, Mysore – 570009
+              </p>
+              <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-300">
+                <span>Safe Wheels Group</span>
+                <span className="text-emerald-300 font-medium">Visiting Desks Open</span>
+              </div>
             </div>
           </div>
         </div>
