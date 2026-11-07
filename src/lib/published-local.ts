@@ -280,12 +280,12 @@ export const fileHomepage: HomepageContent = {
       id: "pokhara",
       title: "Pokhara Retreat",
       location: "Himalayas",
-      price: "₹28,500",
-      duration: "5 Days",
+      price: "₹49,000",
+      duration: "6 Days",
       style: "Active & Serene",
       description:
         "Stay down beside the peaceful Phewa lake, surrounded by green hills, distant Annapurna peaks and quiet beauty.",
-      slug: "kashmir-paradise",
+      slug: "nepal-himalayan-kingdom",
       image: "/images/destinations/nepal.jpg",
     },
     {

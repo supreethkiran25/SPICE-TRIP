@@ -100,12 +100,11 @@ export default function Navbar() {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 sm:py-4 px-3 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Main Floating Pill with 100% Solid Pure White Background */}
           <div
             className={`rounded-full px-4 sm:px-6 py-2 sm:py-2.5 transition-all duration-300 flex items-center justify-between border bg-white ${
               isScrolled
-                ? "shadow-xl border-gray-200/90"
-                : "shadow-lg border-gray-200/70"
+                ? "shadow-lg border-zinc-200"
+                : "shadow-sm border-zinc-200/70"
             }`}
           >
             {/* 01. Official SpiceTrip & Safe Wheels Group Logo Lockup (Matches Reference Image 1) */}
@@ -261,10 +260,10 @@ export default function Navbar() {
                             </li>
                             <li>
                               <Link
-                                href="/packages/kashmir-paradise"
+                                href="/packages/nepal-himalayan-kingdom"
                                 className="block py-1 px-2 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
                               >
-                                Kashmir Valley & Gulmarg Snow
+                                Nepal · Kathmandu & Pokhara
                               </Link>
                             </li>
                             <li>
@@ -428,17 +427,16 @@ export default function Navbar() {
             <div className="flex items-center space-x-2 sm:space-x-3">
               <Link
                 href="/contact#enquiry"
-                className="hidden sm:inline-flex items-center space-x-1.5 bg-[#D31F25] hover:bg-[#B91C1C] text-white px-5 py-2 rounded-full text-xs font-bold transition-all shadow-md hover:shadow-red-600/30 shrink-0"
+                className="hidden sm:inline-flex items-center space-x-1.5 bg-brand-spice hover:bg-brand-spice-dark text-white px-5 py-2 rounded-full text-xs font-bold transition-colors shrink-0"
               >
                 <span>Plan Trip</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
-              {/* Mobile Menu Hamburger Button */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-[#18181B] transition-colors"
+                className="lg:hidden p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-brand-charcoal transition-colors"
                 aria-label="Toggle navigation menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -450,7 +448,7 @@ export default function Navbar() {
         {/* 04. Mobile Expandable Navigation Drawer (Pure Solid White) */}
         {mobileMenuOpen && (
           <div className="lg:hidden mt-2 max-w-7xl mx-auto px-2 animate-in fade-in slide-in-from-top-4 duration-300">
-            <div className="bg-white rounded-3xl shadow-2xl border border-gray-200 p-5 max-h-[82vh] overflow-y-auto">
+            <div className="bg-white rounded-3xl shadow-2xl border border-zinc-200 p-5 max-h-[82vh] overflow-y-auto">
               <div className="space-y-3">
                 {/* Home */}
                 <Link
@@ -644,7 +642,7 @@ export default function Navbar() {
                   <Link
                     href="/contact#enquiry"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-full bg-[#D31F25] hover:bg-[#B91C1C] text-white py-3 rounded-full text-center text-xs font-bold block shadow-md"
+                    className="w-full bg-brand-spice hover:bg-brand-spice-dark text-white py-3 rounded-full text-center text-xs font-bold block"
                   >
                     Plan Custom Trip
                   </Link>

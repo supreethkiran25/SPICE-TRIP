@@ -38,76 +38,81 @@ export default function InquirySection({ defaultDestination = "" }: InquirySecti
     setSubmitted(true);
   };
 
-  return (
-    <section className="w-full bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8">
-      <div className="mb-6">
-        <h3 className="text-xl sm:text-2xl font-extrabold text-[#0C2340]">Plan your journey</h3>
-        <p className="text-sm text-gray-500 mt-1">
-          Share a few details and our Mysore concierge will respond shortly.
-        </p>
-      </div>
+  const fieldClass =
+    "w-full px-4 py-3 rounded-2xl border border-zinc-200 text-sm text-brand-charcoal placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-brand-spice/20 focus:border-brand-spice";
 
-      {submitted ? (
-        <div className="py-10 text-center space-y-3">
-          <div className="w-12 h-12 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
-            <CheckCircle2 className="w-6 h-6" />
-          </div>
-          <h4 className="font-bold text-[#0C2340]">Inquiry received</h4>
-          <p className="text-xs text-gray-600 max-w-sm mx-auto">
-            Thank you{name ? `, ${name}` : ""}. Our Safe Wheels team will contact you soon
-            {destination ? ` about ${destination}` : ""}.
-          </p>
+  return (
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div className="max-w-2xl mx-auto bg-white rounded-3xl border border-zinc-200 p-6 sm:p-8 shadow-sm">
+        <div className="mb-6">
+          <h3 className="text-xl sm:text-2xl font-bold text-brand-charcoal tracking-tight">
+            Plan this trip
+          </h3>
+          <p className="text-sm text-zinc-500 mt-1">Share a few details. We’ll reply from Mysore.</p>
         </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="space-y-3.5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            <input
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Full name"
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0C2340]"
-            />
-            <input
-              required
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="Phone / WhatsApp"
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0C2340]"
-            />
+
+        {submitted ? (
+          <div className="py-10 text-center space-y-3">
+            <div className="w-12 h-12 mx-auto rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <CheckCircle2 className="w-6 h-6" />
+            </div>
+            <h4 className="font-bold text-brand-charcoal">Inquiry received</h4>
+            <p className="text-sm text-zinc-500 max-w-sm mx-auto">
+              Thank you{name ? `, ${name}` : ""}. We’ll contact you soon
+              {destination ? ` about ${destination}` : ""}.
+            </p>
           </div>
-          <input
-            required
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email address"
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0C2340]"
-          />
-          <input
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-            placeholder="Destination / package interest"
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0C2340]"
-          />
-          <textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Travel dates, travelers, notes…"
-            rows={4}
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0C2340] resize-y"
-          />
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-[#0C2340] hover:bg-[#153359] text-white text-sm font-bold transition-colors disabled:opacity-60"
-          >
-            <Send className="w-4 h-4" />
-            <span>{loading ? "Sending…" : "Submit inquiry"}</span>
-          </button>
-        </form>
-      )}
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Full name"
+                className={fieldClass}
+              />
+              <input
+                required
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Phone / WhatsApp"
+                className={fieldClass}
+              />
+            </div>
+            <input
+              required
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              className={fieldClass}
+            />
+            <input
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
+              placeholder="Destination"
+              className={fieldClass}
+            />
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Dates, travelers, notes…"
+              rows={4}
+              className={`${fieldClass} resize-y`}
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-brand-spice hover:bg-brand-spice-dark text-white text-sm font-semibold transition-colors disabled:opacity-60"
+            >
+              <Send className="w-4 h-4" />
+              <span>{loading ? "Sending…" : "Submit"}</span>
+            </button>
+          </form>
+        )}
+      </div>
     </section>
   );
 }

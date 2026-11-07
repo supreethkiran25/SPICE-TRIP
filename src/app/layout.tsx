@@ -113,7 +113,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-[#FAF9F5] text-[#18181B] min-h-screen flex flex-col font-sans selection:bg-[#D31F25] selection:text-white">
+      <body className="bg-white text-[#18181B] min-h-screen flex flex-col font-sans selection:bg-[#D31F25] selection:text-white">
         <CmsProvider>
           <SmoothScroll>
             <Navbar />

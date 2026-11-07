@@ -11,15 +11,16 @@ import InquirySection from "@/components/home/InquirySection";
 export const revalidate = 30;
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
   return DESTINATIONS.map((dest) => ({ slug: dest.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const destination = DESTINATIONS.find((d) => d.slug === params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const destination = DESTINATIONS.find((d) => d.slug === slug);
   if (!destination) return { title: "Destination Not Found" };
 
   return {
@@ -29,7 +30,8 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 export default async function DestinationDetailPage({ params }: Props) {
-  const destination = DESTINATIONS.find((d) => d.slug === params.slug);
+  const { slug } = await params;
+  const destination = DESTINATIONS.find((d) => d.slug === slug);
   if (!destination) notFound();
 
   const { packages } = await getPublished();

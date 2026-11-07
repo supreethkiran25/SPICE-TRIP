@@ -9,7 +9,7 @@ import { Clock, ArrowLeft, Share2, BookOpen } from "lucide-react";
 export const revalidate = 30;
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -18,8 +18,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   const { journal } = await getPublished();
-  const art = journal.find((a) => a.slug === params.slug);
+  const art = journal.find((a) => a.slug === slug);
   if (!art) return { title: "Article Not Found" };
 
   return {
@@ -29,8 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogDetailPage({ params }: Props) {
+  const { slug } = await params;
   const { journal } = await getPublished();
-  const article = journal.find((a) => a.slug === params.slug);
+  const article = journal.find((a) => a.slug === slug);
   if (!article) notFound();
 
   return (
