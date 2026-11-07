@@ -10,7 +10,13 @@ export const metadata: Metadata = {
 
 export default function PackagesPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-background py-24 text-center">Loading luxury packages...</div>}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-white pt-32 text-center text-sm text-zinc-400">
+          Loading packages…
+        </div>
+      }
+    >
       <PackagesClient />
     </Suspense>
   );
