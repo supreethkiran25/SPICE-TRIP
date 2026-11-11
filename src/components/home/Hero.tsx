@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { ArrowRight, Search } from "lucide-react";
 import { DESTINATIONS } from "@/lib/data/packages";
 
-const HERO_IMAGE = "/images/hero-oia-sunset-4k.jpg";
+const HERO_IMAGE = "/images/hero-oia-golden-4k.jpg";
 
 export default function Hero() {
   const router = useRouter();
@@ -34,22 +34,14 @@ export default function Hero() {
           priority
           sizes="100vw"
           quality={100}
-          className="object-cover object-[70%_40%]"
+          className="object-cover object-center"
         />
-        {/* Soft left wash — dark type readable, sunset photo open on right */}
+        {/* Light left gradient only — photo stays visible */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(90deg, rgba(247,244,238,0.97) 0%, rgba(247,244,238,0.9) 24%, rgba(247,244,238,0.55) 42%, rgba(255,210,160,0.15) 58%, transparent 75%)",
-          }}
-        />
-        {/* Subtle sunset warmth across the sky / right */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(255,170,90,0.14) 0%, transparent 45%, rgba(20,12,8,0.08) 100%)",
+              "linear-gradient(90deg, rgba(255,248,240,0.72) 0%, rgba(255,248,240,0.45) 32%, rgba(255,248,240,0.12) 52%, transparent 70%)",
           }}
         />
       </div>
