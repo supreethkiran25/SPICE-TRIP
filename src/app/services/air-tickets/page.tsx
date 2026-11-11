@@ -55,13 +55,13 @@ export default function AirTicketsPage() {
 
   return (
     <div className="bg-background min-h-screen py-16 md:py-24">
-      <div className="max-w-container mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-3xl mb-12">
           <div className="flex items-center space-x-2 text-xs font-sans uppercase tracking-[0.2em] text-terracotta font-semibold mb-3">
             <Plane className="w-3.5 h-3.5" />
             <span>IATA Accredited Flight Booking Desk</span>
           </div>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-forest-deep mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-forest-deep mb-4">
             Air Tickets & International Flights
           </h1>
           <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">
@@ -71,11 +71,11 @@ export default function AirTicketsPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12" id="enquiry">
           {/* Form Column */}
-          <div className="lg:col-span-7 bg-white p-8 sm:p-10 border border-sand/40 rounded-sm shadow-sm">
+          <div className="lg:col-span-7 bg-white p-8 sm:p-10 border border-sand/40 rounded-3xl shadow-sm">
             {status === "success" ? (
               <div className="text-center py-12">
                 <CheckCircle2 className="w-12 h-12 text-green-600 mx-auto mb-4" />
-                <h3 className="font-serif text-2xl font-bold text-forest-deep mb-2">
+                <h3 className="text-2xl font-bold text-forest-deep mb-2">
                   Flight Request Received
                 </h3>
                 <p className="text-xs text-foreground-muted mb-6">
@@ -83,7 +83,7 @@ export default function AirTicketsPage() {
                 </p>
                 <button
                   onClick={() => setStatus("idle")}
-                  className="bg-forest text-white text-xs font-semibold uppercase tracking-wider px-6 py-2.5 rounded-sm"
+                  className="bg-forest text-white text-xs font-semibold uppercase tracking-wider px-6 py-2.5 rounded-3xl"
                 >
                   Submit Another Flight Request
                 </button>
@@ -125,7 +125,7 @@ export default function AirTicketsPage() {
                       placeholder="e.g. Bangalore (BLR), Mysore"
                       value={formData.from}
                       onChange={(e) => setFormData({ ...formData, from: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-sm focus:outline-none focus:border-forest"
+                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
                     />
                   </div>
                   <div className="flex flex-col space-y-1.5">
@@ -138,7 +138,7 @@ export default function AirTicketsPage() {
                       placeholder="e.g. Hanoi (HAN), Malé (MLE)"
                       value={formData.to}
                       onChange={(e) => setFormData({ ...formData, to: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-sm focus:outline-none focus:border-forest"
+                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
                     />
                   </div>
                 </div>
@@ -154,7 +154,7 @@ export default function AirTicketsPage() {
                       value={formData.departureDate}
                       onChange={(e) => setFormData({ ...formData, departureDate: e.target.value })}
                       min={new Date().toISOString().split("T")[0]}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-sm focus:outline-none focus:border-forest"
+                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
                     />
                   </div>
                   {tripType === "roundtrip" && (
@@ -168,7 +168,7 @@ export default function AirTicketsPage() {
                         value={formData.returnDate}
                         onChange={(e) => setFormData({ ...formData, returnDate: e.target.value })}
                         min={formData.departureDate || new Date().toISOString().split("T")[0]}
-                        className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-sm focus:outline-none focus:border-forest"
+                        className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
                       />
                     </div>
                   )}
@@ -182,7 +182,7 @@ export default function AirTicketsPage() {
                     <select
                       value={formData.travelClass}
                       onChange={(e) => setFormData({ ...formData, travelClass: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-sm focus:outline-none focus:border-forest"
+                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
                     >
                       <option value="Economy">Economy Class</option>
                       <option value="Premium Economy">Premium Economy</option>
@@ -197,7 +197,7 @@ export default function AirTicketsPage() {
                     <select
                       value={formData.passengers}
                       onChange={(e) => setFormData({ ...formData, passengers: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-sm focus:outline-none focus:border-forest"
+                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
                     >
                       <option value="1 Adult">1 Adult</option>
                       <option value="2 Adults">2 Adults</option>
@@ -219,7 +219,7 @@ export default function AirTicketsPage() {
                       placeholder="Full Name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-sm focus:outline-none focus:border-forest"
+                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
                     />
                   </div>
                   <div className="flex flex-col space-y-1.5">
@@ -232,7 +232,7 @@ export default function AirTicketsPage() {
                       placeholder="email@domain.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-sm focus:outline-none focus:border-forest"
+                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
                     />
                   </div>
                   <div className="flex flex-col space-y-1.5">
@@ -245,7 +245,7 @@ export default function AirTicketsPage() {
                       placeholder="+91 98450 XXXXX"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-sm focus:outline-none focus:border-forest"
+                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
                     />
                   </div>
                 </div>
@@ -259,12 +259,12 @@ export default function AirTicketsPage() {
                     placeholder="e.g. Prefer morning departures, Singapore Airlines or Emirates..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-sm focus:outline-none focus:border-forest"
+                    className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
                   />
                 </div>
 
                 {status === "error" && (
-                  <div className="p-3 bg-red-50 text-red-700 text-xs rounded-sm flex items-center space-x-2">
+                  <div className="p-3 bg-red-50 text-red-700 text-xs rounded-3xl flex items-center space-x-2">
                     <AlertCircle className="w-4 h-4 shrink-0" />
                     <span>Failed to submit flight inquiry. Please call +91 821 4001100.</span>
                   </div>
@@ -273,7 +273,7 @@ export default function AirTicketsPage() {
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="w-full bg-forest hover:bg-terracotta text-white font-sans text-xs font-semibold uppercase tracking-widest py-3.5 rounded-sm transition-colors shadow-sm disabled:opacity-50"
+                  className="w-full bg-forest hover:bg-terracotta text-white font-sans text-xs font-semibold py-3 rounded-full transition-colors shadow-sm disabled:opacity-50"
                 >
                   {status === "submitting" ? "Searching Schedules..." : "Enquire for Flight Schedules & Rates"}
                 </button>
@@ -283,8 +283,8 @@ export default function AirTicketsPage() {
 
           {/* Right Info Column */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-forest-deep text-sand-light p-8 rounded-sm border border-forest">
-              <div className="flex items-center space-x-2 text-white font-serif font-bold text-lg mb-3">
+            <div className="bg-forest-deep text-sand-light p-8 rounded-3xl border border-forest">
+              <div className="flex items-center space-x-2 text-white font-bold text-lg mb-3">
                 <ShieldCheck className="w-5 h-5 text-terracotta" />
                 <span>The SpiceTrip Flight Advantage</span>
               </div>
@@ -296,8 +296,8 @@ export default function AirTicketsPage() {
               </ul>
             </div>
 
-            <div className="bg-white p-6 border border-sand/40 rounded-sm">
-              <h4 className="font-serif text-base font-bold text-forest-deep mb-2">Immediate Assistance</h4>
+            <div className="bg-white p-6 border border-sand/40 rounded-3xl">
+              <h4 className="text-base font-bold text-forest-deep mb-2">Immediate Assistance</h4>
               <p className="text-xs text-foreground-muted mb-4">Need urgent international rebooking or next-day tickets?</p>
               <a
                 href="tel:+918214001100"

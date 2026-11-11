@@ -80,13 +80,13 @@ function VisaAssistanceContent() {
 
   return (
     <div className="bg-background min-h-screen py-16 md:py-24">
-      <div className="max-w-container mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-3xl mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-[#D31F25] text-xs font-semibold uppercase tracking-wider mb-4">
             <FileCheck className="w-3.5 h-3.5" />
             <span>Consular &amp; Documentation Concierge</span>
           </div>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-forest-deep mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-forest-deep mb-4">
             Visa Assistance &amp; Stamping Desk
           </h1>
           <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">
@@ -100,7 +100,7 @@ function VisaAssistanceContent() {
             {status === "success" ? (
               <div className="text-center py-12">
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto mb-4" />
-                <h3 className="font-serif text-2xl font-bold text-forest-deep mb-2">
+                <h3 className="text-2xl font-bold text-forest-deep mb-2">
                   Visa Inquiry Logged
                 </h3>
                 <p className="text-xs text-foreground-muted mb-6">
@@ -242,7 +242,7 @@ function VisaAssistanceContent() {
           {/* Right Checklist */}
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-[#18181B] text-white p-8 rounded-2xl border border-gray-800 shadow-lg">
-              <h3 className="font-serif text-lg font-bold text-white mb-4 flex items-center space-x-2">
+              <h3 className="text-lg font-bold text-white mb-4 flex items-center space-x-2">
                 <ShieldCheck className="w-5 h-5 text-[#D31F25]" />
                 <span>Standard Visa Document Checklist</span>
               </h3>
@@ -257,7 +257,7 @@ function VisaAssistanceContent() {
             </div>
 
             <div className="bg-white p-6 border border-gray-200/80 rounded-2xl shadow-sm">
-              <h4 className="font-serif text-base font-bold text-gray-900 mb-2">Speak to a Visa Officer</h4>
+              <h4 className="text-base font-bold text-gray-900 mb-2">Speak to a Visa Officer</h4>
               <p className="text-xs text-gray-600 mb-4">Walk into Prashanth Plaza, Mysore or contact our desk:</p>
               <a
                 href="tel:+918214001100"

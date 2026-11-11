@@ -43,7 +43,7 @@ export default function TopDeals() {
         {/* Header with Category Filter Buttons */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-8 gap-4">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#18181B] flex items-center space-x-2">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#18181B] flex items-center space-x-2">
               <span>Top Deals & Limited-Time Offers</span>
               <Tag className="w-5 h-5 text-[#D31F25]" />
             </h2>
@@ -93,7 +93,7 @@ export default function TopDeals() {
                   quality={65}
                   className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute top-3 left-3 bg-[#D31F25] text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-lg uppercase tracking-wider">
+                <div className="absolute top-3 left-3 bg-[#D31F25] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-lg uppercase tracking-wider">
                   {deal.discount}
                 </div>
               </div>
@@ -101,7 +101,7 @@ export default function TopDeals() {
               {/* Body */}
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-extrabold text-base text-[#18181B] group-hover:text-[#D31F25] transition-colors line-clamp-1">
+                  <h3 className="font-bold text-base text-[#18181B] group-hover:text-[#D31F25] transition-colors line-clamp-1">
                     {deal.title}
                   </h3>
                   <div className="flex items-center space-x-1 text-xs text-gray-500 mt-1">
@@ -118,7 +118,7 @@ export default function TopDeals() {
                     <span className="block text-[11px] line-through text-gray-400">
                       {deal.originalPrice}
                     </span>
-                    <span className="text-lg font-extrabold text-[#D31F25]">
+                    <span className="text-lg font-bold text-[#D31F25]">
                       {deal.discountedPrice}
                     </span>
                   </div>

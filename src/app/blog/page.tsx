@@ -20,14 +20,14 @@ export default async function BlogListingPage() {
 
   return (
     <div className="bg-background min-h-screen py-16 md:py-24">
-      <div className="max-w-container mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="max-w-3xl mb-16">
           <div className="flex items-center space-x-2 text-xs font-sans uppercase tracking-[0.2em] text-terracotta font-semibold mb-3">
             <BookOpen className="w-3.5 h-3.5" />
             <span>The SpiceTrip Publication</span>
           </div>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-forest-deep mb-4">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-forest-deep mb-4">
             The Travel Journal
           </h1>
           <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">
@@ -37,7 +37,7 @@ export default async function BlogListingPage() {
 
         {/* Featured Big Magazine Hero Article */}
         {featuredArticle && (
-          <div className="bg-white border border-sand/40 rounded-sm overflow-hidden shadow-sm grid grid-cols-1 lg:grid-cols-12 mb-16 group hover:border-forest transition-colors">
+          <div className="bg-white border border-sand/40 rounded-3xl overflow-hidden shadow-sm grid grid-cols-1 lg:grid-cols-12 mb-16 group hover:border-forest transition-colors">
             <div className="lg:col-span-7 relative aspect-[16/10] lg:aspect-auto lg:h-full min-h-[380px] overflow-hidden bg-sand/20">
               <Image
                 src={featuredArticle.image}
@@ -47,7 +47,7 @@ export default async function BlogListingPage() {
                 sizes="(max-width: 1024px) 100vw, 60vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-forest-deep text-[10px] font-sans uppercase tracking-widest px-3 py-1 rounded-sm font-semibold">
+              <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-forest-deep text-[10px] font-sans uppercase tracking-widest px-3 py-1 rounded-3xl font-semibold">
                 Featured Cover Story
               </div>
             </div>
@@ -67,7 +67,7 @@ export default async function BlogListingPage() {
                   </span>
                 </div>
 
-                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-forest-deep group-hover:text-terracotta transition-colors mb-4">
+                <h2 className="text-2xl sm:text-3xl font-bold text-forest-deep group-hover:text-terracotta transition-colors mb-4">
                   <Link href={`/blog/${featuredArticle.slug}`}>
                     {featuredArticle.title}
                   </Link>
@@ -99,7 +99,7 @@ export default async function BlogListingPage() {
           {otherArticles.map((art) => (
             <article
               key={art.id}
-              className="bg-white border border-sand/40 rounded-sm overflow-hidden flex flex-col justify-between group hover:border-forest transition-colors shadow-sm"
+              className="bg-white border border-sand/40 rounded-3xl overflow-hidden flex flex-col justify-between group hover:border-forest transition-colors shadow-sm"
             >
               <div>
                 <div className="relative aspect-[16/10] overflow-hidden bg-sand/20">
@@ -110,7 +110,7 @@ export default async function BlogListingPage() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm text-forest-deep text-[10px] font-sans uppercase tracking-widest px-2.5 py-1 rounded-sm font-semibold">
+                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm text-forest-deep text-[10px] font-sans uppercase tracking-widest px-2.5 py-1 rounded-3xl font-semibold">
                     {art.category}
                   </div>
                 </div>
@@ -122,7 +122,7 @@ export default async function BlogListingPage() {
                     <span>{art.readTime}</span>
                   </div>
 
-                  <h3 className="font-serif text-xl font-bold text-forest-deep group-hover:text-terracotta transition-colors line-clamp-2 mb-3">
+                  <h3 className="text-xl font-bold text-forest-deep group-hover:text-terracotta transition-colors line-clamp-2 mb-3">
                     <Link href={`/blog/${art.slug}`}>{art.title}</Link>
                   </h3>
 

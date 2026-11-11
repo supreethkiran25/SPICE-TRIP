@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { Plus_Jakarta_Sans, Caveat } from "next/font/google";
+import { Outfit, Caveat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import SmoothScroll from "@/components/motion/SmoothScroll";
@@ -9,9 +9,9 @@ import { COMPANY_INFO } from "@/lib/data/company";
 
 const Footer = dynamic(() => import("@/components/layout/Footer"));
 
-const sans = Plus_Jakarta_Sans({
+const sans = Outfit({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans",
   display: "swap",
   preload: true,
@@ -28,25 +28,25 @@ const script = Caveat({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.spicetrip.com"),
   title: {
-    default: "SpiceTrip — Curated Luxury Expeditions & Bespoke Journeys",
-    template: "%s | SpiceTrip Official",
+    default: "SpiceTrip | Private international journeys from Mysore",
+    template: "%s | SpiceTrip",
   },
   description:
-    "Official website of SpiceTrip, an IATA certified travel agency & venture of Safe Wheels Group, Mysore. Handcrafted international tour packages, honeymoon getaways, flight ticketing, and private travel concierge.",
+    "IATA certified travel agency from Safe Wheels Group, Mysore. Get a free custom itinerary for Vietnam, Maldives, Bali, Dubai, Thailand, and Kerala with a dedicated travel manager.",
   keywords: [
     "SpiceTrip",
     "Spice Trip Mysore",
     "Safe Wheels travel agency",
     "IATA certified travel agency Mysore",
-    "luxury tour packages India",
+    "international tour packages India",
     "honeymoon packages Vietnam Maldives Bali",
-    "custom international holidays Mysore Bangalore",
+    "custom holidays Mysore Bangalore",
   ],
-  authors: [{ name: "SpiceTrip & Safe Wheels Group" }],
+  authors: [{ name: "SpiceTrip and Safe Wheels Group" }],
   openGraph: {
-    title: "SpiceTrip — Journeys, Not Destinations",
+    title: "SpiceTrip | Private international journeys from Mysore",
     description:
-      "Curated international tour packages, honeymoon retreats, and bespoke expeditions. An IATA certified agency and venture of Safe Wheels, Mysore.",
+      "Free itinerary planning with IATA certified booking for Vietnam, Maldives, Bali, Dubai, Thailand, and Kerala. A Safe Wheels Group venture.",
     url: "https://www.spicetrip.com",
     siteName: "SpiceTrip",
     images: [
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
         url: "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=75",
         width: 1200,
         height: 630,
-        alt: "SpiceTrip Luxury Travel Expeditions",
+        alt: "Halong Bay journey planned by SpiceTrip",
       },
     ],
     locale: "en_IN",
@@ -62,9 +62,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SpiceTrip — Curated Luxury Expeditions",
+    title: "SpiceTrip | Private international journeys from Mysore",
     description:
-      "Handcrafted international tour packages & honeymoon retreats by Safe Wheels, Mysore.",
+      "Free itinerary planning and IATA certified booking by Safe Wheels, Mysore.",
   },
   icons: {
     icon: "/favicon.ico",
@@ -113,11 +113,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-white text-[#18181B] min-h-screen flex flex-col font-sans selection:bg-[#D31F25] selection:text-white">
+      <body className="bg-[#F7F6F3] text-[#171717] min-h-screen flex flex-col font-sans antialiased selection:bg-[#D31F25] selection:text-white">
         <CmsProvider>
           <SmoothScroll>
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-white focus:text-[#18181B] focus:px-3 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold"
+            >
+              Skip to content
+            </a>
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
             <Footer />
           </SmoothScroll>
         </CmsProvider>

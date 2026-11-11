@@ -42,7 +42,7 @@ export default function ChoosePlan() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#18181B]">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#18181B]">
             Choose Your Perfect Plan
           </h2>
           <p className="text-xs sm:text-sm text-gray-500 mt-1">
@@ -62,7 +62,7 @@ export default function ChoosePlan() {
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#D31F25] text-white text-[10px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#D31F25] text-white text-[10px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md">
                   Most Popular
                 </div>
               )}
@@ -71,7 +71,7 @@ export default function ChoosePlan() {
                 <div className="w-10 h-10 rounded-2xl bg-gray-50 flex items-center justify-center mb-4">
                   {plan.icon}
                 </div>
-                <h3 className="text-lg font-extrabold text-[#18181B]">
+                <h3 className="text-lg font-bold text-[#18181B]">
                   {plan.name}
                 </h3>
                 <p className="text-xs text-gray-500 mt-2 leading-relaxed">
@@ -84,7 +84,7 @@ export default function ChoosePlan() {
                   From
                 </span>
                 <div className="flex items-baseline space-x-1 mb-4">
-                  <span className="text-2xl font-extrabold text-[#D31F25]">
+                  <span className="text-2xl font-bold text-[#D31F25]">
                     {plan.price}
                   </span>
                   <span className="text-xs text-gray-400">({plan.usd})</span>
@@ -108,7 +108,7 @@ export default function ChoosePlan() {
           {/* Right Card: Globe & Peace of Mind Graphic */}
           <div className="bg-gradient-to-br from-red-50/50 via-amber-50/30 to-orange-50/40 rounded-3xl p-6 sm:p-7 border border-red-100 flex flex-col justify-between shadow-sm">
             <div>
-              <h3 className="text-xl font-extrabold text-[#18181B] leading-snug">
+              <h3 className="text-xl font-bold text-[#18181B] leading-snug">
                 Explore the world with complete peace of mind.
               </h3>
               <p className="text-xs text-gray-600 mt-2 leading-relaxed">
@@ -152,7 +152,7 @@ export default function ChoosePlan() {
               <span className="text-xs font-bold text-[#D31F25] uppercase tracking-wider">
                 Custom Itinerary Consultation
               </span>
-              <h3 className="text-2xl font-extrabold text-[#18181B] mt-1">
+              <h3 className="text-2xl font-bold text-[#18181B] mt-1">
                 {selectedPlan} Package
               </h3>
               <p className="text-xs text-gray-500 mt-1">

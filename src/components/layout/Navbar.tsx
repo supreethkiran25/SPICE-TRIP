@@ -12,7 +12,8 @@ import {
   Globe,
   MapPin,
   Heart,
-  Compass,
+  Users,
+  Package,
 } from "lucide-react";
 
 export default function Navbar() {
@@ -100,11 +101,12 @@ export default function Navbar() {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 sm:py-4 px-3 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
+          {/* Main Floating Pill with 100% Solid Pure White Background */}
           <div
             className={`rounded-full px-4 sm:px-6 py-2 sm:py-2.5 transition-all duration-300 flex items-center justify-between border bg-white ${
               isScrolled
-                ? "shadow-lg border-zinc-200"
-                : "shadow-sm border-zinc-200/70"
+                ? "shadow-xl border-gray-200/90"
+                : "shadow-lg border-gray-200/70"
             }`}
           >
             {/* 01. Official SpiceTrip & Safe Wheels Group Logo Lockup (Matches Reference Image 1) */}
@@ -134,7 +136,7 @@ export default function Navbar() {
 
               {/* Stacked Safe Wheels Group & IATA Pedigree */}
               <div className="flex flex-col justify-center leading-tight select-none">
-                <span className="text-[10px] sm:text-[11px] md:text-xs font-black uppercase tracking-wider text-gray-900 font-sans whitespace-nowrap">
+                <span className="text-[10px] sm:text-[11px] md:text-xs font-bold uppercase tracking-wider text-gray-900 font-sans whitespace-nowrap">
                   SAFE WHEELS GROUP
                 </span>
                 <span className="text-[8.5px] sm:text-[9.5px] md:text-[10.5px] font-bold uppercase tracking-wider text-[#D31F25] font-sans whitespace-nowrap">
@@ -182,120 +184,82 @@ export default function Navbar() {
 
                 {/* Destinations Mega Dropdown Panel */}
                 {openDropdown === "destinations" && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[560px] animate-in fade-in zoom-in-95 duration-200 z-50">
-                    <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-5 overflow-hidden">
-                      <div className="grid grid-cols-2 gap-6">
-                        {/* Column 1: International */}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[420px] animate-in fade-in zoom-in-95 duration-200 z-50">
+                    <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 overflow-hidden">
+                      <div className="grid grid-cols-2 gap-5">
                         <div>
-                          <div className="flex items-center space-x-1.5 text-xs font-black uppercase tracking-wider text-[#D31F25] mb-3 pb-1 border-b border-gray-100">
-                            <Globe className="w-3.5 h-3.5" />
-                            <span>International Escapes</span>
+                          <div className="text-xs font-bold uppercase tracking-wider text-[#D31F25] mb-2">
+                            International
                           </div>
-                          <ul className="space-y-1.5 text-xs font-medium text-gray-700">
+                          <ul className="space-y-1 text-sm text-gray-700">
                             <li>
-                              <Link
-                                href="/packages/explore-vietnam"
-                                className="block py-1 px-2 rounded-lg hover:bg-red-50 hover:text-[#D31F25] transition-colors"
-                              >
-                                Vietnam & Halong Bay Cruise
+                              <Link href="/destinations/vietnam" className="block py-1.5 px-2 rounded-lg hover:bg-red-50 hover:text-[#D31F25] transition-colors">
+                                Vietnam
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                href="/packages/maldives-luxury-escape"
-                                className="block py-1 px-2 rounded-lg hover:bg-red-50 hover:text-[#D31F25] transition-colors"
-                              >
-                                Maldives Barefoot Atolls
+                              <Link href="/destinations/maldives" className="block py-1.5 px-2 rounded-lg hover:bg-red-50 hover:text-[#D31F25] transition-colors">
+                                Maldives
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                href="/packages/bali-classic-tour"
-                                className="block py-1 px-2 rounded-lg hover:bg-red-50 hover:text-[#D31F25] transition-colors"
-                              >
-                                Bali Private Pool Villas
+                              <Link href="/destinations/bali" className="block py-1.5 px-2 rounded-lg hover:bg-red-50 hover:text-[#D31F25] transition-colors">
+                                Bali
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                href="/packages/dubai-tour"
-                                className="block py-1 px-2 rounded-lg hover:bg-red-50 hover:text-[#D31F25] transition-colors"
-                              >
-                                Dubai Burj Khalifa & Safari
+                              <Link href="/destinations/dubai" className="block py-1.5 px-2 rounded-lg hover:bg-red-50 hover:text-[#D31F25] transition-colors">
+                                Dubai
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                href="/packages/thailand-tour"
-                                className="block py-1 px-2 rounded-lg hover:bg-red-50 hover:text-[#D31F25] transition-colors"
-                              >
-                                Splendid Thailand & Phuket
+                              <Link href="/packages/thailand-tour" className="block py-1.5 px-2 rounded-lg hover:bg-red-50 hover:text-[#D31F25] transition-colors">
+                                Thailand
                               </Link>
                             </li>
                           </ul>
                         </div>
 
-                        {/* Column 2: South India & Domestic */}
                         <div>
-                          <div className="flex items-center space-x-1.5 text-xs font-black uppercase tracking-wider text-emerald-600 mb-3 pb-1 border-b border-gray-100">
-                            <MapPin className="w-3.5 h-3.5" />
-                            <span>South India & Domestic</span>
+                          <div className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2">
+                            India
                           </div>
-                          <ul className="space-y-1.5 text-xs font-medium text-gray-700">
+                          <ul className="space-y-1 text-sm text-gray-700">
                             <li>
-                              <Link
-                                href="/packages/kerala-tour"
-                                className="block py-1 px-2 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
-                              >
-                                Kerala Munnar & Alleppey Houseboat
+                              <Link href="/destinations/kerala" className="block py-1.5 px-2 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition-colors">
+                                Kerala
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                href="/packages/karnataka-heritage-tour"
-                                className="block py-1 px-2 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
-                              >
-                                Mysore, Coorg & Kabini (Safe Wheels)
+                              <Link href="/packages/karnataka-heritage-tour" className="block py-1.5 px-2 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition-colors">
+                                Karnataka
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                href="/packages/nepal-himalayan-kingdom"
-                                className="block py-1 px-2 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
-                              >
-                                Nepal · Kathmandu & Pokhara
+                              <Link href="/packages/kashmir-paradise" className="block py-1.5 px-2 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition-colors">
+                                Kashmir
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                href="/packages/andaman-tour"
-                                className="block py-1 px-2 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
-                              >
-                                Andaman Coral Islands & Havelock
+                              <Link href="/packages/andaman-tour" className="block py-1.5 px-2 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition-colors">
+                                Andaman
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                href="/packages/golden-triangle-tour"
-                                className="block py-1 px-2 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
-                              >
-                                Golden Triangle (Delhi, Agra, Jaipur)
+                              <Link href="/packages/golden-triangle-tour" className="block py-1.5 px-2 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition-colors">
+                                Golden Triangle
                               </Link>
                             </li>
                           </ul>
                         </div>
                       </div>
 
-                      {/* Bottom Action */}
-                      <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
-                        <span className="text-[11px] text-gray-500 font-medium">
-                          All departures verified by Safe Wheels Mysore specialists
-                        </span>
+                      <div className="mt-3 pt-3 border-t border-gray-100">
                         <Link
                           href="/destinations"
                           className="text-xs font-bold text-[#D31F25] hover:underline inline-flex items-center space-x-1"
                         >
-                          <span>Explore All Destinations</span>
+                          <span>See all destinations</span>
                           <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
                       </div>
@@ -323,65 +287,54 @@ export default function Navbar() {
 
                 {/* Packages Dropdown Panel */}
                 {openDropdown === "packages" && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-80 animate-in fade-in zoom-in-95 duration-200 z-50">
-                    <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4">
-                      <ul className="space-y-1 text-xs font-medium text-gray-800">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-64 animate-in fade-in zoom-in-95 duration-200 z-50">
+                    <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-3">
+                      <ul className="space-y-0.5 text-sm text-gray-800">
                         <li>
                           <Link
                             href="/honeymoon"
-                            className="flex items-center space-x-2.5 p-2 rounded-xl hover:bg-red-50 hover:text-[#D31F25] transition-colors"
+                            className="flex items-center space-x-2.5 px-3 py-2.5 rounded-xl hover:bg-red-50 hover:text-[#D31F25] transition-colors font-semibold"
                           >
                             <Heart className="w-4 h-4 text-[#D31F25]" />
-                            <div>
-                              <div className="font-bold">Honeymoon Specials</div>
-                              <div className="text-[10px] text-gray-500">Private pool villas & overwater suites</div>
-                            </div>
+                            <span>Honeymoon</span>
                           </Link>
                         </li>
                         <li>
                           <Link
-                            href="/packages#international"
-                            className="flex items-center space-x-2.5 p-2 rounded-xl hover:bg-gray-50 hover:text-[#D31F25] transition-colors"
+                            href="/packages?type=International"
+                            className="flex items-center space-x-2.5 px-3 py-2.5 rounded-xl hover:bg-gray-50 hover:text-[#D31F25] transition-colors font-semibold"
                           >
                             <Globe className="w-4 h-4 text-sky-600" />
-                            <div>
-                              <div className="font-bold">International Tour Packages</div>
-                              <div className="text-[10px] text-gray-500">Vietnam, Bali, Maldives, Dubai, Thailand</div>
-                            </div>
+                            <span>International</span>
                           </Link>
                         </li>
                         <li>
                           <Link
-                            href="/packages#domestic"
-                            className="flex items-center space-x-2.5 p-2 rounded-xl hover:bg-gray-50 hover:text-[#D31F25] transition-colors"
+                            href="/packages?type=Domestic"
+                            className="flex items-center space-x-2.5 px-3 py-2.5 rounded-xl hover:bg-gray-50 hover:text-[#D31F25] transition-colors font-semibold"
                           >
                             <MapPin className="w-4 h-4 text-emerald-600" />
-                            <div>
-                              <div className="font-bold">South India & Domestic Tours</div>
-                              <div className="text-[10px] text-gray-500">Kerala, Coorg, Ooty, Kashmir & Goa</div>
-                            </div>
+                            <span>India</span>
                           </Link>
                         </li>
                         <li>
                           <Link
-                            href="/packages#family"
-                            className="flex items-center space-x-2.5 p-2 rounded-xl hover:bg-gray-50 hover:text-[#D31F25] transition-colors"
+                            href="/packages?type=Family Holidays"
+                            className="flex items-center space-x-2.5 px-3 py-2.5 rounded-xl hover:bg-gray-50 hover:text-[#D31F25] transition-colors font-semibold"
                           >
-                            <Compass className="w-4 h-4 text-amber-500" />
-                            <div>
-                              <div className="font-bold">Family Holidays</div>
-                              <div className="text-[10px] text-gray-500">All-inclusive resorts & child-friendly tours</div>
-                            </div>
+                            <Users className="w-4 h-4 text-amber-500" />
+                            <span>Family</span>
                           </Link>
                         </li>
                       </ul>
 
-                      <div className="mt-3 pt-2.5 border-t border-gray-100">
+                      <div className="mt-2 pt-2 border-t border-gray-100 px-2">
                         <Link
                           href="/packages"
-                          className="w-full text-center block text-xs font-bold text-[#D31F25] hover:underline"
+                          className="flex items-center space-x-2 text-xs font-bold text-[#D31F25] hover:underline py-1.5"
                         >
-                          View All 15 Tour Packages →
+                          <Package className="w-3.5 h-3.5" />
+                          <span>See all packages</span>
                         </Link>
                       </div>
                     </div>
@@ -427,16 +380,17 @@ export default function Navbar() {
             <div className="flex items-center space-x-2 sm:space-x-3">
               <Link
                 href="/contact#enquiry"
-                className="hidden sm:inline-flex items-center space-x-1.5 bg-brand-spice hover:bg-brand-spice-dark text-white px-5 py-2 rounded-full text-xs font-bold transition-colors shrink-0"
+                className="hidden sm:inline-flex items-center space-x-1.5 bg-[#D31F25] hover:bg-[#B91C1C] text-white px-5 py-2 rounded-full text-xs font-bold transition-all shadow-md hover:shadow-red-600/30 shrink-0"
               >
                 <span>Plan Trip</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
+              {/* Mobile Menu Hamburger Button */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-brand-charcoal transition-colors"
+                className="lg:hidden p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-[#18181B] transition-colors"
                 aria-label="Toggle navigation menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -448,7 +402,7 @@ export default function Navbar() {
         {/* 04. Mobile Expandable Navigation Drawer (Pure Solid White) */}
         {mobileMenuOpen && (
           <div className="lg:hidden mt-2 max-w-7xl mx-auto px-2 animate-in fade-in slide-in-from-top-4 duration-300">
-            <div className="bg-white rounded-3xl shadow-2xl border border-zinc-200 p-5 max-h-[82vh] overflow-y-auto">
+            <div className="bg-white rounded-3xl shadow-2xl border border-gray-200 p-5 max-h-[82vh] overflow-y-auto">
               <div className="space-y-3">
                 {/* Home */}
                 <Link
@@ -487,61 +441,25 @@ export default function Navbar() {
                     </button>
                   </div>
                   {mobileAccordion === "destinations" && (
-                    <div className="pl-4 pr-2 py-2 space-y-1.5 text-xs text-gray-600 bg-gray-50 rounded-xl mt-1">
+                    <div className="pl-4 pr-2 py-2 space-y-1.5 text-sm text-gray-600 bg-gray-50 rounded-xl mt-1">
                       <div className="font-bold text-[#D31F25] uppercase tracking-wider text-[10px] pt-1">
                         International
                       </div>
-                      <Link
-                        href="/packages/explore-vietnam"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-1 hover:text-[#D31F25]"
-                      >
-                        Vietnam & Halong Cruise
-                      </Link>
-                      <Link
-                        href="/packages/maldives-luxury-escape"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-1 hover:text-[#D31F25]"
-                      >
-                        Maldives Barefoot Atolls
-                      </Link>
-                      <Link
-                        href="/packages/bali-classic-tour"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-1 hover:text-[#D31F25]"
-                      >
-                        Bali Private Pool Villas
-                      </Link>
-                      <Link
-                        href="/packages/dubai-tour"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-1 hover:text-[#D31F25]"
-                      >
-                        Dubai Burj Khalifa & Safari
-                      </Link>
+                      <Link href="/destinations/vietnam" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#D31F25]">Vietnam</Link>
+                      <Link href="/destinations/maldives" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#D31F25]">Maldives</Link>
+                      <Link href="/destinations/bali" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#D31F25]">Bali</Link>
+                      <Link href="/destinations/dubai" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#D31F25]">Dubai</Link>
                       <div className="font-bold text-emerald-600 uppercase tracking-wider text-[10px] pt-2">
-                        South India & Domestic
+                        India
                       </div>
-                      <Link
-                        href="/packages/kerala-tour"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-1 hover:text-emerald-700"
-                      >
-                        Kerala Munnar & Alleppey
-                      </Link>
-                      <Link
-                        href="/packages/karnataka-heritage-tour"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-1 hover:text-emerald-700"
-                      >
-                        Mysore & Coorg (Safe Wheels)
-                      </Link>
+                      <Link href="/destinations/kerala" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-emerald-700">Kerala</Link>
+                      <Link href="/packages/kashmir-paradise" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-emerald-700">Kashmir</Link>
                       <Link
                         href="/destinations"
                         onClick={() => setMobileMenuOpen(false)}
                         className="block py-1.5 font-bold text-[#D31F25] pt-1 border-t border-gray-200"
                       >
-                        View All Destinations →
+                        See all destinations
                       </Link>
                     </div>
                   )}
@@ -573,34 +491,17 @@ export default function Navbar() {
                     </button>
                   </div>
                   {mobileAccordion === "packages" && (
-                    <div className="pl-4 pr-2 py-2 space-y-1.5 text-xs text-gray-600 bg-gray-50 rounded-xl mt-1">
-                      <Link
-                        href="/honeymoon"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-1 hover:text-[#D31F25]"
-                      >
-                        Honeymoon Specials
-                      </Link>
-                      <Link
-                        href="/packages#international"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-1 hover:text-[#D31F25]"
-                      >
-                        International Tour Packages
-                      </Link>
-                      <Link
-                        href="/packages#domestic"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-1 hover:text-[#D31F25]"
-                      >
-                        South India & Domestic Packages
-                      </Link>
+                    <div className="pl-4 pr-2 py-2 space-y-1.5 text-sm text-gray-600 bg-gray-50 rounded-xl mt-1">
+                      <Link href="/honeymoon" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#D31F25]">Honeymoon</Link>
+                      <Link href="/packages?type=International" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#D31F25]">International</Link>
+                      <Link href="/packages?type=Domestic" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#D31F25]">India</Link>
+                      <Link href="/packages?type=Family Holidays" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#D31F25]">Family</Link>
                       <Link
                         href="/packages"
                         onClick={() => setMobileMenuOpen(false)}
                         className="block py-1.5 font-bold text-[#D31F25] pt-1 border-t border-gray-200"
                       >
-                        View All 15 Packages →
+                        See all packages
                       </Link>
                     </div>
                   )}
@@ -642,9 +543,9 @@ export default function Navbar() {
                   <Link
                     href="/contact#enquiry"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-full bg-brand-spice hover:bg-brand-spice-dark text-white py-3 rounded-full text-center text-xs font-bold block"
+                    className="w-full bg-[#D31F25] hover:bg-[#B91C1C] text-white py-3 rounded-full text-center text-xs font-bold block shadow-md"
                   >
-                    Plan Custom Trip
+                    Plan trip
                   </Link>
                 </div>
               </div>

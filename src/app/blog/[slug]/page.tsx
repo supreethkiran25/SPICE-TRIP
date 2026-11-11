@@ -62,17 +62,17 @@ export default async function BlogDetailPage({ params }: Props) {
             </span>
           </div>
 
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-forest-deep leading-tight mb-6">
+          <h1 className="text-3xl sm:text-5xl font-bold text-forest-deep leading-tight mb-6">
             {article.title}
           </h1>
 
-          <p className="font-serif text-lg sm:text-xl text-foreground-muted italic border-l-2 border-terracotta pl-4 leading-relaxed">
+          <p className="text-lg sm:text-xl text-foreground-muted italic border-l-2 border-terracotta pl-4 leading-relaxed">
             {article.excerpt}
           </p>
         </div>
 
         {/* Featured Image */}
-        <div className="relative aspect-[16/10] overflow-hidden rounded-sm border border-sand/40 bg-sand/20 mb-12 shadow-md">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-sand/40 bg-sand/20 mb-12 shadow-md">
           <Image
             src={article.image}
             alt={article.title}
@@ -87,7 +87,7 @@ export default async function BlogDetailPage({ params }: Props) {
         <div className="flex items-center space-x-3 pb-8 mb-8 border-b border-sand/30 text-xs text-foreground-muted">
           <div>
             <span className="text-[10px] uppercase tracking-wider text-terracotta font-semibold block">Written by</span>
-            <strong className="text-forest text-sm font-serif">{article.author.name}</strong>
+            <strong className="text-forest text-sm ">{article.author.name}</strong>
             <span className="text-foreground-muted block">{article.author.role}</span>
           </div>
         </div>
@@ -100,14 +100,14 @@ export default async function BlogDetailPage({ params }: Props) {
         </div>
 
         {/* Bottom CTA to plan journey */}
-        <div className="mt-16 p-8 bg-forest-deep text-white rounded-sm border border-forest text-center">
-          <h3 className="font-serif text-2xl font-bold mb-2">Inspired by this dispatch?</h3>
+        <div className="mt-16 p-8 bg-forest-deep text-white rounded-3xl border border-forest text-center">
+          <h3 className="text-2xl font-bold mb-2">Plan a trip</h3>
           <p className="text-xs text-sand-light/80 mb-6 max-w-md mx-auto">
             Our curators can integrate any of these experiences into your private bespoke itinerary.
           </p>
           <Link
             href="/contact#enquiry"
-            className="inline-flex items-center justify-center bg-terracotta hover:bg-white hover:text-forest-deep text-white text-xs font-semibold uppercase tracking-widest px-7 py-3.5 rounded-sm transition-colors"
+            className="inline-flex items-center justify-center bg-terracotta hover:bg-white hover:text-forest-deep text-white text-xs font-semibold uppercase tracking-widest px-7 py-3.5 rounded-3xl transition-colors"
           >
             <span>Plan This Journey</span>
           </Link>

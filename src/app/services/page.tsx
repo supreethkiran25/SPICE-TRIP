@@ -2,29 +2,27 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { SERVICES } from "@/lib/data/services";
-import { ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Travel Services — Flight Tickets, Visas, Passports & Car Rentals | SpiceTrip",
-  description:
-    "Comprehensive travel desk services by SpiceTrip: IATA air ticketing, tourist & business visa stamping, passport assistance, and Safe Wheels chauffeur car rentals in Mysore.",
+  title: "Services | SpiceTrip",
+  description: "Flights, visas, passports, and car rentals.",
 };
 
 export default function ServicesPage() {
   return (
     <div className="bg-background min-h-screen py-16 md:py-24">
-      <div className="max-w-container mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="max-w-3xl mb-16">
-          <div className="flex items-center space-x-2 text-xs font-sans uppercase tracking-[0.2em] text-terracotta font-semibold mb-3">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>IATA Certified Travel Agency Services</span>
-          </div>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-forest-deep mb-6">
-            Comprehensive Travel Concierge
+          <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#D31F25] mb-4">
+            SpiceTrip
+          </p>
+          <h1 className="text-3xl sm:text-4xl font-bold uppercase tracking-[0.04em] text-[#171717] mb-3">
+            Services
           </h1>
-          <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">
-            From seamless international flight routing and consulate visa approvals to luxury chauffeured mobility across southern India, SpiceTrip provides end-to-end travel support with single-point accountability.
+          <p className="text-sm sm:text-base text-[#737373] leading-relaxed font-light">
+            Flights, visas, passports, and car rentals.
           </p>
         </div>
 
@@ -33,7 +31,7 @@ export default function ServicesPage() {
           {SERVICES.map((serv, index) => (
             <div
               key={serv.id}
-              className={`bg-white border border-sand/40 rounded-sm overflow-hidden shadow-sm grid grid-cols-1 lg:grid-cols-12 items-center`}
+              className={`bg-white border border-sand/40 rounded-3xl overflow-hidden shadow-sm grid grid-cols-1 lg:grid-cols-12 items-center`}
             >
               {/* Image Column */}
               <div
@@ -55,11 +53,11 @@ export default function ServicesPage() {
                 <span className="text-[10px] font-sans uppercase tracking-widest text-terracotta font-semibold block mb-2">
                   {serv.category}
                 </span>
-                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-forest-deep mb-2">
+                <h2 className="text-2xl sm:text-3xl font-bold text-forest-deep mb-2">
                   {serv.title}
                 </h2>
-                <p className="text-xs font-serif italic text-forest mb-4">
-                  "{serv.tagline}"
+                <p className="text-xs text-foreground-muted mb-4">
+                  {serv.tagline}
                 </p>
                 <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed mb-6">
                   {serv.description}
@@ -76,7 +74,7 @@ export default function ServicesPage() {
 
                 <Link
                   href={serv.ctaHref}
-                  className="inline-flex items-center space-x-2 bg-forest hover:bg-terracotta text-white text-xs font-semibold uppercase tracking-wider px-6 py-3.5 rounded-sm transition-colors shadow-sm"
+                  className="inline-flex items-center space-x-2 bg-forest hover:bg-terracotta text-white text-xs font-semibold px-6 py-3 rounded-full transition-colors shadow-sm"
                 >
                   <span>{serv.ctaLabel}</span>
                   <ArrowRight className="w-4 h-4" />

@@ -10,7 +10,7 @@ export default function NotFound() {
           <span>Coordinate Uncharted • 404</span>
         </div>
 
-        <h1 className="font-serif text-5xl sm:text-6xl font-bold text-forest-deep mb-4">
+        <h1 className="text-5xl sm:text-6xl font-bold text-forest-deep mb-4">
           The path has wandered.
         </h1>
 
@@ -21,14 +21,14 @@ export default function NotFound() {
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/"
-            className="inline-flex items-center space-x-2 bg-forest hover:bg-terracotta text-white font-sans text-xs font-semibold uppercase tracking-widest px-7 py-3.5 rounded-sm transition-all duration-300 shadow-md"
+            className="inline-flex items-center space-x-2 bg-forest hover:bg-terracotta text-white font-sans text-xs font-semibold uppercase tracking-widest px-7 py-3.5 rounded-3xl transition-all duration-300 shadow-md"
           >
             <Home className="w-3.5 h-3.5" />
             <span>Return to Discover</span>
           </Link>
           <Link
             href="/packages"
-            className="inline-flex items-center space-x-2 border border-forest/40 hover:border-forest text-forest hover:bg-forest hover:text-white font-sans text-xs font-semibold uppercase tracking-widest px-7 py-3.5 rounded-sm transition-colors"
+            className="inline-flex items-center space-x-2 border border-forest/40 hover:border-forest text-forest hover:bg-forest hover:text-white font-sans text-xs font-semibold uppercase tracking-widest px-7 py-3.5 rounded-3xl transition-colors"
           >
             <span>Browse All Packages</span>
             <ArrowRight className="w-3.5 h-3.5" />

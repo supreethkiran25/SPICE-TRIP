@@ -1,191 +1,147 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ShieldCheck, Award, Users, Compass, MapPin, Phone, Mail, ArrowRight } from "lucide-react";
-import { COMPANY_INFO } from "@/lib/data/company";
+import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Us — SpiceTrip & Safe Wheels Group Heritage",
-  description:
-    "Learn about SpiceTrip, an IATA certified travel agency and venture of Safe Wheels Group headquartered in Mysore, India. Over two decades of hospitality excellence.",
+  title: "About | SpiceTrip",
+  description: "IATA certified travel agency from Safe Wheels Group, Mysore.",
 };
 
 export default function AboutPage() {
   return (
-    <div className="bg-background min-h-screen py-16 md:py-24">
-      <div className="max-w-container mx-auto px-6">
-        {/* Header Breadcrumbs & Title */}
-        <div className="max-w-3xl mb-16">
-          <div className="flex items-center space-x-2 text-xs font-sans uppercase tracking-[0.2em] text-terracotta font-semibold mb-3">
-            <Compass className="w-3.5 h-3.5" />
-            <span>The SpiceTrip Story</span>
-          </div>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-forest-deep mb-6">
-            Boutique Travel Crafted with Heritage & Integrity
+    <div className="bg-[#F7F6F3] min-h-screen">
+      {/* Intro */}
+      <section className="pt-20 md:pt-28 pb-16 md:pb-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#D31F25] mb-5">
+            SpiceTrip · Safe Wheels Group
+          </p>
+          <h1 className="text-3xl sm:text-4xl font-bold uppercase tracking-[0.04em] text-[#171717] max-w-3xl leading-[1.15] mb-6">
+            Private journeys.
+            <br />
+            Planned with care.
           </h1>
-          <p className="text-base sm:text-lg text-foreground-muted leading-relaxed font-normal">
-            SpiceTrip, a venture of Safe Wheels, is an IATA certified travel agency offering independent, curated travel worldwide. Headquartered in Mysore with branch offices in Bangalore and Mangalore.
+          <p className="text-base sm:text-lg text-[#737373] max-w-2xl leading-relaxed font-light">
+            IATA certified travel from Mysore. Clear plans, named support, and the Safe Wheels network behind every trip.
           </p>
         </div>
+      </section>
 
-        {/* Story Section with Editorial Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
-          <div className="lg:col-span-7 space-y-6 text-sm sm:text-base text-foreground-muted leading-relaxed">
-            <p>
-              SpiceTrip is a much sought-after name in the travel industry. We are a passionate and energetic team of travel curators, headed by an experienced leadership group with a combined field experience of over a decade, known for our impeccable services and well-preserved moral values.
-            </p>
-            <p>
-              Our well-researched and carefully designed tour itineraries have made us a favourite tour operator not only with our discerning individual clients but also with co-tour operators, luxury hotels, private resorts, airlines, and international ground associates.
-            </p>
-            <p>
-              We hold exclusive tie-ups with premier resorts and star hotels across all ranges—right from ultra-luxurious private pool villas to handpicked boutique heritage properties. We offer unbeatable value and seamless ground execution for popular global and domestic destinations.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-sand/40">
-              <div className="flex items-start space-x-3">
-                <ShieldCheck className="w-5 h-5 text-terracotta shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-serif font-bold text-forest-deep text-sm">IATA Certified</h4>
-                  <p className="text-xs text-foreground-muted">Direct global airline reservation authority and passenger protection standards.</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <Award className="w-5 h-5 text-terracotta shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-serif font-bold text-forest-deep text-sm">Safe Wheels Legacy</h4>
-                  <p className="text-xs text-foreground-muted">Backed by Karnataka’s premier luxury fleet mobility and hospitality enterprise.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5 relative aspect-[4/5] rounded-2xl overflow-hidden border border-border shadow-xl bg-slate-100 group">
-            <Image
-              src="/images/prashanth-plaza-mysore.jpg"
-              alt="SpiceTrip Headquarters — Prashanth Plaza, Saraswathipuram, Mysore"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-forest-deep/30 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 text-white p-5 bg-forest-deep/95 backdrop-blur-md rounded-xl border border-white/10 shadow-lg">
-              <div className="flex items-center space-x-2 mb-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-emerald-300 font-bold">
-                  Corporate Headquarters
-                </span>
-              </div>
-              <h3 className="font-serif text-xl font-bold text-white tracking-tight">"PRASHANTH PLAZA", Mysore</h3>
-              <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                4th Main, 5th Cross, Saraswathipuram, Mysore – 570009
+      {/* Story + image */}
+      <section className="pb-20 md:pb-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-5 space-y-6">
+              <p className="text-base sm:text-lg text-[#525252] leading-relaxed font-light">
+                We build international and India itineraries around your dates, budget, and pace. Flights, hotels, and transfers arrive as one clear plan.
               </p>
-              <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-300">
-                <span>Safe Wheels Group</span>
-                <span className="text-emerald-300 font-medium">Visiting Desks Open</span>
+              <p className="text-base sm:text-lg text-[#525252] leading-relaxed font-light">
+                One travel manager stays with you from the first call to your return home.
+              </p>
+
+              <div className="grid grid-cols-2 gap-8 pt-8 border-t border-[#E5E5E5]">
+                <div>
+                  <p className="text-2xl font-semibold text-[#171717] mb-1">IATA</p>
+                  <p className="text-sm text-[#737373] font-light leading-relaxed">
+                    Certified flight booking
+                  </p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold text-[#171717] mb-1">20+</p>
+                  <p className="text-sm text-[#737373] font-light leading-relaxed">
+                    Years with Safe Wheels
+                  </p>
+                </div>
               </div>
+            </div>
+
+            <div className="lg:col-span-7">
+              <div className="relative aspect-[5/4] rounded-[2rem] overflow-hidden bg-[#E7E5E4]">
+                <Image
+                  src="/images/prashanth-plaza-mysore.jpg"
+                  alt="SpiceTrip office, Prashanth Plaza, Mysore"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <p className="mt-4 text-sm text-[#737373] font-light">
+                Prashanth Plaza, Saraswathipuram, Mysore
+              </p>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Office Network & Branches */}
-        <div className="bg-white border border-sand/40 p-8 sm:p-12 rounded-sm shadow-sm mb-20">
-          <div className="mb-8">
-            <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-terracotta font-semibold block mb-1">
-              Regional Presence
-            </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-forest-deep">
-              Our Offices Across Karnataka
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Head Office Mysore */}
-            <div className="bg-background-secondary/40 p-6 rounded-sm border border-sand/40">
-              <span className="text-[10px] font-sans uppercase tracking-widest text-terracotta font-bold block mb-2">
-                Head Office
-              </span>
-              <h3 className="font-serif text-xl font-bold text-forest-deep mb-3">Mysore</h3>
-              <div className="space-y-2 text-xs text-foreground-muted">
-                <div className="flex items-start space-x-2">
-                  <MapPin className="w-4 h-4 text-forest shrink-0 mt-0.5" />
-                  <span>"PRASHANTH PLAZA", 4th Main, 5th Cross, Saraswathipuram, Mysore - 570009</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Phone className="w-4 h-4 text-forest shrink-0" />
-                  <span>+91 821 4001100 / 2541100</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Mail className="w-4 h-4 text-forest shrink-0" />
-                  <span>info@spicetrip.com</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Bangalore Branch */}
-            <div className="bg-background-secondary/40 p-6 rounded-sm border border-sand/40">
-              <span className="text-[10px] font-sans uppercase tracking-widest text-terracotta font-bold block mb-2">
-                Branch Office
-              </span>
-              <h3 className="font-serif text-xl font-bold text-forest-deep mb-3">Bangalore</h3>
-              <div className="space-y-2 text-xs text-foreground-muted">
-                <div className="flex items-start space-x-2">
-                  <MapPin className="w-4 h-4 text-forest shrink-0 mt-0.5" />
-                  <span>Central Business District / Lavelle Road, Bangalore</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Phone className="w-4 h-4 text-forest shrink-0" />
-                  <span>+91 821 4001100 (Central Desk)</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Mail className="w-4 h-4 text-forest shrink-0" />
-                  <span>bangalore@spicetrip.com</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Mangalore Branch */}
-            <div className="bg-background-secondary/40 p-6 rounded-sm border border-sand/40">
-              <span className="text-[10px] font-sans uppercase tracking-widest text-terracotta font-bold block mb-2">
-                Branch Office
-              </span>
-              <h3 className="font-serif text-xl font-bold text-forest-deep mb-3">Mangalore</h3>
-              <div className="space-y-2 text-xs text-foreground-muted">
-                <div className="flex items-start space-x-2">
-                  <MapPin className="w-4 h-4 text-forest shrink-0 mt-0.5" />
-                  <span>Kadri Road / Hampankatta, Mangalore</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Phone className="w-4 h-4 text-forest shrink-0" />
-                  <span>+91 821 4001100 (Central Desk)</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Mail className="w-4 h-4 text-forest shrink-0" />
-                  <span>mangalore@spicetrip.com</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Banner */}
-        <div className="bg-forest-deep text-white p-10 sm:p-14 rounded-sm text-center border border-forest">
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-4">
-            Begin Your Next Journey with Us
-          </h2>
-          <p className="text-sm text-sand-light/80 max-w-xl mx-auto mb-8">
-            Speak with our travel curators to design an extraordinary international voyage customized exclusively for you.
+      {/* Offices */}
+      <section className="pb-20 md:pb-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#D31F25] mb-3">
+            Offices
           </p>
-          <Link
-            href="/contact#enquiry"
-            className="inline-flex items-center space-x-2 bg-terracotta hover:bg-white hover:text-forest-deep text-white font-sans text-xs font-semibold uppercase tracking-widest px-8 py-4 rounded-sm transition-all duration-300 shadow-md"
-          >
-            <span>Plan Your Journey Today</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <h2 className="text-3xl sm:text-4xl font-semibold text-[#171717] mb-12">
+            Across Karnataka
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12">
+            <div className="space-y-3">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#A3A3A3] font-medium">
+                Head office
+              </p>
+              <h3 className="text-xl font-semibold text-[#171717]">Mysore</h3>
+              <p className="text-sm text-[#737373] font-light leading-relaxed">
+                Prashanth Plaza, 4th Main, 5th Cross, Saraswathipuram, Mysore 570009
+              </p>
+              <p className="text-sm text-[#171717] font-medium">+91 821 4001100</p>
+            </div>
+
+            <div className="space-y-3">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#A3A3A3] font-medium">
+                Branch
+              </p>
+              <h3 className="text-xl font-semibold text-[#171717]">Bangalore</h3>
+              <p className="text-sm text-[#737373] font-light leading-relaxed">
+                Central Business District / Lavelle Road
+              </p>
+              <p className="text-sm text-[#171717] font-medium">+91 821 4001100</p>
+            </div>
+
+            <div className="space-y-3">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#A3A3A3] font-medium">
+                Branch
+              </p>
+              <h3 className="text-xl font-semibold text-[#171717]">Mangalore</h3>
+              <p className="text-sm text-[#737373] font-light leading-relaxed">
+                Kadri Road / Hampankatta
+              </p>
+              <p className="text-sm text-[#171717] font-medium">+91 821 4001100</p>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* CTA */}
+      <section className="pb-20 md:pb-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="rounded-[2rem] bg-[#171717] text-white px-8 py-14 sm:px-14 sm:py-16">
+            <h2 className="text-3xl sm:text-4xl font-semibold max-w-xl leading-tight mb-4">
+              Ready to plan your next trip?
+            </h2>
+            <p className="text-sm sm:text-base text-white/60 font-light max-w-lg mb-8 leading-relaxed">
+              Tell us where you want to go. We will send a clear itinerary and price.
+            </p>
+            <Link
+              href="/contact#enquiry"
+              className="inline-flex items-center gap-2 bg-[#D31F25] hover:bg-[#B91C1C] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors"
+            >
+              <span>Enquire</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
-

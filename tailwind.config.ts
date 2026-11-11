@@ -55,9 +55,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "Plus Jakarta Sans", "Inter", "sans-serif"],
+        sans: ["var(--font-sans)", "Outfit", "sans-serif"],
         script: ["var(--font-script)", "Caveat", "cursive"],
-        serif: ["Playfair Display", "Georgia", "serif"],
       },
       maxWidth: {
         container: "1280px",

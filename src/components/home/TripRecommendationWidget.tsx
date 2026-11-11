@@ -69,7 +69,7 @@ export default function TripRecommendationWidget() {
                 <Compass className="w-7 h-7" />
               </div>
               <div>
-                <h3 className="text-xl sm:text-2xl font-extrabold text-[#18181B] tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#18181B] tracking-tight">
                   Not sure where to go?
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-600 mt-0.5">

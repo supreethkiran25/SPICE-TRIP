@@ -162,13 +162,13 @@ export default function Footer() {
             </p>
 
             {isSubscribed ? (
-              <div className="bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 px-4 py-2.5 rounded-sm text-xs flex items-center space-x-2 animate-in fade-in">
+              <div className="bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 px-4 py-2.5 rounded-3xl text-xs flex items-center space-x-2 animate-in fade-in">
                 <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>Thank you for subscribing!</span>
               </div>
             ) : (
               <form onSubmit={handleNewsletterSubmit} className="space-y-2">
-                <div className="flex items-stretch rounded-sm overflow-hidden shadow-sm border border-gray-300">
+                <div className="flex items-stretch rounded-3xl overflow-hidden shadow-sm border border-gray-300">
                   <input
                     type="email"
                     required
@@ -199,9 +199,9 @@ export default function Footer() {
             </h3>
 
             {/* Embedded Facebook Card Preview */}
-            <div className="bg-white rounded-sm p-3.5 shadow-md border border-gray-200 text-gray-900 max-w-xs">
+            <div className="bg-white rounded-3xl p-3.5 shadow-md border border-gray-200 text-gray-900 max-w-xs">
               <div className="flex items-center space-x-3 mb-3">
-                <div className="w-12 h-12 relative rounded-sm overflow-hidden border border-gray-200 shrink-0 bg-white p-0.5">
+                <div className="w-12 h-12 relative rounded-3xl overflow-hidden border border-gray-200 shrink-0 bg-white p-0.5">
                   <Image
                     src="/images/facebook-widget-avatar.png"
                     alt="Spice Trip"

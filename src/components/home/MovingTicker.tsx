@@ -46,7 +46,7 @@ export default function MovingTicker() {
     <div className="w-full bg-[#0F1E2E] text-white py-2.5 overflow-hidden border-y border-white/10 relative z-20">
       <div className="flex items-center">
         {/* Yellow/Amber Ticker Label Badge matching user reference screenshot */}
-        <div className="flex items-center space-x-2 bg-[#F59E0B] hover:bg-[#D97706] text-[#0A1626] px-4 py-2 text-xs font-black uppercase tracking-wider shrink-0 z-10 shadow-md transition-colors">
+        <div className="flex items-center space-x-2 bg-[#F59E0B] hover:bg-[#D97706] text-[#0A1626] px-4 py-2 text-xs font-bold uppercase tracking-wider shrink-0 z-10 shadow-md transition-colors">
           <Plane className="w-4 h-4 fill-[#0A1626]" />
           <span>LIVE DEPARTURES</span>
         </div>

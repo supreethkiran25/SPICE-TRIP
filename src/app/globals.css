@@ -37,13 +37,18 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-/* Base modern travel styling */
+/* Premium minimal base */
 html {
-  background-color: #F8FAFC;
-  color: #0F172A;
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  background-color: #F7F6F3;
+  color: #171717;
+  font-family: var(--font-sans), Outfit, system-ui, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.011em;
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: -0.03em;
 }
 
 ::selection {
@@ -72,11 +77,11 @@ a, button {
 }
 
 .font-sans {
-  font-family: var(--font-sans), "Plus Jakarta Sans", system-ui, sans-serif;
+  font-family: var(--font-sans), Outfit, system-ui, sans-serif;
 }
 
 .font-script {
-  font-family: var(--font-script), "Caveat", cursive;
+  font-family: var(--font-script), Caveat, cursive;
 }
 
 /* Skip rendering work for offscreen sections */

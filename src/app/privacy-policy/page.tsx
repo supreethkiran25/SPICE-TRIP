@@ -17,7 +17,7 @@ export default function PrivacyPolicyPage() {
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>Client Data Integrity</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-forest-deep mb-4">
+          <h1 className="text-3xl sm:text-5xl font-bold text-forest-deep mb-4">
             Privacy Policy
           </h1>
           <p className="text-xs text-foreground-muted">
@@ -25,16 +25,16 @@ export default function PrivacyPolicyPage() {
           </p>
         </div>
 
-        <div className="bg-white border border-sand/40 p-8 sm:p-12 rounded-sm shadow-sm space-y-8 text-xs sm:text-sm text-foreground-muted leading-relaxed">
+        <div className="bg-white border border-sand/40 p-8 sm:p-12 rounded-3xl shadow-sm space-y-8 text-xs sm:text-sm text-foreground-muted leading-relaxed">
           <section>
-            <h2 className="font-serif text-lg font-bold text-forest-deep mb-2">1. Introduction</h2>
+            <h2 className="text-lg font-bold text-forest-deep mb-2">1. Introduction</h2>
             <p>
               SpiceTrip ("we", "our", or "us"), a prestigious venture of Safe Wheels Group headquartered at "PRASHANTH PLAZA", 4th Main, 5th Cross, Saraswathipuram, Mysore - 570009, operates under strict IATA compliance. We are committed to protecting the privacy, security, and personal data of our travelers.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif text-lg font-bold text-forest-deep mb-2">2. Information We Collect</h2>
+            <h2 className="text-lg font-bold text-forest-deep mb-2">2. Information We Collect</h2>
             <p className="mb-2">
               To curate bespoke international expeditions, issue flight tickets, coordinate visas, and guarantee hotel reservations, we collect:
             </p>
@@ -47,7 +47,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="font-serif text-lg font-bold text-forest-deep mb-2">3. How Your Information Is Used</h2>
+            <h2 className="text-lg font-bold text-forest-deep mb-2">3. How Your Information Is Used</h2>
             <p>
               Your data is exclusively utilized to:
             </p>
@@ -60,14 +60,14 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="font-serif text-lg font-bold text-forest-deep mb-2">4. Data Sharing & Third Parties</h2>
+            <h2 className="text-lg font-bold text-forest-deep mb-2">4. Data Sharing & Third Parties</h2>
             <p>
               We do not sell, rent, or trade client information to advertising brokers. Necessary details are shared only with certified travel suppliers (airlines, embassies, hotels, ground transport partners) strictly required to fulfill your journey.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif text-lg font-bold text-forest-deep mb-2">5. Contact Our Privacy Officer</h2>
+            <h2 className="text-lg font-bold text-forest-deep mb-2">5. Contact Our Privacy Officer</h2>
             <p>
               If you have any questions or wish to update or delete your stored travel records, please write to us at{" "}
               <a href="mailto:info@spicetrip.com" className="text-forest font-semibold underline">

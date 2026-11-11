@@ -1,47 +1,43 @@
-"use client";
-
-import Link from "next/link";
+import { Globe2, ShieldCheck, UserRound } from "lucide-react";
 
 const POINTS = [
-  { value: "IATA", label: "Certified agency" },
-  { value: "20+", label: "Years with Safe Wheels" },
-  { value: "3", label: "Desks · Mysore, BLR, MLR" },
-  { value: "24×7", label: "Travel desk support" },
+  {
+    icon: Globe2,
+    label: "IATA Accredited",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Safe Wheels",
+  },
+  {
+    icon: UserRound,
+    label: "One Travel Manager",
+  },
 ];
 
 export default function WhyTravelWithUs() {
   return (
-    <section id="experiences" className="py-14 md:py-16 bg-[#F7F7F8] scroll-mt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-xl mb-8">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-charcoal tracking-tight">
-            Why SpiceTrip
+    <section
+      id="experiences"
+      className="py-10 md:py-12 bg-[#EFEDE8] scroll-mt-24 border-y border-[#E5E2DB]"
+    >
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-10">
+          <h2 className="text-sm sm:text-base font-bold uppercase tracking-[0.12em] text-[#171717] shrink-0 md:pr-8 md:border-r md:border-[#D4D0C8]">
+            Why SpiceTrip?
           </h2>
-          <p className="mt-2 text-sm text-zinc-500">
-            Private trips. Real desk. Clear prices.
-          </p>
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10 lg:gap-14 flex-1">
+            {POINTS.map(({ icon: Icon, label }) => (
+              <div key={label} className="flex items-center gap-3">
+                <Icon className="w-5 h-5 text-[#171717] shrink-0 stroke-[1.5]" />
+                <span className="text-sm font-medium text-[#404040]">
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
-
-        <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
-          {POINTS.map((p) => (
-            <div
-              key={p.label}
-              className="bg-white rounded-2xl border border-zinc-100 px-5 py-5 shadow-sm"
-            >
-              <dd className="text-2xl font-extrabold text-brand-spice tracking-tight">
-                {p.value}
-              </dd>
-              <dt className="mt-1 text-xs text-zinc-500">{p.label}</dt>
-            </div>
-          ))}
-        </dl>
-
-        <Link
-          href="/contact#enquiry"
-          className="inline-flex items-center justify-center bg-brand-spice hover:bg-brand-spice-dark text-white rounded-full px-6 py-3 text-sm font-semibold transition-colors"
-        >
-          Plan a trip
-        </Link>
       </div>
     </section>
   );

@@ -30,28 +30,28 @@ import {
 import { COMPANY_INFO } from "@/lib/data/company";
 
 const TRAVEL_TYPES = [
-  { id: "international", label: "Bespoke International", icon: Compass },
-  { id: "honeymoon", label: "Luxury Honeymoon", icon: Sparkles },
-  { id: "corporate", label: "Corporate MICE & Fleet", icon: Briefcase },
-  { id: "visa_flight", label: "IATA Flights & Visas", icon: Globe },
+  { id: "international", label: "International trip", icon: Compass },
+  { id: "honeymoon", label: "Honeymoon", icon: Sparkles },
+  { id: "corporate", label: "Corporate travel", icon: Briefcase },
+  { id: "visa_flight", label: "Flights and visas", icon: Globe },
 ];
 
 const FAQS = [
   {
-    q: "Can I visit your office in Mysore in person without an appointment?",
-    a: "Yes. Our flagship office at Prashanth Plaza in Saraswathipuram, Mysore is open Monday through Saturday from 9:30 AM to 7:00 PM IST. Our destination specialists and ticketing concierges welcome walk-in consultations, passport submissions, and personalized itinerary reviews.",
+    q: "Can I visit the Mysore office without an appointment?",
+    a: "Yes. Prashanth Plaza, Saraswathipuram is open Monday to Saturday, 9:30 AM to 7:00 PM.",
   },
   {
-    q: "How fast do you respond to custom itinerary requests?",
-    a: "Within 2 to 4 business hours, an assigned destination specialist will review your preferences and share a personalized first draft. For immediate queries, our WhatsApp concierge and direct phone desk (+91 821 4001100) provide real-time support.",
+    q: "How fast do you reply?",
+    a: "Usually within 2 to 4 business hours. For faster help, call or WhatsApp +91 821 4001100.",
   },
   {
-    q: "Do you handle visa processing and international flights?",
-    a: "Yes. As an IATA-certified agency, we issue direct airline tickets across all major international and domestic carriers with sovereign booking systems. Our in-house documentation desk handles visa application scheduling, documentation vetting, and submission for Schengen, UK, US, Dubai, Singapore, and 60+ global destinations.",
+    q: "Do you handle visas and flights?",
+    a: "Yes. We book IATA flights and help with visa paperwork for many destinations.",
   },
   {
-    q: "Can you arrange custom departures from Bangalore or Mangalore?",
-    a: "Absolutely. In addition to our Mysore headquarters, we operate regional concierge desks for Bangalore (Lavelle Road / CBD) and Mangalore (Kadri Road), coordinating doorstep consultation, private airport transfers via Safe Wheels luxury fleet, and regional departures.",
+    q: "Do you serve Bangalore and Mangalore?",
+    a: "Yes. Planning is available by call or WhatsApp, with local support when needed.",
   },
 ];
 
@@ -113,14 +113,14 @@ export default function ContactClient() {
     <div className="bg-white min-h-screen text-zinc-900 selection:bg-brand-spice selection:text-white">
       {/* Top Banner / Availability Bar */}
       <div className="border-b border-slate-200/80 bg-slate-50/70">
-        <div className="max-w-container mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-4 text-xs">
+        <div className="max-w-6xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-4 text-xs">
           <div className="flex items-center space-x-2.5">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
             </span>
             <span className="font-semibold text-zinc-800">
-              Concierge Desks Active
+              Desks open
             </span>
             <span className="hidden sm:inline text-slate-400">•</span>
             <span className="hidden sm:inline text-zinc-600">
@@ -146,17 +146,16 @@ export default function ContactClient() {
 
       {/* Hero Section */}
       <section className="pt-14 pb-12 md:pt-20 md:pb-16 border-b border-slate-100">
-        <div className="max-w-container mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-spice/10 border border-brand-spice/20 text-brand-spice text-[11px] font-semibold tracking-wider uppercase mb-5">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>IATA Certified Travel Agency • Over 20 Years Heritage</span>
-            </div>
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-950 leading-[1.1] mb-5">
-              Let&apos;s craft your next extraordinary journey.
+            <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#D31F25] mb-4">
+              IATA certified · Mysore
+            </p>
+            <h1 className="text-3xl sm:text-4xl font-bold uppercase tracking-[0.04em] text-[#171717] mb-3">
+              Contact
             </h1>
-            <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl">
-              Connect directly with our senior destination designers at our Mysore flagship or regional desks in Bangalore and Mangalore. We orchestrate private departures, sovereign visa processing, and curated corporate itineraries.
+            <p className="text-sm sm:text-base text-[#737373] leading-relaxed max-w-2xl font-light">
+              Reach our Mysore desk, or get support in Bangalore and Mangalore. Call, WhatsApp, or send an enquiry.
             </p>
 
             {/* Quick Action Buttons */}
@@ -181,7 +180,7 @@ export default function ContactClient() {
                 href="#consultation-form"
                 className="inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-zinc-800 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
               >
-                <span>Request Custom Proposal</span>
+                <span>Enquire</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -191,13 +190,13 @@ export default function ContactClient() {
 
       {/* FEATURED HEADQUARTERS SPOTLIGHT (The Real Photograph) */}
       <section className="py-14 md:py-20 bg-slate-50/60 border-b border-slate-200/80">
-        <div className="max-w-container mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
               <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-brand-spice font-bold block mb-2">
                 Physical Presence & Hospitality
               </span>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-950 tracking-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-950 tracking-tight">
                 Visit Our Mysore Flagship Office
               </h2>
             </div>
@@ -237,7 +236,7 @@ export default function ContactClient() {
                     <span className="text-[10px] uppercase font-sans tracking-[0.2em] text-amber-400 font-bold block mb-0.5">
                       Flagship Address
                     </span>
-                    <h3 className="font-serif text-lg sm:text-xl font-bold tracking-tight text-white">
+                    <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white">
                       &quot;PRASHANTH PLAZA&quot;
                     </h3>
                     <p className="text-xs text-slate-300 mt-0.5">
@@ -265,7 +264,7 @@ export default function ContactClient() {
                   <Building className="w-4 h-4" />
                   <span>Central Operations & VIP Lounge</span>
                 </div>
-                <h3 className="font-serif text-2xl font-bold text-zinc-950 tracking-tight mb-3">
+                <h3 className="text-2xl font-bold text-zinc-950 tracking-tight mb-3">
                   Mysore Head Office
                 </h3>
                 <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed mb-6">
@@ -375,13 +374,13 @@ export default function ContactClient() {
 
       {/* REGIONAL DESKS & CORPORATE NETWORK */}
       <section className="py-14 md:py-20 border-b border-slate-200/80">
-        <div className="max-w-container mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-12">
             <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-brand-spice font-bold block mb-2">
               Regional Operations
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight mb-3">
-              Specialized Regional Concierges
+            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight mb-3">
+              Our offices
             </h2>
             <p className="text-sm text-zinc-600 leading-relaxed">
               In addition to our Mysore headquarters, SpiceTrip maintains regional representation across key Karnataka metropolitan gateways for tailored outbound services.
@@ -398,7 +397,7 @@ export default function ContactClient() {
                   </span>
                   <span className="text-xs font-semibold text-brand-spice">Karnataka Hub</span>
                 </div>
-                <h3 className="font-serif text-2xl font-bold text-zinc-950 mb-2">
+                <h3 className="text-2xl font-bold text-zinc-950 mb-2">
                   Bangalore
                 </h3>
                 <p className="text-xs text-zinc-600 mb-4 leading-relaxed">
@@ -428,7 +427,7 @@ export default function ContactClient() {
                 className="inline-flex items-center justify-center space-x-1.5 w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-zinc-800 text-xs font-semibold transition-colors"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Message Bangalore Concierge</span>
+                <span>Message Bangalore</span>
               </a>
             </div>
 
@@ -441,7 +440,7 @@ export default function ContactClient() {
                   </span>
                   <span className="text-xs font-semibold text-brand-spice">Coastal Gateway</span>
                 </div>
-                <h3 className="font-serif text-2xl font-bold text-zinc-950 mb-2">
+                <h3 className="text-2xl font-bold text-zinc-950 mb-2">
                   Mangalore
                 </h3>
                 <p className="text-xs text-zinc-600 mb-4 leading-relaxed">
@@ -471,7 +470,7 @@ export default function ContactClient() {
                 className="inline-flex items-center justify-center space-x-1.5 w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-zinc-800 text-xs font-semibold transition-colors"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Message Mangalore Concierge</span>
+                <span>Message Mangalore</span>
               </a>
             </div>
 
@@ -484,7 +483,7 @@ export default function ContactClient() {
                   </span>
                   <span className="text-xs text-slate-300">20+ Yrs Trust</span>
                 </div>
-                <h3 className="font-serif text-2xl font-bold text-white mb-2">
+                <h3 className="text-2xl font-bold text-white mb-2">
                   Safe Wheels Group
                 </h3>
                 <p className="text-xs text-slate-300 mb-4 leading-relaxed">
@@ -540,14 +539,14 @@ export default function ContactClient() {
         id="consultation-form"
         className="py-14 md:py-24 bg-slate-50/70 border-b border-slate-200/80"
       >
-        <div className="max-w-container mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-10">
               <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-brand-spice font-bold block mb-2">
                 Direct Travel Designer Assignment
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight mb-3">
-                Request a Curated Consultation
+              <h2 className="text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight mb-3">
+                Send an enquiry
               </h2>
               <p className="text-sm text-zinc-600 max-w-xl mx-auto">
                 Share your journey parameters. A dedicated SpiceTrip travel designer will reach out with tailor-made options, flight routings, and transparent costing.
@@ -560,7 +559,7 @@ export default function ContactClient() {
                   <div className="w-16 h-16 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center animate-bounce">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="font-serif text-2xl font-bold text-zinc-950">
+                  <h3 className="text-2xl font-bold text-zinc-950">
                     Consultation Request Recorded
                   </h3>
                   <p className="text-sm text-zinc-600 max-w-md mx-auto leading-relaxed">
@@ -759,7 +758,7 @@ export default function ContactClient() {
                       ) : (
                         <>
                           <Send className="w-3.5 h-3.5" />
-                          <span>Request Bespoke Proposal</span>
+                          <span>Send enquiry</span>
                         </>
                       )}
                     </button>
@@ -776,13 +775,13 @@ export default function ContactClient() {
 
       {/* FREQUENTLY ASKED QUESTIONS */}
       <section className="py-14 md:py-20 border-b border-slate-200/80">
-        <div className="max-w-container mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-10">
               <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-brand-spice font-bold block mb-2">
                 Traveler Assistance
               </span>
-              <h2 className="font-serif text-3xl font-bold text-zinc-950 tracking-tight">
+              <h2 className="text-3xl font-bold text-zinc-950 tracking-tight">
                 Frequently Asked Questions
               </h2>
             </div>
@@ -798,7 +797,7 @@ export default function ContactClient() {
                     <button
                       type="button"
                       onClick={() => setOpenFaq(isOpen ? null : idx)}
-                      className="w-full p-5 text-left flex items-center justify-between gap-4 font-serif text-base font-semibold text-zinc-900 hover:text-brand-spice transition-colors"
+                      className="w-full p-5 text-left flex items-center justify-between gap-4 text-base font-semibold text-zinc-900 hover:text-brand-spice transition-colors"
                     >
                       <span>{faq.q}</span>
                       <ChevronDown
@@ -822,7 +821,7 @@ export default function ContactClient() {
 
       {/* TRUST STRIP & ACCREDITATIONS */}
       <section className="py-12 bg-slate-50/50">
-        <div className="max-w-container mx-auto px-6 text-center">
+        <div className="max-w-6xl mx-auto px-6 text-center">
           <div className="inline-flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs font-semibold text-zinc-600">
             <div className="flex items-center space-x-2">
               <ShieldCheck className="w-4 h-4 text-brand-spice" />

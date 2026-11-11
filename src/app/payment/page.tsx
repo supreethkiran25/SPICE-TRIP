@@ -18,7 +18,7 @@ export default function PaymentPage() {
             <Lock className="w-3.5 h-3.5" />
             <span>Secure Client Transactions</span>
           </div>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-forest-deep mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-forest-deep mb-4">
             Payment & Booking Options
           </h1>
           <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed">
@@ -27,13 +27,13 @@ export default function PaymentPage() {
         </div>
 
         {/* Primary Gateway Card */}
-        <div className="bg-white border border-sand/40 p-8 sm:p-12 rounded-sm shadow-md mb-12">
+        <div className="bg-white border border-sand/40 p-8 sm:p-12 rounded-3xl shadow-md mb-12">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-sand/30">
             <div>
               <span className="text-[10px] font-sans uppercase tracking-widest text-terracotta font-bold block mb-1">
                 Official Online Gateway
               </span>
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-forest-deep">
+              <h2 className="text-2xl sm:text-3xl font-bold text-forest-deep">
                 Instamojo Verified Client Portal
               </h2>
               <p className="text-xs text-foreground-muted mt-1">
@@ -44,7 +44,7 @@ export default function PaymentPage() {
               href={COMPANY_INFO.integrations.paymentUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center space-x-2 bg-forest hover:bg-terracotta text-white font-sans text-xs font-semibold uppercase tracking-widest px-8 py-4 rounded-sm transition-all duration-300 shadow-md whitespace-nowrap"
+              className="inline-flex items-center justify-center space-x-2 bg-forest hover:bg-terracotta text-white font-sans text-xs font-semibold uppercase tracking-widest px-8 py-4 rounded-3xl transition-all duration-300 shadow-md whitespace-nowrap"
             >
               <span>Pay on Instamojo</span>
               <ExternalLink className="w-4 h-4" />
@@ -68,15 +68,15 @@ export default function PaymentPage() {
         </div>
 
         {/* Bank Transfer Details (NEFT / RTGS) */}
-        <div className="bg-forest-deep text-sand-light p-8 sm:p-10 rounded-sm border border-forest mb-12">
-          <h3 className="font-serif text-xl sm:text-2xl font-bold text-white mb-2">
+        <div className="bg-forest-deep text-sand-light p-8 sm:p-10 rounded-3xl border border-forest mb-12">
+          <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
             Direct Bank Wire (NEFT / RTGS / IMPS)
           </h3>
           <p className="text-xs text-sand-light/80 leading-relaxed mb-6">
             For corporate invoices and large package reservations, you may transfer directly to our corporate bank account. Please notify your travel designer after initiating the transfer.
           </p>
 
-          <div className="bg-forest/50 p-6 rounded-sm border border-sand/20 space-y-3 text-xs">
+          <div className="bg-forest/50 p-6 rounded-3xl border border-sand/20 space-y-3 text-xs">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <span className="text-sand/70 uppercase text-[10px] block">Beneficiary Name</span>
@@ -99,8 +99,8 @@ export default function PaymentPage() {
         </div>
 
         {/* Package Tours on EMI */}
-        <div className="bg-white border border-sand/40 p-8 rounded-sm shadow-sm mb-12">
-          <h3 className="font-serif text-xl font-bold text-forest-deep mb-2">
+        <div className="bg-white border border-sand/40 p-8 rounded-3xl shadow-sm mb-12">
+          <h3 className="text-xl font-bold text-forest-deep mb-2">
             Package Tours on Easy EMI
           </h3>
           <p className="text-xs text-foreground-muted leading-relaxed mb-4">
@@ -115,7 +115,7 @@ export default function PaymentPage() {
         </div>
 
         {/* Verification Hotline */}
-        <div className="p-6 bg-background-secondary/60 border border-sand/40 rounded-sm text-center">
+        <div className="p-6 bg-background-secondary/60 border border-sand/40 rounded-3xl text-center">
           <p className="text-xs text-foreground-muted mb-2">
             Have questions regarding your payment invoice or transaction verification?
           </p>

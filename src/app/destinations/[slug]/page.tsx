@@ -5,49 +5,48 @@ import Link from "next/link";
 import { DESTINATIONS } from "@/lib/data/packages";
 import { getPublished } from "@/lib/published";
 import { formatPrice } from "@/lib/utils";
-import { MapPin, Calendar, ShieldCheck, ArrowRight, Clock, Star, Compass } from "lucide-react";
+import { getPackageCover } from "@/lib/package-covers";
+import { Calendar, Clock } from "lucide-react";
 import InquirySection from "@/components/home/InquirySection";
 
 export const revalidate = 30;
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 export function generateStaticParams() {
   return DESTINATIONS.map((dest) => ({ slug: dest.slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const destination = DESTINATIONS.find((d) => d.slug === slug);
-  if (!destination) return { title: "Destination Not Found" };
+export function generateMetadata({ params }: Props): Metadata {
+  const destination = DESTINATIONS.find((d) => d.slug === params.slug);
+  if (!destination) return { title: "Destination not found" };
 
   return {
-    title: `${destination.name} Tour Packages & Custom Itineraries`,
+    title: `${destination.name} | SpiceTrip`,
     description: destination.description,
   };
 }
 
 export default async function DestinationDetailPage({ params }: Props) {
-  const { slug } = await params;
-  const destination = DESTINATIONS.find((d) => d.slug === slug);
+  const destination = DESTINATIONS.find((d) => d.slug === params.slug);
   if (!destination) notFound();
 
   const { packages } = await getPublished();
-  // Find all packages matching this destination
   const matchingPackages = packages.filter(
     (p) =>
       p.destination.toLowerCase().includes(destination.name.toLowerCase()) ||
       destination.name.toLowerCase().includes(p.destination.toLowerCase())
   );
 
+  const cover = getPackageCover(destination.slug, destination.name, destination.heroImage);
+
   return (
     <div className="bg-background min-h-screen">
-      {/* Cinematic Destination Hero Header */}
-      <section className="relative min-h-[55vh] lg:min-h-[65vh] flex items-end bg-forest-deep text-white overflow-hidden py-16">
+      <section className="relative min-h-[50vh] lg:min-h-[55vh] flex items-end bg-forest-deep text-white overflow-hidden py-14">
         <Image
-          src={destination.heroImage}
+          src={cover}
           alt={destination.name}
           fill
           priority
@@ -56,8 +55,8 @@ export default async function DestinationDetailPage({ params }: Props) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-forest-deep via-forest-deep/40 to-transparent pointer-events-none" />
 
-        <div className="max-w-container mx-auto px-6 relative z-10 w-full">
-          <div className="flex items-center space-x-2 text-xs font-sans uppercase tracking-[0.2em] text-sand mb-3">
+        <div className="max-w-6xl mx-auto px-6 relative z-10 w-full">
+          <div className="flex items-center space-x-2 text-xs uppercase tracking-wider text-sand mb-3">
             <Link href="/destinations" className="hover:underline">
               Destinations
             </Link>
@@ -65,52 +64,34 @@ export default async function DestinationDetailPage({ params }: Props) {
             <span>{destination.country}</span>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold text-white mb-4">
-            {destination.name}
-          </h1>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-3">{destination.name}</h1>
+          <p className="text-sm sm:text-base text-sand-light/90 max-w-2xl mb-5">{destination.headline}</p>
 
-          <p className="text-base sm:text-xl text-sand-light/90 max-w-2xl font-serif italic mb-6">
-            "{destination.headline}"
-          </p>
-
-          <div className="flex flex-wrap items-center gap-6 text-xs text-sand-light pt-4 border-t border-white/20">
+          <div className="flex flex-wrap items-center gap-5 text-xs text-sand-light pt-4 border-t border-white/20">
             <div className="flex items-center space-x-1.5">
               <Calendar className="w-4 h-4 text-terracotta" />
-              <span><strong>Best Season:</strong> {destination.bestTimeToVisit}</span>
+              <span>{destination.bestTimeToVisit}</span>
             </div>
             <span className="hidden sm:inline">•</span>
-            <div className="flex items-center space-x-1.5">
-              <ShieldCheck className="w-4 h-4 text-terracotta" />
-              <span><strong>Visa:</strong> {destination.visaRequirement}</span>
-            </div>
-            <span className="hidden sm:inline">•</span>
-            <div>
-              <strong>Starting From:</strong> {formatPrice(destination.startingPrice)}
-            </div>
+            <div>From {formatPrice(destination.startingPrice)}</div>
           </div>
         </div>
       </section>
 
-      {/* Destination Overview & Highlights */}
-      <section className="py-16 md:py-20 border-b border-sand/30">
-        <div className="max-w-container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section className="py-14 md:py-16 border-b border-sand/30">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-7">
-              <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-terracotta font-semibold block mb-2">
-                Destination Overview
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-forest-deep mb-6">
-                About Travelling to {destination.name}
+              <h2 className="text-2xl sm:text-3xl font-bold text-forest-deep mb-4">
+                About {destination.name}
               </h2>
               <p className="text-sm sm:text-base text-foreground-muted leading-relaxed mb-6">
                 {destination.description}
               </p>
 
               <div className="space-y-3 pt-4 border-t border-sand/40">
-                <h4 className="font-sans text-xs uppercase tracking-wider font-bold text-forest">
-                  Key Experiences Curated by SpiceTrip:
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-foreground-muted">
+                <h4 className="text-xs uppercase tracking-wider font-bold text-forest">Highlights</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-foreground-muted">
                   {destination.highlights.map((hl, i) => (
                     <div key={i} className="flex items-center space-x-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-terracotta" />
@@ -121,13 +102,15 @@ export default async function DestinationDetailPage({ params }: Props) {
               </div>
             </div>
 
-            {/* Gallery Previews */}
             <div className="lg:col-span-5 grid grid-cols-2 gap-4">
               {destination.gallery.slice(0, 2).map((img, i) => (
-                <div key={i} className="relative aspect-square overflow-hidden rounded-sm border border-sand/40 bg-sand/20">
+                <div
+                  key={i}
+                  className="relative aspect-square overflow-hidden rounded-3xl border border-sand/40 bg-sand/20"
+                >
                   <Image
                     src={img}
-                    alt={`${destination.name} gallery image ${i + 1}`}
+                    alt={`${destination.name} ${i + 1}`}
                     fill
                     sizes="(max-width: 1024px) 50vw, 25vw"
                     className="object-cover"
@@ -139,96 +122,73 @@ export default async function DestinationDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Available Packages in this Destination */}
-      <section className="py-16 md:py-24 bg-background-secondary/40">
-        <div className="max-w-container mx-auto px-6">
-          <div className="mb-12">
-            <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-terracotta font-semibold block mb-2">
-              Curated Itineraries
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-forest-deep">
-              Available Tour Packages in {destination.name}
-            </h2>
-          </div>
+      <section className="py-14 md:py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-forest-deep mb-8">
+            Packages in {destination.name}
+          </h2>
 
           {matchingPackages.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
               {matchingPackages.map((pkg) => (
-                <div
+                <Link
                   key={pkg.id}
-                  className="bg-white border border-sand/40 rounded-sm overflow-hidden flex flex-col justify-between group hover:border-forest transition-all duration-300 shadow-sm"
+                  href={`/packages/${pkg.slug}`}
+                  className="bg-white border border-sand/40 rounded-3xl overflow-hidden flex flex-col h-full group hover:border-forest transition-all duration-300 shadow-sm hover:shadow-md"
                 >
-                  <div>
-                    <div className="relative aspect-[16/10] overflow-hidden bg-sand/20">
-                      <Image
-                        src={pkg.images[0] || destination.heroImage}
-                        alt={pkg.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute top-3 right-3 bg-forest-deep text-white text-[10px] font-sans uppercase tracking-widest px-2.5 py-1 rounded-sm">
-                        {pkg.duration.nights}N / {pkg.duration.days}D
-                      </div>
-                    </div>
-
-                    <div className="p-6">
-                      <h3 className="font-serif text-xl font-bold text-forest-deep group-hover:text-terracotta transition-colors mb-2 line-clamp-1">
-                        <Link href={`/packages/${pkg.slug}`}>{pkg.title}</Link>
-                      </h3>
-                      <p className="text-xs text-foreground-muted line-clamp-2 leading-relaxed mb-4">
-                        {pkg.description}
-                      </p>
-                      <div className="space-y-1 text-xs text-foreground-muted">
-                        {pkg.highlights.slice(0, 2).map((hl, i) => (
-                          <div key={i} className="flex items-center space-x-1.5 text-[11px]">
-                            <span className="text-terracotta">•</span>
-                            <span className="line-clamp-1">{hl}</span>
-                          </div>
-                        ))}
-                      </div>
+                  <div className="relative aspect-[4/3] overflow-hidden bg-sand/20">
+                    <Image
+                      src={getPackageCover(pkg.slug, pkg.destination, pkg.images[0] || cover)}
+                      alt={pkg.destination}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 25vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute bottom-3 left-3 bg-white/95 px-3 py-1 rounded-full text-[11px] font-semibold text-forest flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-terracotta" />
+                      {pkg.duration.nights}N / {pkg.duration.days}D
                     </div>
                   </div>
 
-                  <div className="p-6 pt-0 border-t border-sand/20 mt-4">
-                    <div className="flex items-baseline justify-between py-3">
+                  <div className="p-4 flex flex-col flex-1 min-h-[118px]">
+                    <h3 className="text-lg font-bold text-forest-deep group-hover:text-terracotta transition-colors line-clamp-1 mb-1">
+                      {pkg.destination}
+                    </h3>
+                    <p className="text-xs text-foreground-muted line-clamp-2 mb-3">{pkg.title}</p>
+                    <div className="mt-auto flex items-end justify-between gap-2 pt-3 border-t border-sand/30">
                       <div>
-                        <span className="text-[10px] uppercase text-foreground-muted block">Starting Price</span>
-                        <span className="font-serif text-xl font-bold text-forest-deep">
+                        <span className="text-[10px] uppercase text-foreground-muted block">From</span>
+                        <span className="text-lg font-bold text-forest-deep">
                           {formatPrice(pkg.startingPrice)}
                         </span>
                       </div>
+                      <span className="text-xs font-semibold text-forest group-hover:text-terracotta">
+                        View
+                      </span>
                     </div>
-                    <Link
-                      href={`/packages/${pkg.slug}`}
-                      className="w-full inline-flex items-center justify-center space-x-2 bg-forest hover:bg-terracotta text-white text-xs font-semibold uppercase tracking-wider py-3 rounded-sm transition-colors text-center"
-                    >
-                      <span>View Full Itinerary</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           ) : (
-            <div className="bg-white p-8 border border-sand/40 text-center rounded-sm">
+            <div className="bg-white p-8 border border-sand/40 text-center rounded-3xl">
               <p className="text-sm text-foreground-muted mb-4">
-                We design custom tailored itineraries for {destination.name} to suit your specific dates and interests.
+                No set packages yet. Ask for a custom plan.
               </p>
               <Link
                 href={`/contact?destination=${destination.name}#enquiry`}
-                className="inline-flex items-center space-x-2 bg-forest hover:bg-terracotta text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded-sm transition-colors"
+                className="inline-flex items-center bg-forest hover:bg-terracotta text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors"
               >
-                <span>Request Custom {destination.name} Itinerary</span>
+                Enquire
               </Link>
             </div>
           )}
         </div>
       </section>
 
-      {/* Pre-filled Inquiry Section */}
-      <InquirySection defaultDestination={destination.name} />
+      <div className="max-w-6xl mx-auto px-6 pb-16">
+        <InquirySection defaultDestination={destination.name} />
+      </div>
     </div>
   );
 }
-
