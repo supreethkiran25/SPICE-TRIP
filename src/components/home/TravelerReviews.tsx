@@ -58,6 +58,8 @@ export default function TravelerReviews() {
           location: "Mysore",
           destination: "Europe",
           rating: 5,
+          tripType: "Holiday",
+          date: "",
         },
       ];
 
