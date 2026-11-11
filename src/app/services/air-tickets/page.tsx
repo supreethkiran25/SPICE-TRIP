@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import { Plane, ShieldCheck, CheckCircle2, Phone, Send, AlertCircle } from "lucide-react";
+import { Plane, CheckCircle2, Phone, AlertCircle } from "lucide-react";
 
 export default function AirTicketsPage() {
   const [tripType, setTripType] = useState<"oneway" | "roundtrip">("roundtrip");
@@ -53,258 +52,244 @@ export default function AirTicketsPage() {
     }
   };
 
+  const field =
+    "w-full bg-[#F7F6F3] border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-[#171717] rounded-xl focus:outline-none focus:border-[#171717]";
+
   return (
-    <div className="bg-background min-h-screen py-16 md:py-24">
+    <div className="bg-[#F7F6F3] min-h-screen py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-3xl mb-12">
-          <div className="flex items-center space-x-2 text-xs font-sans uppercase tracking-[0.2em] text-terracotta font-semibold mb-3">
+        <div className="max-w-2xl mb-12">
+          <p className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.22em] text-[#D31F25] mb-4">
             <Plane className="w-3.5 h-3.5" />
-            <span>IATA Accredited Flight Booking Desk</span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-forest-deep mb-4">
-            Air Tickets & International Flights
+            IATA certified
+          </p>
+          <h1 className="text-3xl sm:text-4xl font-bold uppercase tracking-[0.04em] text-[#171717] mb-3">
+            Flight tickets
           </h1>
-          <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">
-            Direct reservation connectivity with premier global airlines. We ensure optimal connections, competitive corporate fares, baggage alignment, and dedicated re-scheduling assistance from our Mysore and Bangalore ticketing desks.
+          <p className="text-sm sm:text-base text-[#737373] font-light leading-relaxed">
+            Domestic and international flights. Clear fares. We book and send your tickets.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12" id="enquiry">
-          {/* Form Column */}
-          <div className="lg:col-span-7 bg-white p-8 sm:p-10 border border-sand/40 rounded-3xl shadow-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10" id="enquiry">
+          <div className="lg:col-span-7 bg-white p-6 sm:p-8 border border-[#E5E5E5] rounded-3xl">
             {status === "success" ? (
-              <div className="text-center py-12">
-                <CheckCircle2 className="w-12 h-12 text-green-600 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-forest-deep mb-2">
-                  Flight Request Received
+              <div className="text-center py-10">
+                <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto mb-3" />
+                <h3 className="text-xl font-semibold text-[#171717] mb-2">
+                  Request received
                 </h3>
-                <p className="text-xs text-foreground-muted mb-6">
-                  Our IATA ticketing specialist will research optimal schedules and contact you at {formData.phone || formData.email} within 30 minutes.
+                <p className="text-sm text-[#737373] mb-6">
+                  We will call or email you with options shortly.
                 </p>
                 <button
+                  type="button"
                   onClick={() => setStatus("idle")}
-                  className="bg-forest text-white text-xs font-semibold uppercase tracking-wider px-6 py-2.5 rounded-3xl"
+                  className="bg-[#171717] text-white text-sm font-medium px-5 py-2.5 rounded-full"
                 >
-                  Submit Another Flight Request
+                  New enquiry
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Oneway / Roundtrip Toggle */}
-                <div className="flex items-center space-x-4 pb-4 border-b border-sand/30">
-                  <label className="flex items-center space-x-2 cursor-pointer text-xs font-semibold text-foreground">
+                <div className="flex items-center gap-5 pb-4 border-b border-[#EFEDE8]">
+                  <label className="flex items-center gap-2 cursor-pointer text-sm font-medium text-[#171717]">
                     <input
                       type="radio"
                       name="tripType"
                       checked={tripType === "roundtrip"}
                       onChange={() => setTripType("roundtrip")}
-                      className="text-terracotta focus:ring-forest"
                     />
-                    <span>Round Trip</span>
+                    <span>Round trip</span>
                   </label>
-                  <label className="flex items-center space-x-2 cursor-pointer text-xs font-semibold text-foreground">
+                  <label className="flex items-center gap-2 cursor-pointer text-sm font-medium text-[#171717]">
                     <input
                       type="radio"
                       name="tripType"
                       checked={tripType === "oneway"}
                       onChange={() => setTripType("oneway")}
-                      className="text-terracotta focus:ring-forest"
                     />
-                    <span>One Way</span>
+                    <span>One way</span>
                   </label>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="flex flex-col space-y-1.5">
-                    <label className="text-[11px] font-sans uppercase tracking-wider font-semibold text-foreground">
-                      Origin Airport / City <span className="text-terracotta">*</span>
-                    </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-[#525252]">From *</label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Bangalore (BLR), Mysore"
+                      placeholder="Bangalore (BLR)"
                       value={formData.from}
                       onChange={(e) => setFormData({ ...formData, from: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
+                      className={field}
                     />
                   </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <label className="text-[11px] font-sans uppercase tracking-wider font-semibold text-foreground">
-                      Destination Airport / City <span className="text-terracotta">*</span>
-                    </label>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-[#525252]">To *</label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Hanoi (HAN), Malé (MLE)"
+                      placeholder="Dubai (DXB)"
                       value={formData.to}
                       onChange={(e) => setFormData({ ...formData, to: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
+                      className={field}
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="flex flex-col space-y-1.5">
-                    <label className="text-[11px] font-sans uppercase tracking-wider font-semibold text-foreground">
-                      Departure Date <span className="text-terracotta">*</span>
-                    </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-[#525252]">Depart *</label>
                     <input
                       type="date"
                       required
                       value={formData.departureDate}
-                      onChange={(e) => setFormData({ ...formData, departureDate: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, departureDate: e.target.value })
+                      }
                       min={new Date().toISOString().split("T")[0]}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
+                      className={field}
                     />
                   </div>
                   {tripType === "roundtrip" && (
-                    <div className="flex flex-col space-y-1.5">
-                      <label className="text-[11px] font-sans uppercase tracking-wider font-semibold text-foreground">
-                        Return Date <span className="text-terracotta">*</span>
-                      </label>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-medium text-[#525252]">Return *</label>
                       <input
                         type="date"
                         required
                         value={formData.returnDate}
-                        onChange={(e) => setFormData({ ...formData, returnDate: e.target.value })}
-                        min={formData.departureDate || new Date().toISOString().split("T")[0]}
-                        className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
+                        onChange={(e) =>
+                          setFormData({ ...formData, returnDate: e.target.value })
+                        }
+                        min={
+                          formData.departureDate ||
+                          new Date().toISOString().split("T")[0]
+                        }
+                        className={field}
                       />
                     </div>
                   )}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="flex flex-col space-y-1.5">
-                    <label className="text-[11px] font-sans uppercase tracking-wider font-semibold text-foreground">
-                      Cabin Class
-                    </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-[#525252]">Class</label>
                     <select
                       value={formData.travelClass}
-                      onChange={(e) => setFormData({ ...formData, travelClass: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
+                      onChange={(e) =>
+                        setFormData({ ...formData, travelClass: e.target.value })
+                      }
+                      className={field}
                     >
-                      <option value="Economy">Economy Class</option>
+                      <option value="Economy">Economy</option>
                       <option value="Premium Economy">Premium Economy</option>
-                      <option value="Business Class">Business Class</option>
-                      <option value="First Class">First Class</option>
+                      <option value="Business Class">Business</option>
+                      <option value="First Class">First</option>
                     </select>
                   </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <label className="text-[11px] font-sans uppercase tracking-wider font-semibold text-foreground">
-                      Passengers
-                    </label>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-[#525252]">Travellers</label>
                     <select
                       value={formData.passengers}
-                      onChange={(e) => setFormData({ ...formData, passengers: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
+                      onChange={(e) =>
+                        setFormData({ ...formData, passengers: e.target.value })
+                      }
+                      className={field}
                     >
                       <option value="1 Adult">1 Adult</option>
                       <option value="2 Adults">2 Adults</option>
-                      <option value="Family (2 Adults, 1 Child)">Family (2 Adults, 1 Child)</option>
-                      <option value="Family (2 Adults, 2 Children)">Family (2 Adults, 2 Children)</option>
-                      <option value="Group (5+ Passengers)">Group (5+ Passengers)</option>
+                      <option value="Family (2 Adults, 1 Child)">2 Adults, 1 Child</option>
+                      <option value="Family (2 Adults, 2 Children)">2 Adults, 2 Children</option>
+                      <option value="Group (5+ Passengers)">Group (5+)</option>
                     </select>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                  <div className="flex flex-col space-y-1.5">
-                    <label className="text-[11px] font-sans uppercase tracking-wider font-semibold text-foreground">
-                      Your Name <span className="text-terracotta">*</span>
-                    </label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-[#525252]">Name *</label>
                     <input
                       type="text"
                       required
-                      placeholder="Full Name"
+                      placeholder="Full name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
+                      className={field}
                     />
                   </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <label className="text-[11px] font-sans uppercase tracking-wider font-semibold text-foreground">
-                      Email Address <span className="text-terracotta">*</span>
-                    </label>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-[#525252]">Email *</label>
                     <input
                       type="email"
                       required
-                      placeholder="email@domain.com"
+                      placeholder="you@email.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
+                      className={field}
                     />
                   </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <label className="text-[11px] font-sans uppercase tracking-wider font-semibold text-foreground">
-                      Phone Number <span className="text-terracotta">*</span>
-                    </label>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-[#525252]">Phone *</label>
                     <input
                       type="tel"
                       required
-                      placeholder="+91 98450 XXXXX"
+                      placeholder="+91…"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
+                      className={field}
                     />
                   </div>
                 </div>
 
-                <div className="flex flex-col space-y-1.5">
-                  <label className="text-[11px] font-sans uppercase tracking-wider font-semibold text-foreground">
-                    Specific Flight Time / Preferred Airline Notes
-                  </label>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-medium text-[#525252]">Notes</label>
                   <textarea
                     rows={2}
-                    placeholder="e.g. Prefer morning departures, Singapore Airlines or Emirates..."
+                    placeholder="Preferred airline or timing (optional)"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="bg-background-secondary/40 border border-sand/50 p-2.5 text-xs text-foreground rounded-3xl focus:outline-none focus:border-forest"
+                    className={field}
                   />
                 </div>
 
                 {status === "error" && (
-                  <div className="p-3 bg-red-50 text-red-700 text-xs rounded-3xl flex items-center space-x-2">
+                  <div className="p-3 bg-red-50 text-red-700 text-sm rounded-xl flex items-center gap-2">
                     <AlertCircle className="w-4 h-4 shrink-0" />
-                    <span>Failed to submit flight inquiry. Please call +91 821 4001100.</span>
+                    <span>Could not send. Call +91 821 4001100.</span>
                   </div>
                 )}
 
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="w-full bg-forest hover:bg-terracotta text-white font-sans text-xs font-semibold py-3 rounded-full transition-colors shadow-sm disabled:opacity-50"
+                  className="w-full bg-[#171717] hover:bg-black text-white text-sm font-medium py-3 rounded-full transition-colors disabled:opacity-50"
                 >
-                  {status === "submitting" ? "Searching Schedules..." : "Enquire for Flight Schedules & Rates"}
+                  {status === "submitting" ? "Sending…" : "Enquire"}
                 </button>
               </form>
             )}
           </div>
 
-          {/* Right Info Column */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-forest-deep text-sand-light p-8 rounded-3xl border border-forest">
-              <div className="flex items-center space-x-2 text-white font-bold text-lg mb-3">
-                <ShieldCheck className="w-5 h-5 text-terracotta" />
-                <span>The SpiceTrip Flight Advantage</span>
-              </div>
-              <ul className="text-xs text-sand-light/85 space-y-3 leading-relaxed">
-                <li>• <strong>IATA Certified:</strong> Official airline issuing authority with direct global inventory.</li>
-                <li>• <strong>No Hidden Fees:</strong> Complete transparency on baggage weight rules and cancellation penalties.</li>
-                <li>• <strong>Human Concierge:</strong> Talk to real ticketing specialists in Mysore and Bangalore instead of dealing with impersonal bots.</li>
-                <li>• <strong>Corporate Block Fares:</strong> Preferential rates for executive delegations and wedding parties.</li>
+          <div className="lg:col-span-5 space-y-5">
+            <div className="bg-[#171717] text-white p-7 sm:p-8 rounded-3xl">
+              <h2 className="text-lg font-semibold mb-5">Why book with us</h2>
+              <ul className="space-y-4 text-sm text-white/75 font-light">
+                <li>IATA certified ticketing</li>
+                <li>Clear fares — no hidden add-ons</li>
+                <li>Mysore &amp; Bangalore desk support</li>
               </ul>
             </div>
 
-            <div className="bg-white p-6 border border-sand/40 rounded-3xl">
-              <h4 className="text-base font-bold text-forest-deep mb-2">Immediate Assistance</h4>
-              <p className="text-xs text-foreground-muted mb-4">Need urgent international rebooking or next-day tickets?</p>
+            <div className="bg-white p-6 border border-[#E5E5E5] rounded-3xl">
+              <h3 className="text-base font-semibold text-[#171717] mb-1">Need help now?</h3>
+              <p className="text-sm text-[#737373] mb-4">Call our flight desk.</p>
               <a
                 href="tel:+918214001100"
-                className="inline-flex items-center space-x-2 text-terracotta hover:underline text-xs font-bold uppercase tracking-wider"
+                className="inline-flex items-center gap-2 text-sm font-medium text-[#D31F25] hover:underline"
               >
                 <Phone className="w-4 h-4" />
-                <span>Call Flight Desk: +91 821 4001100</span>
+                +91 821 4001100
               </a>
             </div>
           </div>
@@ -313,4 +298,3 @@ export default function AirTicketsPage() {
     </div>
   );
 }
-

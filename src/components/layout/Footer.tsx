@@ -57,17 +57,17 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Column 1: Head Office */}
           <div>
-            <h3 className="text-base font-bold text-white mb-4 tracking-tight">
+            <h3 className="text-lg font-semibold text-white mb-4 tracking-tight">
               Head Office
             </h3>
-            <div className="space-y-3 text-xs text-white/85 leading-relaxed font-sans">
+            <div className="space-y-3.5 text-sm text-white/90 leading-relaxed font-sans">
               <p>
-                <span className="block font-medium">&quot;PRASHANTH PLAZA&quot;,</span>
+                <span className="block font-semibold text-white">&quot;PRASHANTH PLAZA&quot;,</span>
                 4th Main, 5th Cross, Saraswathipuram,
                 <br />
                 MYSORE - 570009.
               </p>
-              <p className="font-semibold text-white/90">
+              <p className="font-semibold text-white">
                 <a href="tel:+918214001100" className="hover:text-[#D31F25] transition-colors">
                   91-821-4001100
                 </a>{" "}
@@ -79,7 +79,7 @@ export default function Footer() {
               <p>
                 <a
                   href="mailto:info@spicetrip.com"
-                  className="hover:text-[#D31F25] transition-colors font-medium underline underline-offset-2"
+                  className="hover:text-[#D31F25] transition-colors font-medium text-white underline underline-offset-2"
                 >
                   info@spicetrip.com
                 </a>
@@ -120,10 +120,10 @@ export default function Footer() {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="text-base font-bold text-white mb-4 tracking-tight">
+            <h3 className="text-lg font-semibold text-white mb-4 tracking-tight">
               Quick Links
             </h3>
-            <ul className="space-y-2.5 text-xs text-white/80 font-sans">
+            <ul className="space-y-3 text-sm text-white/90 font-sans">
               <li>
                 <Link href="/packages" className="hover:text-[#D31F25] transition-colors">
                   Packages
@@ -140,9 +140,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/services/car-rentals" className="hover:text-[#D31F25] transition-colors">
+                <a
+                  href="https://safewheelsindia.com/book/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#D31F25] transition-colors"
+                >
                   Car Rentals
-                </Link>
+                </a>
               </li>
               <li>
                 <Link href="/services" className="hover:text-[#D31F25] transition-colors">
@@ -154,10 +159,10 @@ export default function Footer() {
 
           {/* Column 3: Newsletter */}
           <div>
-            <h3 className="text-base font-bold text-white mb-4 tracking-tight">
+            <h3 className="text-lg font-semibold text-white mb-4 tracking-tight">
               Newsletter
             </h3>
-            <p className="text-xs text-white/80 leading-relaxed mb-4">
+            <p className="text-sm text-white/90 leading-relaxed mb-4">
               Sign up for our mailing list to get latest updates and offers
             </p>
 
@@ -175,7 +180,7 @@ export default function Footer() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Your Email"
-                    className="flex-1 bg-white text-gray-900 placeholder:text-gray-500 px-3.5 py-2.5 text-xs focus:outline-none"
+                    className="flex-1 bg-white text-gray-900 placeholder:text-gray-500 px-3.5 py-2.5 text-sm focus:outline-none"
                   />
                   <button
                     type="submit"
@@ -194,21 +199,20 @@ export default function Footer() {
 
           {/* Column 4: Follow Us (Facebook Page Widget Card) */}
           <div>
-            <h3 className="text-base font-bold text-white mb-4 tracking-tight">
+            <h3 className="text-lg font-semibold text-white mb-4 tracking-tight">
               Follow Us
             </h3>
 
             {/* Embedded Facebook Card Preview */}
             <div className="bg-white rounded-3xl p-3.5 shadow-md border border-gray-200 text-gray-900 max-w-xs">
               <div className="flex items-center space-x-3 mb-3">
-                <div className="w-12 h-12 relative rounded-3xl overflow-hidden border border-gray-200 shrink-0 bg-white p-0.5">
+                <div className="w-12 h-12 relative rounded-full overflow-hidden border border-gray-200 shrink-0 bg-white p-1.5">
                   <Image
-                    src="/images/facebook-widget-avatar.png"
-                    alt="Spice Trip"
+                    src="/images/spicetrip-logo-light-bg.png"
+                    alt="SpiceTrip"
                     width={48}
                     height={48}
                     unoptimized
-                    priority
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -241,7 +245,7 @@ export default function Footer() {
         </div>
 
         {/* 03. Bottom Credits */}
-        <div className="pt-10 mt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 gap-3 text-center sm:text-left">
+        <div className="pt-10 mt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-sm text-white/70 gap-3 text-center sm:text-left">
           <p>© 2026 SpiceTrip. All Rights Reserved. A venture of Safe Wheels Group.</p>
           <div className="flex items-center space-x-4">
             <Link href="/terms-and-conditions" className="hover:text-white transition-colors">

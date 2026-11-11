@@ -22,8 +22,7 @@ export const SERVICES: ServiceItem[] = [
     ],
     ctaLabel: "Enquire",
     ctaHref: "/services/air-tickets#enquiry",
-    image:
-      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/flights.jpg",
   },
   {
     id: "serv-visa-assistance",
@@ -46,8 +45,7 @@ export const SERVICES: ServiceItem[] = [
     ],
     ctaLabel: "Enquire",
     ctaHref: "/services/visa-assistance#enquiry",
-    image:
-      "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/visa.jpg",
   },
   {
     id: "serv-passport-assistance",
@@ -70,8 +68,7 @@ export const SERVICES: ServiceItem[] = [
     ],
     ctaLabel: "Enquire",
     ctaHref: "/services/passport-assistance#enquiry",
-    image:
-      "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/passport.jpg",
   },
   {
     id: "serv-car-rentals",
@@ -94,8 +91,7 @@ export const SERVICES: ServiceItem[] = [
     ],
     ctaLabel: "Book car",
     ctaHref: "https://safewheelsindia.com/book",
-    image:
-      "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/car.jpg",
   },
   {
     id: "serv-bus-tickets",
@@ -118,8 +114,7 @@ export const SERVICES: ServiceItem[] = [
     ],
     ctaLabel: "Enquire",
     ctaHref: "/services/bus-tickets#enquiry",
-    image:
-      "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/bus.jpg",
   },
   {
     id: "serv-corporate-travel",
@@ -142,7 +137,6 @@ export const SERVICES: ServiceItem[] = [
     ],
     ctaLabel: "Enquire",
     ctaHref: "/contact#corporate",
-    image:
-      "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/corporate.jpg",
   },
 ];
