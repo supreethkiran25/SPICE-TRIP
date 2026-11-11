@@ -53,8 +53,8 @@ export default function Hero() {
             <br />
             the world
           </h1>
-          <p className="text-sm sm:text-base text-[#6B6B6B] font-normal tracking-wide mb-8 max-w-md">
-            Curated journeys. Unforgettable experiences.
+          <p className="text-sm sm:text-base text-[#6B6B6B] font-medium tracking-[0.16em] uppercase mb-8 max-w-md">
+            Travel farther · Live better
           </p>
 
           <form onSubmit={onSubmit} className="relative max-w-md w-full">
