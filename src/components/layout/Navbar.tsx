@@ -131,11 +131,11 @@ export default function Navbar() {
                 className="h-7 sm:h-8 md:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-102"
               />
 
-              {/* Thin Vertical Separator Line */}
-              <div className="h-6 sm:h-7 md:h-8 w-[1.5px] bg-gray-300 shrink-0" />
+              {/* Thin Vertical Separator Line — desktop/tablet only */}
+              <div className="hidden sm:block h-6 sm:h-7 md:h-8 w-[1.5px] bg-gray-300 shrink-0" />
 
-              {/* Stacked Safe Wheels Group & IATA Pedigree */}
-              <div className="flex flex-col justify-center leading-tight select-none">
+              {/* Stacked Safe Wheels Group & IATA — hide on small phones */}
+              <div className="hidden sm:flex flex-col justify-center leading-tight select-none">
                 <span className="text-[10px] sm:text-[11px] md:text-xs font-bold uppercase tracking-wider text-gray-900 font-sans whitespace-nowrap">
                   SAFE WHEELS GROUP
                 </span>
