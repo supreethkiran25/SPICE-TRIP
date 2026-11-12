@@ -605,8 +605,8 @@ export const PACKAGES: TravelPackage[] = [
       }
     ],
     images: [
-      "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1600&q=80",
-      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1600&q=80"
+      "/images/destinations/andaman.jpg",
+      "/images/destinations/andaman-2.jpg"
     ],
     category: ["Domestic", "Honeymoon", "Adventure"],
     rating: 4.8,

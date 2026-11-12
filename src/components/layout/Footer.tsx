@@ -173,24 +173,25 @@ export default function Footer() {
               </div>
             ) : (
               <form onSubmit={handleNewsletterSubmit} className="space-y-2">
-                <div className="flex items-stretch rounded-3xl overflow-hidden shadow-sm border border-gray-300">
+                <div className="flex items-center gap-2">
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Your Email"
-                    className="flex-1 bg-white text-gray-900 placeholder:text-gray-500 px-3.5 py-2.5 text-sm focus:outline-none"
+                    placeholder="Your email"
+                    className="flex-1 min-w-0 bg-white text-gray-900 placeholder:text-gray-500 px-4 py-2.5 text-sm rounded-full border border-gray-200 focus:outline-none focus:border-white"
                   />
                   <button
                     type="submit"
-                    className="bg-[#D31F25] hover:bg-[#B91C1C] text-white px-3.5 flex items-center justify-center transition-colors"
+                    className="shrink-0 inline-flex items-center gap-1.5 bg-[#D31F25] hover:bg-[#B91C1C] text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors"
                     aria-label="Subscribe"
                   >
-                    <Mail className="w-4 h-4 fill-current" />
+                    <Mail className="w-3.5 h-3.5" />
+                    <span>Join</span>
                   </button>
                 </div>
-                <p className="text-[11px] text-white/50 italic">
+                <p className="text-[11px] text-white/50">
                   We respect your privacy
                 </p>
               </form>

@@ -122,13 +122,13 @@ export default function Navbar() {
               aria-label="SpiceTrip — Safe Wheels Group, IATA Certified Agency"
             >
               <Image
-                src="/images/spicetrip-logo-light-bg.png"
+                src="/images/spicetrip-logo-nav-mark.png"
                 alt="SpiceTrip — good time, great memories!"
                 width={145}
-                height={46}
+                height={54}
                 priority
                 unoptimized
-                className="h-7 sm:h-8 md:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-102"
+                className="h-7 sm:h-8 md:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
               />
 
               {/* Thin Vertical Separator Line — desktop/tablet only */}
@@ -136,11 +136,11 @@ export default function Navbar() {
 
               {/* Stacked Safe Wheels Group & IATA — hide on small phones */}
               <div className="hidden sm:flex flex-col justify-center leading-tight select-none">
-                <span className="text-[10px] sm:text-[11px] md:text-xs font-bold uppercase tracking-wider text-gray-900 font-sans whitespace-nowrap">
-                  SAFE WHEELS GROUP
+                <span className="text-[11px] md:text-[12px] font-semibold tracking-[0.04em] text-[#171717] font-sans whitespace-nowrap">
+                  Safe Wheels Group
                 </span>
-                <span className="text-[8.5px] sm:text-[9.5px] md:text-[10.5px] font-bold uppercase tracking-wider text-[#D31F25] font-sans whitespace-nowrap">
-                  IATA CERTIFIED AGENCY
+                <span className="text-[10px] md:text-[11px] font-medium tracking-[0.06em] text-[#D31F25] font-sans whitespace-nowrap">
+                  IATA Certified Agency
                 </span>
               </div>
             </Link>
@@ -156,7 +156,7 @@ export default function Navbar() {
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }
                 }}
-                className={`relative px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors ${
+                className={`relative px-3 py-1.5 text-[13px] xl:text-sm font-semibold tracking-[0.06em] transition-colors ${
                   isHomeActive
                     ? "text-[#D31F25] after:content-[''] after:absolute after:bottom-[-2px] after:left-3 after:right-3 after:h-[2.5px] after:bg-[#D31F25] after:rounded-full"
                     : "text-[#18181B] hover:text-[#D31F25]"
@@ -173,7 +173,7 @@ export default function Navbar() {
               >
                 <Link
                   href="/destinations"
-                  className={`relative px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors inline-flex items-center ${
+                  className={`relative px-3 py-1.5 text-[13px] xl:text-sm font-semibold tracking-[0.06em] transition-colors inline-flex items-center ${
                     isDestinationsActive
                       ? "text-[#D31F25] after:content-[''] after:absolute after:bottom-[-2px] after:left-3 after:right-3 after:h-[2.5px] after:bg-[#D31F25] after:rounded-full"
                       : "text-[#18181B] hover:text-[#D31F25]"
@@ -276,7 +276,7 @@ export default function Navbar() {
               >
                 <Link
                   href="/packages"
-                  className={`relative px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors inline-flex items-center ${
+                  className={`relative px-3 py-1.5 text-[13px] xl:text-sm font-semibold tracking-[0.06em] transition-colors inline-flex items-center ${
                     isPackagesActive
                       ? "text-[#D31F25] after:content-[''] after:absolute after:bottom-[-2px] after:left-3 after:right-3 after:h-[2.5px] after:bg-[#D31F25] after:rounded-full"
                       : "text-[#18181B] hover:text-[#D31F25]"
@@ -346,7 +346,7 @@ export default function Navbar() {
               <a
                 href="/#experiences"
                 onClick={(e) => handleScrollTo(e, "experiences")}
-                className="px-3 py-1.5 text-xs xl:text-sm font-bold text-[#18181B] hover:text-[#D31F25] transition-colors"
+                className="px-3 py-1.5 text-[13px] xl:text-sm font-semibold tracking-[0.06em] text-[#18181B] hover:text-[#D31F25] transition-colors"
               >
                 Experiences
               </a>
@@ -354,7 +354,7 @@ export default function Navbar() {
               {/* About Us */}
               <Link
                 href="/about"
-                className={`relative px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors ${
+                className={`relative px-3 py-1.5 text-[13px] xl:text-sm font-semibold tracking-[0.06em] transition-colors ${
                   isAboutActive
                     ? "text-[#D31F25] after:content-[''] after:absolute after:bottom-[-2px] after:left-3 after:right-3 after:h-[2.5px] after:bg-[#D31F25] after:rounded-full"
                     : "text-[#18181B] hover:text-[#D31F25]"
@@ -366,7 +366,7 @@ export default function Navbar() {
               {/* Contact */}
               <Link
                 href="/contact"
-                className={`relative px-3 py-1.5 text-xs xl:text-sm font-bold transition-colors ${
+                className={`relative px-3 py-1.5 text-[13px] xl:text-sm font-semibold tracking-[0.06em] transition-colors ${
                   isContactActive
                     ? "text-[#D31F25] after:content-[''] after:absolute after:bottom-[-2px] after:left-3 after:right-3 after:h-[2.5px] after:bg-[#D31F25] after:rounded-full"
                     : "text-[#18181B] hover:text-[#D31F25]"
@@ -379,8 +379,8 @@ export default function Navbar() {
             {/* 03. Right Actions: Plan Trip CTA & Mobile Toggle */}
             <div className="flex items-center space-x-2 sm:space-x-3">
               <Link
-                href="/contact#enquiry"
-                className="hidden sm:inline-flex items-center space-x-1.5 bg-[#D31F25] hover:bg-[#B91C1C] text-white px-5 py-2 rounded-full text-xs font-bold transition-all shadow-md hover:shadow-red-600/30 shrink-0"
+                href="/contact#consultation-form"
+                className="hidden sm:inline-flex items-center space-x-1.5 bg-[#D31F25] hover:bg-[#B91C1C] text-white px-5 py-2 rounded-full text-[12px] font-semibold tracking-[0.08em] transition-all shadow-md hover:shadow-red-600/30 shrink-0"
               >
                 <span>Plan Trip</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -541,7 +541,7 @@ export default function Navbar() {
                 {/* Mobile Plan Trip CTA */}
                 <div className="pt-3 border-t border-gray-100">
                   <Link
-                    href="/contact#enquiry"
+                    href="/contact#consultation-form"
                     onClick={() => setMobileMenuOpen(false)}
                     className="w-full bg-[#D31F25] hover:bg-[#B91C1C] text-white py-3 rounded-full text-center text-xs font-bold block shadow-md"
                   >

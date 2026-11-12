@@ -107,7 +107,7 @@ export default function TravelerReviews() {
           <div className="lg:col-span-6">
             <blockquote
               key={current.id}
-              className="text-2xl sm:text-3xl md:text-[2rem] font-medium text-[#171717] leading-snug tracking-tight mb-6 animate-in fade-in duration-500"
+              className="text-xl sm:text-2xl md:text-[1.65rem] font-medium text-[#171717] leading-snug tracking-tight mb-6 animate-in fade-in duration-500 line-clamp-4"
             >
               “{current.quote}”
             </blockquote>

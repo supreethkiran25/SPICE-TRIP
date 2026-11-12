@@ -75,9 +75,19 @@ function SearchForm({
               </button>
             ))
           ) : (
-            <p className="px-4 py-3 text-sm text-[#737373]">
-              Press enter to search packages
-            </p>
+            <button
+              type="button"
+              onMouseDown={() => {
+                const q = query.trim();
+                if (!q) return;
+                router.push(
+                  `/contact?destination=${encodeURIComponent(q)}#consultation-form`
+                );
+              }}
+              className="w-full px-4 py-3 text-sm text-left text-[#171717] hover:bg-[#F5F5F4]"
+            >
+              Enquire for <span className="font-semibold">{query.trim()}</span>
+            </button>
           )}
         </div>
       )}
@@ -96,9 +106,24 @@ export default function Hero() {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const params = new URLSearchParams();
-    if (query.trim()) params.set("search", query.trim());
-    router.push(`/packages?${params.toString()}`);
+    const q = query.trim();
+    if (!q) return;
+
+    const exact = DESTINATIONS.find(
+      (d) => d.name.toLowerCase() === q.toLowerCase()
+    );
+    if (exact) {
+      router.push(`/destinations/${exact.slug}`);
+      return;
+    }
+    if (suggestions.length === 1) {
+      router.push(`/destinations/${suggestions[0].slug}`);
+      return;
+    }
+
+    router.push(
+      `/contact?destination=${encodeURIComponent(q)}#consultation-form`
+    );
   };
 
   const searchProps = {
@@ -111,7 +136,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-[100svh] min-h-[100svh] flex flex-col overflow-hidden bg-[#F5F2EC]">
+    <section className="relative h-[85svh] min-h-[520px] max-h-[860px] flex flex-col overflow-hidden bg-[#F5F2EC]">
       <div className="absolute inset-0 z-0">
         <Image
           src={HERO_IMAGE}
@@ -155,12 +180,15 @@ export default function Hero() {
 
         {/* Desktop: left column with copy + search */}
         <div className="hidden md:flex flex-1 flex-col justify-center max-w-xl text-left">
-          <h1 className="text-5xl lg:text-[3.5rem] font-bold uppercase tracking-[0.04em] leading-[1.08] text-[#1A1A1A] mb-4">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#D31F25] mb-4">
+            SpiceTrip · Safe Wheels
+          </p>
+          <h1 className="text-5xl lg:text-[3.4rem] font-bold uppercase tracking-[0.04em] leading-[1.08] text-[#1A1A1A] mb-4">
             Discover
             <br />
             the world
           </h1>
-          <p className="text-sm lg:text-base text-[#5A5A5A] font-medium tracking-[0.16em] uppercase mb-8">
+          <p className="text-sm lg:text-base text-[#525252] font-medium tracking-[0.14em] uppercase mb-8">
             Travel farther · Live better
           </p>
           <SearchForm {...searchProps} />

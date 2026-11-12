@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import {
   Phone,
   Mail,
@@ -13,27 +14,22 @@ import {
   ShieldCheck,
   MessageCircle,
   ArrowRight,
-  ArrowUpRight,
   Building,
   CheckCircle2,
-  Navigation,
-  Globe,
   Award,
   ChevronDown,
   Copy,
   Check,
   Send,
-  Compass,
   Users,
-  Sparkles,
 } from "lucide-react";
 import { COMPANY_INFO } from "@/lib/data/company";
 
 const TRAVEL_TYPES = [
-  { id: "international", label: "International trip", icon: Compass },
-  { id: "honeymoon", label: "Honeymoon", icon: Sparkles },
-  { id: "corporate", label: "Corporate travel", icon: Briefcase },
-  { id: "visa_flight", label: "Flights and visas", icon: Globe },
+  { id: "international", label: "International" },
+  { id: "honeymoon", label: "Honeymoon" },
+  { id: "corporate", label: "Corporate" },
+  { id: "visa_flight", label: "Flights & visas" },
 ];
 
 const FAQS = [
@@ -56,6 +52,7 @@ const FAQS = [
 ];
 
 export default function ContactClient() {
+  const searchParams = useSearchParams();
   // Form State
   const [travelType, setTravelType] = useState("international");
   const [fullName, setFullName] = useState("");
@@ -68,7 +65,27 @@ export default function ContactClient() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [copiedAddress, setCopiedAddress] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  useEffect(() => {
+    const fromQuery = searchParams?.get("destination")?.trim();
+    if (fromQuery) {
+      setDestination(fromQuery);
+    }
+
+    const scrollToForm = () => {
+      const el = document.getElementById("consultation-form");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+
+    const hash = typeof window !== "undefined" ? window.location.hash : "";
+    if (fromQuery || hash === "#consultation-form" || hash === "#enquiry") {
+      const t = window.setTimeout(scrollToForm, 120);
+      return () => window.clearTimeout(t);
+    }
+  }, [searchParams]);
 
   const handleCopyAddress = () => {
     navigator.clipboard.writeText(
@@ -155,35 +172,8 @@ export default function ContactClient() {
               Contact
             </h1>
             <p className="text-sm sm:text-base text-[#737373] leading-relaxed max-w-2xl font-light">
-              Reach our Mysore desk, or get support in Bangalore and Mangalore. Call, WhatsApp, or send an enquiry.
+              Reach our Mysore desk, or get support in Bangalore and Mangalore.
             </p>
-
-            {/* Quick Action Buttons */}
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a
-                href="https://wa.me/918214001100?text=Hi%20SpiceTrip%2C%20I%20would%20like%20to%20plan%20a%20journey"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>Chat on WhatsApp</span>
-              </a>
-              <a
-                href="tel:+918214001100"
-                className="inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-black text-white text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
-              >
-                <Phone className="w-4 h-4 text-brand-spice" />
-                <span>Call Central Desk: +91 821 4001100</span>
-              </a>
-              <a
-                href="#consultation-form"
-                className="inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-zinc-800 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
-              >
-                <span>Enquire</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
           </div>
         </div>
       </section>
@@ -206,55 +196,16 @@ export default function ContactClient() {
           </div>
 
           <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
-            {/* Left: The Authentic Building Photograph */}
-            <div className="lg:col-span-7 relative min-h-[340px] sm:min-h-[420px] lg:min-h-full bg-slate-900 overflow-hidden group">
+            {/* Left: Safe Wheels Group logo */}
+            <div className="lg:col-span-7 relative min-h-[280px] sm:min-h-[360px] lg:min-h-full bg-black overflow-hidden">
               <Image
-                src="/images/prashanth-plaza-mysore.jpg"
-                alt="SpiceTrip Corporate Headquarters at Prashanth Plaza, Saraswathipuram, Mysore"
+                src="/images/safewheels-group-logo.png"
+                alt="Safe Wheels Group of Companies"
                 fill
+                sizes="(max-width: 1024px) 100vw, 58vw"
                 priority
-                sizes="(max-width: 1024px) 100vw, 60vw"
-                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                className="object-contain object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/30 to-zinc-950/10" />
-
-              {/* Top Floating Badge */}
-              <div className="absolute top-5 left-5 right-5 flex items-center justify-between pointer-events-none">
-                <span className="px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[11px] font-bold text-zinc-900 shadow-md border border-white/40 flex items-center space-x-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
-                  <span>VERIFIED HEADQUARTERS</span>
-                </span>
-                <span className="px-3 py-1 rounded-full bg-zinc-900/80 backdrop-blur-md text-[11px] font-semibold text-white/90 border border-white/20">
-                  Mysore, Karnataka
-                </span>
-              </div>
-
-              {/* Bottom Card Overlay on Image */}
-              <div className="absolute bottom-5 left-5 right-5 p-4 sm:p-5 rounded-2xl bg-zinc-950/85 backdrop-blur-md border border-white/15 text-white">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                  <div>
-                    <span className="text-[10px] uppercase font-sans tracking-[0.2em] text-amber-400 font-bold block mb-0.5">
-                      Flagship Address
-                    </span>
-                    <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white">
-                      &quot;PRASHANTH PLAZA&quot;
-                    </h3>
-                    <p className="text-xs text-slate-300 mt-0.5">
-                      4th Main, 5th Cross, Saraswathipuram, Mysore – 570009
-                    </p>
-                  </div>
-                  <a
-                    href="https://maps.google.com/?q=Prashanth+Plaza+Saraswathipuram+Mysore"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center space-x-1.5 px-3.5 py-2 rounded-xl bg-white text-zinc-950 hover:bg-slate-100 text-xs font-semibold shadow-sm transition-all shrink-0 hover:scale-[1.02] active:scale-100"
-                  >
-                    <Navigation className="w-3.5 h-3.5 text-brand-spice" />
-                    <span>Open in Maps</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
-                  </a>
-                </div>
-              </div>
             </div>
 
             {/* Right: Detailed Office Information */}
@@ -262,14 +213,40 @@ export default function ContactClient() {
               <div>
                 <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-spice mb-2">
                   <Building className="w-4 h-4" />
-                  <span>Central Operations & VIP Lounge</span>
+                  <span>Head office</span>
                 </div>
                 <h3 className="text-2xl font-bold text-zinc-950 tracking-tight mb-3">
-                  Mysore Head Office
+                  Mysore
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed mb-6">
-                  Our central desk manages all global ticketing, custom itinerary curation, cruise reservations, and institutional visa applications.
+                <p className="text-sm text-zinc-600 leading-relaxed mb-5">
+                  Ticketing, itineraries, visas, and cruise bookings from one desk.
                 </p>
+
+                <div className="flex flex-col gap-2.5 mb-6">
+                  <a
+                    href="https://wa.me/918214001100?text=Hi%20SpiceTrip%2C%20I%20would%20like%20to%20plan%20a%20journey"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold transition-colors"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    WhatsApp
+                  </a>
+                  <a
+                    href="tel:+918214001100"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#171717] hover:bg-black text-white text-sm font-semibold transition-colors"
+                  >
+                    <Phone className="w-4 h-4" />
+                    +91 821 4001100
+                  </a>
+                  <a
+                    href="#consultation-form"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full border border-[#E5E5E5] hover:bg-slate-50 text-[#171717] text-sm font-semibold transition-colors"
+                  >
+                    Enquire
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
 
                 {/* Info Points */}
                 <div className="space-y-4">
@@ -537,19 +514,16 @@ export default function ContactClient() {
       {/* INTERACTIVE CONSULTATION FORM SECTION */}
       <section
         id="consultation-form"
-        className="py-14 md:py-24 bg-slate-50/70 border-b border-slate-200/80"
+        className="scroll-mt-28 py-14 md:py-24 bg-slate-50/70 border-b border-slate-200/80"
       >
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-10">
-              <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-brand-spice font-bold block mb-2">
-                Direct Travel Designer Assignment
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight mb-3">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-[0.04em] text-[#171717] mb-3">
                 Send an enquiry
               </h2>
-              <p className="text-sm text-zinc-600 max-w-xl mx-auto">
-                Share your journey parameters. A dedicated SpiceTrip travel designer will reach out with tailor-made options, flight routings, and transparent costing.
+              <p className="text-sm text-[#737373] max-w-xl mx-auto font-light">
+                Tell us where you want to go. We will reply with options and a clear price.
               </p>
             </div>
 
@@ -595,32 +569,24 @@ export default function ContactClient() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Category Selector Tabs */}
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700 mb-2.5">
-                      1. Select Journey Type
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-600 mb-2.5">
+                      Trip type
                     </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {TRAVEL_TYPES.map((t) => {
-                        const Icon = t.icon;
                         const isSelected = travelType === t.id;
                         return (
                           <button
                             type="button"
                             key={t.id}
                             onClick={() => setTravelType(t.id)}
-                            className={`p-3 rounded-xl border text-left flex flex-col justify-between transition-all duration-200 ${
+                            className={`px-3 py-2.5 rounded-full border text-center text-xs font-semibold transition-all duration-200 ${
                               isSelected
-                                ? "border-brand-spice bg-brand-spice/5 text-zinc-950 shadow-sm ring-1 ring-brand-spice"
-                                : "border-slate-200 bg-white hover:bg-slate-50 text-zinc-600"
+                                ? "border-[#171717] bg-[#171717] text-white"
+                                : "border-slate-200 bg-white hover:bg-slate-50 text-zinc-700"
                             }`}
                           >
-                            <Icon
-                              className={`w-4 h-4 mb-2 ${
-                                isSelected ? "text-brand-spice" : "text-zinc-400"
-                              }`}
-                            />
-                            <span className="text-xs font-semibold leading-tight">
-                              {t.label}
-                            </span>
+                            {t.label}
                           </button>
                         );
                       })}
@@ -629,8 +595,8 @@ export default function ContactClient() {
 
                   {/* Primary Inputs */}
                   <div className="space-y-4">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700">
-                      2. Contact & Route Parameters
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-600">
+                      Your details
                     </label>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -701,7 +667,10 @@ export default function ContactClient() {
                         <select
                           value={travelers}
                           onChange={(e) => setTravelers(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-spice/20 focus:border-brand-spice bg-white transition-all"
+                          className="w-full appearance-none bg-white bg-[length:14px] bg-[right_14px_center] bg-no-repeat pr-10 pl-4 py-2.5 rounded-xl border border-slate-200 text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-spice/20 focus:border-brand-spice transition-all"
+                          style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23717117' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
+                          }}
                         >
                           <option value="1 Solo Traveler">1 Solo Traveler</option>
                           <option value="2 Travelers (Couple / Honeymoon)">
@@ -777,12 +746,9 @@ export default function ContactClient() {
       <section className="py-14 md:py-20 border-b border-slate-200/80">
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-10">
-              <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-brand-spice font-bold block mb-2">
-                Traveler Assistance
-              </span>
-              <h2 className="text-3xl font-bold text-zinc-950 tracking-tight">
-                Frequently Asked Questions
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold uppercase tracking-[0.04em] text-[#171717]">
+                FAQ
               </h2>
             </div>
 

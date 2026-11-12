@@ -10,12 +10,10 @@ const BY_SLUG: Record<string, string> = {
   "nepal-himalayan-kingdom": "/images/destinations/nepal.jpg",
   "singapore-tour":
     "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80",
-  "andaman-islands":
-    "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1200&q=80",
+  "andaman-islands": "/images/destinations/andaman.jpg",
   "krabi-phuket":
     "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1200&q=80",
-  "mauritius-island-paradise":
-    "https://images.unsplash.com/photo-1586861635166-c0b2225c7b80?auto=format&fit=crop&w=1200&q=80",
+  "mauritius-island-paradise": "/images/destinations/mauritius.jpg",
   "himachal-pradesh-tour":
     "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
   "rajasthan-royal-heritage":
@@ -34,12 +32,10 @@ const BY_DESTINATION: Record<string, string> = {
   nepal: "/images/destinations/nepal.jpg",
   singapore:
     "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80",
-  andaman:
-    "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1200&q=80",
+  andaman: "/images/destinations/andaman.jpg",
   "krabi & phuket":
     "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1200&q=80",
-  mauritius:
-    "https://images.unsplash.com/photo-1586861635166-c0b2225c7b80?auto=format&fit=crop&w=1200&q=80",
+  mauritius: "/images/destinations/mauritius.jpg",
   "himachal pradesh":
     "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
   rajasthan:

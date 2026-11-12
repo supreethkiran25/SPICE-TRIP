@@ -21,12 +21,30 @@ export default function TravelSearch() {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const q = destination.trim();
+    if (!q) return;
+
+    const exact = DESTINATIONS.find((d) => d.name.toLowerCase() === q.toLowerCase());
+    if (exact) {
+      router.push(`/destinations/${exact.slug}`);
+      return;
+    }
+    if (filteredSuggestions.length === 1) {
+      router.push(`/destinations/${filteredSuggestions[0].slug}`);
+      return;
+    }
+    if (filteredSuggestions.length === 0) {
+      router.push(
+        `/contact?destination=${encodeURIComponent(q)}#consultation-form`
+      );
+      return;
+    }
+
     const params = new URLSearchParams();
-    if (destination.trim()) params.set("search", destination.trim());
+    params.set("search", q);
     if (checkIn) params.set("checkIn", checkIn);
     if (checkOut) params.set("checkOut", checkOut);
     params.set("travelers", `${adults} Adults, ${childrenCount} Child`);
-
     router.push(`/packages?${params.toString()}`);
   };
 
@@ -78,9 +96,20 @@ export default function TravelSearch() {
                 </button>
               ))
             ) : (
-              <div className="px-3.5 py-2.5 text-xs text-gray-500">
-                No exact match. Click Search to view all tours.
-              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const q = destination.trim();
+                  if (!q) return;
+                  setSuggestionsOpen(false);
+                  router.push(
+                    `/contact?destination=${encodeURIComponent(q)}#consultation-form`
+                  );
+                }}
+                className="w-full text-left px-3.5 py-2.5 text-xs text-gray-800 hover:bg-red-50 rounded-xl"
+              >
+                Enquire for <span className="font-semibold">{destination.trim()}</span>
+              </button>
             )}
           </div>
         )}
